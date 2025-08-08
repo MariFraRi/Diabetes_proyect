@@ -1,0 +1,2043 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Estudio de Predictores de Diabetes en la Población Estadounidense 2022 &#8212; Eda_Diabetes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Eda_Diabetes';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Bienvenido al Estudio de Diabetes" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Eda_Diabetes - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Eda_Diabetes - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenido al Estudio de Diabetes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEda_Diabetes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Eda_Diabetes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estudio de Predictores de Diabetes en la Población Estadounidense 2022</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6">Variables numéricas (6)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas-34">Variables categóricas (34)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-los-datos"><strong>Análisis Exploratorio de los Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-variable-numericas"><strong>Análisis de variable numéricas</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-outliers"><strong>Análisis de Outliers</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-variables-categoricas-relevantes"><strong>Análisis de Variables Categoricas Relevantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlacion-entre-variables-numericas"><strong>Correlación entre variables numéricas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principales-observaciones"><strong>Principales observaciones</strong>:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado"><strong>Analisis bivariado</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022">
+<h1><strong>Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong><a class="headerlink" href="#estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022" title="Link to this heading">#</a></h1>
+<p><strong>Descripción:</strong><br />
+En este análisis exploratorio (EDA) utilizamos el dataset <code class="docutils literal notranslate"><span class="pre">heart_2022_no_nans.csv</span></code> para identificar y caracterizar los principales factores asociados a la aparición de diabetes en adultos de Estados Unidos durante 2022. El objetivo es comprender la distribución de las variables clave, detectar correlaciones relevantes y sentar las bases para un posible modelo predictivo.</p>
+<p><strong>Objetivos:</strong></p>
+<ol class="arabic simple">
+<li><p>Describir la distribución de variables demográficas y de salud relacionadas con la diabetes (BMI, actividad física, tabaquismo, etc.).</p></li>
+<li><p>Identificar correlaciones y patrones entre predictores potenciales y la presencia de diabetes.</p></li>
+<li><p>Detectar valores atípicos y evaluar la calidad de los datos.</p></li>
+<li><p>Proponer próximos pasos para un modelo predictivo.</p></li>
+</ol>
+<p><strong>Fuente de datos:</strong></p>
+<ul class="simple">
+<li><p>link: <a class="reference external" href="https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022">https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022</a></p></li>
+<li><p>Archivo: <code class="docutils literal notranslate"><span class="pre">heart_2022_no_nans.csv</span></code> (246 022 registros, 40 variables, sin valores nulos).</p></li>
+</ul>
+<hr class="docutils" />
+<section id="informacion-general-de-los-datos">
+<h2><strong>Información general de los Datos</strong><a class="headerlink" href="#informacion-general-de-los-datos" title="Link to this heading">#</a></h2>
+<p>El dataset contiene 40 variables que se clasifican en dos grandes grupos:</p>
+<section id="variables-numericas-6">
+<h3>Variables numéricas (6)<a class="headerlink" href="#variables-numericas-6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PhysicalHealthDays</span></code>: Número de días en el último mes con mala salud física.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MentalHealthDays</span></code>: Número de días en el último mes con mala salud mental.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SleepHours</span></code>: Horas promedio de sueño por noche.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HeightInMeters</span></code>: Altura en metros.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WeightInKilograms</span></code>: Peso en kilogramos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BMI</span></code>: Índice de Masa Corporal.</p></li>
+</ul>
+</section>
+<section id="variables-categoricas-34">
+<h3>Variables categóricas (34)<a class="headerlink" href="#variables-categoricas-34" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">State</span></code>: Estado de residencia en EE. UU.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Sex</span></code>: Sexo del encuestado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GeneralHealth</span></code>: Autopercepción del estado de salud general.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LastCheckupTime</span></code>: Tiempo desde la última revisión médica.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PhysicalActivities</span></code>: Realiza actividad física regularmente (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RemovedTeeth</span></code>: Número de dientes extraídos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HadHeartAttack</span></code>, <code class="docutils literal notranslate"><span class="pre">HadAngina</span></code>, <code class="docutils literal notranslate"><span class="pre">HadStroke</span></code>, <code class="docutils literal notranslate"><span class="pre">HadAsthma</span></code>, <code class="docutils literal notranslate"><span class="pre">HadSkinCancer</span></code>, <code class="docutils literal notranslate"><span class="pre">HadCOPD</span></code>, <code class="docutils literal notranslate"><span class="pre">HadDepressiveDisorder</span></code>, <code class="docutils literal notranslate"><span class="pre">HadKidneyDisease</span></code>, <code class="docutils literal notranslate"><span class="pre">HadArthritis</span></code>, <code class="docutils literal notranslate"><span class="pre">HadDiabetes</span></code>: Antecedentes de condiciones de salud (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DeafOrHardOfHearing</span></code>, <code class="docutils literal notranslate"><span class="pre">BlindOrVisionDifficulty</span></code>: Discapacidades sensoriales (auditiva y visual).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DifficultyConcentrating</span></code>, <code class="docutils literal notranslate"><span class="pre">DifficultyWalking</span></code>, <code class="docutils literal notranslate"><span class="pre">DifficultyDressingBathing</span></code>, <code class="docutils literal notranslate"><span class="pre">DifficultyErrands</span></code>: Dificultades funcionales en tareas diarias (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SmokerStatus</span></code>: Estado de fumador (Nunca, Ex-fumador, Fumador).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ECigaretteUsage</span></code>: Uso de cigarrillos electrónicos (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ChestScan</span></code>: Realización de escáner de tórax (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RaceEthnicityCategory</span></code>: Categoría de raza o etnia.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AgeCategory</span></code>: Categoría de edad.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AlcoholDrinkers</span></code>: Consumo de alcohol en el último mes (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HIVTesting</span></code>: Prueba de VIH alguna vez (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FluVaxLast12</span></code>: Vacunación contra la gripe en los últimos 12 meses (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PneumoVaxEver</span></code>: Vacunación antineumocócica alguna vez (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TetanusLast10Tdap</span></code>: Vacunación de tétanos (Tdap) en los últimos 10 años (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HighRiskLastYear</span></code>: Exposición a entornos de alto riesgo COVID-19 en el último año (Sí/No).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CovidPos</span></code>: Resultado positivo de COVID-19 en el último año (Sí/No).</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="analisis-exploratorio-de-los-datos">
+<h2><strong>Análisis Exploratorio de los Datos</strong><a class="headerlink" href="#analisis-exploratorio-de-los-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Dataset</span>
+<span class="n">df_original</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;heart_2022_no_nans.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span> <span class="n">df_original</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>State</th>
+      <th>Sex</th>
+      <th>GeneralHealth</th>
+      <th>PhysicalHealthDays</th>
+      <th>MentalHealthDays</th>
+      <th>LastCheckupTime</th>
+      <th>PhysicalActivities</th>
+      <th>SleepHours</th>
+      <th>RemovedTeeth</th>
+      <th>HadHeartAttack</th>
+      <th>...</th>
+      <th>HeightInMeters</th>
+      <th>WeightInKilograms</th>
+      <th>BMI</th>
+      <th>AlcoholDrinkers</th>
+      <th>HIVTesting</th>
+      <th>FluVaxLast12</th>
+      <th>PneumoVaxEver</th>
+      <th>TetanusLast10Tdap</th>
+      <th>HighRiskLastYear</th>
+      <th>CovidPos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alabama</td>
+      <td>Female</td>
+      <td>Very good</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>9.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.60</td>
+      <td>71.67</td>
+      <td>27.99</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes, received Tdap</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alabama</td>
+      <td>Male</td>
+      <td>Very good</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>6.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.78</td>
+      <td>95.25</td>
+      <td>30.13</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes, received tetanus shot but not sure what type</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Alabama</td>
+      <td>Male</td>
+      <td>Very good</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>No</td>
+      <td>8.0</td>
+      <td>6 or more, but not all</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.85</td>
+      <td>108.86</td>
+      <td>31.66</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>No, did not receive any tetanus shot in the pa...</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Alabama</td>
+      <td>Female</td>
+      <td>Fair</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>9.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.70</td>
+      <td>90.72</td>
+      <td>31.32</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No, did not receive any tetanus shot in the pa...</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Alabama</td>
+      <td>Female</td>
+      <td>Good</td>
+      <td>3.0</td>
+      <td>15.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>5.0</td>
+      <td>1 to 5</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.55</td>
+      <td>79.38</td>
+      <td>33.07</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No, did not receive any tetanus shot in the pa...</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 40 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;estado&#39;</span> <span class="p">,</span> <span class="s1">&#39;sexo&#39;</span> <span class="p">,</span> <span class="s1">&#39;salud_general&#39;</span> <span class="p">,</span> <span class="s1">&#39;dias_salud_fisica&#39;</span> <span class="p">,</span> <span class="s1">&#39;dias_salud_mental&#39;</span> <span class="p">,</span> <span class="s1">&#39;ultimo_chequeo&#39;</span> <span class="p">,</span> <span class="s1">&#39;actividades_fisicas&#39;</span> <span class="p">,</span> <span class="s1">&#39;horas_sueño&#39;</span> <span class="p">,</span> <span class="s1">&#39;dientes_removidos&#39;</span> <span class="p">,</span> <span class="s1">&#39;ataque_cardiaco&#39;</span> <span class="p">,</span> <span class="s1">&#39;angina&#39;</span> <span class="p">,</span> <span class="s1">&#39;ACV&#39;</span> <span class="p">,</span> <span class="s1">&#39;asma&#39;</span> <span class="p">,</span> <span class="s1">&#39;cancer_piel&#39;</span> <span class="p">,</span> <span class="s1">&#39;EPOC&#39;</span> <span class="p">,</span> <span class="s1">&#39;trastorno_depre&#39;</span> <span class="p">,</span> <span class="s1">&#39;enfermedad_riñon&#39;</span> <span class="p">,</span> <span class="s1">&#39;artritis&#39;</span> <span class="p">,</span> <span class="s1">&#39;diabetes&#39;</span> <span class="p">,</span> <span class="s1">&#39;sordo_semisordo&#39;</span> <span class="p">,</span> <span class="s1">&#39;ciego_semiciego&#39;</span> <span class="p">,</span> <span class="s1">&#39;dif_concentracion&#39;</span> <span class="p">,</span> <span class="s1">&#39;dif_caminar&#39;</span> <span class="p">,</span> <span class="s1">&#39;dif_vestirduchar&#39;</span> <span class="p">,</span> <span class="s1">&#39;dif_encargo&#39;</span> <span class="p">,</span><span class="s1">&#39;estado_fumador&#39;</span> <span class="p">,</span> <span class="s1">&#39;uso_cigarroelect&#39;</span> <span class="p">,</span> <span class="s1">&#39;escaner_torax&#39;</span> <span class="p">,</span> <span class="s1">&#39;categoria_etnica&#39;</span> <span class="p">,</span> <span class="s1">&#39;categoria_edad&#39;</span> <span class="p">,</span> <span class="s1">&#39;altura_metros&#39;</span> <span class="p">,</span> <span class="s1">&#39;peso_kilos&#39;</span> <span class="p">,</span> <span class="s1">&#39;bmi&#39;</span> <span class="p">,</span> <span class="s1">&#39;bebedor_alcohol&#39;</span> <span class="p">,</span> <span class="s1">&#39;prueba_VIH&#39;</span> <span class="p">,</span> <span class="s1">&#39;gripa_vac&#39;</span> <span class="p">,</span> <span class="s1">&#39;pneumo&#39;</span> <span class="p">,</span> <span class="s1">&#39;tetanos&#39;</span> <span class="p">,</span> <span class="s1">&#39;alto_riesgo_ap&#39;</span> <span class="p">,</span> <span class="s1">&#39;covid&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;estado&#39;, &#39;sexo&#39;, &#39;salud_general&#39;, &#39;dias_salud_fisica&#39;,
+       &#39;dias_salud_mental&#39;, &#39;ultimo_chequeo&#39;, &#39;actividades_fisicas&#39;,
+       &#39;horas_sueño&#39;, &#39;dientes_removidos&#39;, &#39;ataque_cardiaco&#39;, &#39;angina&#39;, &#39;ACV&#39;,
+       &#39;asma&#39;, &#39;cancer_piel&#39;, &#39;EPOC&#39;, &#39;trastorno_depre&#39;, &#39;enfermedad_riñon&#39;,
+       &#39;artritis&#39;, &#39;diabetes&#39;, &#39;sordo_semisordo&#39;, &#39;ciego_semiciego&#39;,
+       &#39;dif_concentracion&#39;, &#39;dif_caminar&#39;, &#39;dif_vestirduchar&#39;, &#39;dif_encargo&#39;,
+       &#39;estado_fumador&#39;, &#39;uso_cigarroelect&#39;, &#39;escaner_torax&#39;,
+       &#39;categoria_etnica&#39;, &#39;categoria_edad&#39;, &#39;altura_metros&#39;, &#39;peso_kilos&#39;,
+       &#39;bmi&#39;, &#39;bebedor_alcohol&#39;, &#39;prueba_VIH&#39;, &#39;gripa_vac&#39;, &#39;pneumo&#39;,
+       &#39;tetanos&#39;, &#39;alto_riesgo_ap&#39;, &#39;covid&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se han reemplazado los nombres de las columnas por su traduccion al español.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 246022 entries, 0 to 246021
+Data columns (total 40 columns):
+ #   Column               Non-Null Count   Dtype  
+---  ------               --------------   -----  
+ 0   estado               246022 non-null  object 
+ 1   sexo                 246022 non-null  object 
+ 2   salud_general        246022 non-null  object 
+ 3   dias_salud_fisica    246022 non-null  float64
+ 4   dias_salud_mental    246022 non-null  float64
+ 5   ultimo_chequeo       246022 non-null  object 
+ 6   actividades_fisicas  246022 non-null  object 
+ 7   horas_sueño          246022 non-null  float64
+ 8   dientes_removidos    246022 non-null  object 
+ 9   ataque_cardiaco      246022 non-null  object 
+ 10  angina               246022 non-null  object 
+ 11  ACV                  246022 non-null  object 
+ 12  asma                 246022 non-null  object 
+ 13  cancer_piel          246022 non-null  object 
+ 14  EPOC                 246022 non-null  object 
+ 15  trastorno_depre      246022 non-null  object 
+ 16  enfermedad_riñon     246022 non-null  object 
+ 17  artritis             246022 non-null  object 
+ 18  diabetes             246022 non-null  object 
+ 19  sordo_semisordo      246022 non-null  object 
+ 20  ciego_semiciego      246022 non-null  object 
+ 21  dif_concentracion    246022 non-null  object 
+ 22  dif_caminar          246022 non-null  object 
+ 23  dif_vestirduchar     246022 non-null  object 
+ 24  dif_encargo          246022 non-null  object 
+ 25  estado_fumador       246022 non-null  object 
+ 26  uso_cigarroelect     246022 non-null  object 
+ 27  escaner_torax        246022 non-null  object 
+ 28  categoria_etnica     246022 non-null  object 
+ 29  categoria_edad       246022 non-null  object 
+ 30  altura_metros        246022 non-null  float64
+ 31  peso_kilos           246022 non-null  float64
+ 32  bmi                  246022 non-null  float64
+ 33  bebedor_alcohol      246022 non-null  object 
+ 34  prueba_VIH           246022 non-null  object 
+ 35  gripa_vac            246022 non-null  object 
+ 36  pneumo               246022 non-null  object 
+ 37  tetanos              246022 non-null  object 
+ 38  alto_riesgo_ap       246022 non-null  object 
+ 39  covid                246022 non-null  object 
+dtypes: float64(6), object(34)
+memory usage: 75.1+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Descripción estadística</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dias_salud_fisica</th>
+      <th>dias_salud_mental</th>
+      <th>horas_sueño</th>
+      <th>altura_metros</th>
+      <th>peso_kilos</th>
+      <th>bmi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>246022.000000</td>
+      <td>246022.000000</td>
+      <td>246022.000000</td>
+      <td>246022.000000</td>
+      <td>246022.000000</td>
+      <td>246022.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>4.119026</td>
+      <td>4.167140</td>
+      <td>7.021331</td>
+      <td>1.705150</td>
+      <td>83.615179</td>
+      <td>28.668136</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>8.405844</td>
+      <td>8.102687</td>
+      <td>1.440681</td>
+      <td>0.106654</td>
+      <td>21.323156</td>
+      <td>6.513973</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.910000</td>
+      <td>28.120000</td>
+      <td>12.020000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>6.000000</td>
+      <td>1.630000</td>
+      <td>68.040000</td>
+      <td>24.270000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>7.000000</td>
+      <td>1.700000</td>
+      <td>81.650000</td>
+      <td>27.460000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.000000</td>
+      <td>4.000000</td>
+      <td>8.000000</td>
+      <td>1.780000</td>
+      <td>95.250000</td>
+      <td>31.890000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>30.000000</td>
+      <td>30.000000</td>
+      <td>24.000000</td>
+      <td>2.410000</td>
+      <td>292.570000</td>
+      <td>97.650000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Este resumen estadístico incluye medidas clave para seis variables cuantitativas del conjunto de datos, el cual contiene <strong>246,022 registros</strong>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">dias_salud_fisica</span></code> y <code class="docutils literal notranslate"><span class="pre">dias_salud_mental</span></code></strong><br />
+Representan la cantidad de días en el último mes que la persona reportó mala salud física o mental, respectivamente.</p>
+<ul>
+<li><p>Promedio de aproximadamente <strong>4 días</strong>, pero con una <strong>mediana de 0</strong>, lo que indica que más del 50% de los encuestados no reportó problemas de salud en ese periodo.</p></li>
+<li><p>Valor máximo de <strong>30 días</strong>, indicando presencia de personas con malestar continuo durante todo el mes.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">horas_sueño</span></code></strong><br />
+Número de horas de sueño que reporta la persona por noche.</p>
+<ul>
+<li><p>Promedio de <strong>7 horas</strong>, considerado dentro del rango saludable.</p></li>
+<li><p>Rango desde <strong>1 hasta 24 horas</strong>, lo que sugiere posibles valores atípicos o errores de reporte.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">altura_metros</span></code> y <code class="docutils literal notranslate"><span class="pre">peso_kilos</span></code></strong><br />
+Medidas antropométricas del individuo.</p>
+<ul>
+<li><p>Altura media: <strong>1.70 metros</strong></p></li>
+<li><p>Peso medio: <strong>83.6 kg</strong></p></li>
+<li><p>Se observan valores extremos: altura máxima de <strong>2.41 m</strong> y peso máximo de <strong>292.57 kg</strong>, lo que podría requerir revisión o limpieza.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">bmi</span></code> (índice de masa corporal)</strong><br />
+Calculado con base en el peso y la altura.</p>
+<ul>
+<li><p>Promedio de <strong>28.7</strong>, clasificado como <strong>sobrepeso</strong> según la OMS.</p></li>
+<li><p>Rango de <strong>12.0 a 97.65</strong>, que incluye tanto casos de bajo peso como de obesidad extrema, posibles outliers o errores.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Valores duplicados</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Número de filas duplicadas:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Número de filas duplicadas:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>estado</th>
+      <th>sexo</th>
+      <th>salud_general</th>
+      <th>dias_salud_fisica</th>
+      <th>dias_salud_mental</th>
+      <th>ultimo_chequeo</th>
+      <th>actividades_fisicas</th>
+      <th>horas_sueño</th>
+      <th>dientes_removidos</th>
+      <th>ataque_cardiaco</th>
+      <th>...</th>
+      <th>altura_metros</th>
+      <th>peso_kilos</th>
+      <th>bmi</th>
+      <th>bebedor_alcohol</th>
+      <th>prueba_VIH</th>
+      <th>gripa_vac</th>
+      <th>pneumo</th>
+      <th>tetanos</th>
+      <th>alto_riesgo_ap</th>
+      <th>covid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5702</th>
+      <td>Arizona</td>
+      <td>Female</td>
+      <td>Excellent</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>7.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.63</td>
+      <td>56.70</td>
+      <td>21.46</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes, received Tdap</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>87555</th>
+      <td>Maryland</td>
+      <td>Female</td>
+      <td>Good</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>8.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.65</td>
+      <td>45.36</td>
+      <td>16.64</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes, received Tdap</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>88402</th>
+      <td>Maryland</td>
+      <td>Male</td>
+      <td>Excellent</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>8.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.75</td>
+      <td>65.77</td>
+      <td>21.41</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes, received Tdap</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>137645</th>
+      <td>New Jersey</td>
+      <td>Male</td>
+      <td>Good</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>No</td>
+      <td>8.0</td>
+      <td>6 or more, but not all</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.63</td>
+      <td>80.74</td>
+      <td>30.55</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No, did not receive any tetanus shot in the pa...</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>174923</th>
+      <td>Rhode Island</td>
+      <td>Female</td>
+      <td>Very good</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>7.0</td>
+      <td>1 to 5</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.57</td>
+      <td>68.04</td>
+      <td>27.44</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No, did not receive any tetanus shot in the pa...</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>184137</th>
+      <td>South Dakota</td>
+      <td>Female</td>
+      <td>Fair</td>
+      <td>30.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>7.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.75</td>
+      <td>90.72</td>
+      <td>29.53</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No, did not receive any tetanus shot in the pa...</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>208013</th>
+      <td>Vermont</td>
+      <td>Female</td>
+      <td>Very good</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>9.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.65</td>
+      <td>79.38</td>
+      <td>29.12</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes, received tetanus shot but not sure what type</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>216362</th>
+      <td>Washington</td>
+      <td>Male</td>
+      <td>Excellent</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>7.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.80</td>
+      <td>77.11</td>
+      <td>23.71</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>Yes, received Tdap</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>225974</th>
+      <td>Washington</td>
+      <td>Male</td>
+      <td>Very good</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Within past year (anytime less than 12 months ...</td>
+      <td>Yes</td>
+      <td>7.0</td>
+      <td>None of them</td>
+      <td>No</td>
+      <td>...</td>
+      <td>1.93</td>
+      <td>104.33</td>
+      <td>28.00</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No, did not receive any tetanus shot in the pa...</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+<p>9 rows × 40 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span> <span class="c1">#limpiamos los duplicados</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Comprobamos limpieza</span>
+<span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analisis-de-variable-numericas">
+<h2><strong>Análisis de variable numéricas</strong><a class="headerlink" href="#analisis-de-variable-numericas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;dias_salud_fisica&#39;, &#39;dias_salud_mental&#39;, &#39;horas_sueño&#39;,
+       &#39;altura_metros&#39;, &#39;peso_kilos&#39;, &#39;bmi&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Histograma para distribución de variables numéricas</span>
+<span class="n">df</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Distribuciones de variables numéricas&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f598fca79ea91da7f0d0a4a6343ab8dd267d98cc319f40829dc3285a9917d030.png" src="_images/f598fca79ea91da7f0d0a4a6343ab8dd267d98cc319f40829dc3285a9917d030.png" />
+</div>
+</div>
+<p>Se presentan las distribuciones de seis variables numéricas clave del conjunto de datos, que permiten observar la forma de los datos y la presencia de posibles valores atípicos:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">dias_salud_fisica</span></code> y <code class="docutils literal notranslate"><span class="pre">dias_salud_mental</span></code></strong><br />
+Ambas variables muestran una distribución fuertemente <strong>asimétrica a la derecha (sesgada positiva)</strong>, con un alto número de personas que reportan <strong>0 días de mala salud</strong> en el último mes. También se observa un pequeño pico en el valor <strong>30</strong>, lo que podría representar personas con malestar persistente o respuestas extremas.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">horas_sueño</span></code></strong><br />
+La distribución tiene una forma <strong>aproximadamente normal</strong>, centrada entre <strong>6 y 8 horas</strong> por noche. Existen pocos casos extremos con menos de 4 o más de 12 horas, lo cual podría indicar hábitos poco comunes o errores.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">altura_metros</span></code></strong><br />
+Presenta una <strong>distribución simétrica y normal</strong>, centrada alrededor de <strong>1.7 metros</strong>, lo esperado en una población general.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">peso_kilos</span></code></strong><br />
+Exhibe una distribución <strong>asimétrica a la derecha</strong>, indicando que la mayoría de las personas pesan entre <strong>60 y 100 kg</strong>, pero existen casos con pesos significativamente mayores, que podrían ser atípicos.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">bmi</span></code> (índice de masa corporal)</strong><br />
+También muestra una <strong>asimetría a la derecha</strong>, con una concentración de individuos en rangos de sobrepeso (<strong>25-30</strong>) y obesidad (<strong>&gt;30</strong>). Hay valores superiores a <strong>60</strong>, que podrían ser casos extremos o errores de digitación.</p></li>
+</ul>
+</section>
+<section id="analisis-de-outliers">
+<h2><strong>Análisis de Outliers</strong><a class="headerlink" href="#analisis-de-outliers" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plots_per_row</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_cols</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">plots_per_row</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">plots_per_row</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">plots_per_row</span><span class="p">,</span><span class="mi">4</span><span class="o">*</span><span class="n">rows</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">num_cols</span><span class="p">):</span>
+  <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="n">n</span><span class="p">:]:</span> <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d88036506c982b4c70d053f59fca8390f6daefedf02a0981124445baf674d5a4.png" src="_images/d88036506c982b4c70d053f59fca8390f6daefedf02a0981124445baf674d5a4.png" />
+</div>
+</div>
+<p>Los diagramas de caja permiten visualizar la dispersión de los datos y la presencia de <strong>valores atípicos</strong> (outliers) en cada variable. A continuación, se describe lo observado en cada caso:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">dias_salud_fisica</span></code> y <code class="docutils literal notranslate"><span class="pre">dias_salud_mental</span></code></strong></p>
+<ul>
+<li><p>La mayoría de los valores están concentrados entre 0 y 5 días.</p></li>
+<li><p>Existen numerosos <strong>valores atípicos hacia la derecha</strong>, especialmente en <strong>30 días</strong>, lo que puede representar respuestas extremas (posiblemente personas con malestar todo el mes).</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">horas_sueño</span></code></strong></p>
+<ul>
+<li><p>La mediana se encuentra cerca de las 7 horas.</p></li>
+<li><p>Hay outliers tanto en valores bajos (&lt; 4 h) como altos (&gt; 12 h), lo cual podría reflejar hábitos extremos o errores en la respuesta.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">altura_metros</span></code></strong></p>
+<ul>
+<li><p>Tiene una distribución más simétrica.</p></li>
+<li><p>Se identifican valores atípicos por debajo de 1.3 m y por encima de 2.1 m, lo cual puede ser real o deberse a errores de captura.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">peso_kilos</span></code></strong></p>
+<ul>
+<li><p>Se identifican muchos <strong>outliers por exceso</strong>, especialmente en pesos mayores a 150 kg.</p></li>
+<li><p>Aunque hay una tendencia normal, la dispersión sugiere una posible revisión o tratamiento de valores extremos.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">bmi</span></code> (índice de masa corporal)</strong></p>
+<ul>
+<li><p>Muestra una concentración de datos en rangos de sobrepeso y obesidad.</p></li>
+<li><p>Presenta numerosos valores atípicos hacia la derecha, superando incluso los <strong>60 puntos de IMC</strong>, lo cual podría representar condiciones médicas graves o errores de digitación.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="analisis-de-variables-categoricas-relevantes">
+<h2><strong>Análisis de Variables Categoricas Relevantes</strong><a class="headerlink" href="#analisis-de-variables-categoricas-relevantes" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Análisis de variables categóricas</span>
+<span class="n">cat_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">cat_cols</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;estado&#39;, &#39;sexo&#39;, &#39;salud_general&#39;, &#39;ultimo_chequeo&#39;,
+       &#39;actividades_fisicas&#39;, &#39;dientes_removidos&#39;, &#39;ataque_cardiaco&#39;, &#39;angina&#39;,
+       &#39;ACV&#39;, &#39;asma&#39;, &#39;cancer_piel&#39;, &#39;EPOC&#39;, &#39;trastorno_depre&#39;,
+       &#39;enfermedad_riñon&#39;, &#39;artritis&#39;, &#39;diabetes&#39;, &#39;sordo_semisordo&#39;,
+       &#39;ciego_semiciego&#39;, &#39;dif_concentracion&#39;, &#39;dif_caminar&#39;,
+       &#39;dif_vestirduchar&#39;, &#39;dif_encargo&#39;, &#39;estado_fumador&#39;, &#39;uso_cigarroelect&#39;,
+       &#39;escaner_torax&#39;, &#39;categoria_etnica&#39;, &#39;categoria_edad&#39;,
+       &#39;bebedor_alcohol&#39;, &#39;prueba_VIH&#39;, &#39;gripa_vac&#39;, &#39;pneumo&#39;, &#39;tetanos&#39;,
+       &#39;alto_riesgo_ap&#39;, &#39;covid&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_cols</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Columna: </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Columna: estado
+estado
+Washington              14998
+Maryland                 9163
+Minnesota                9161
+Ohio                     8995
+New York                 8923
+Texas                    7408
+Florida                  7315
+Kansas                   6145
+Wisconsin                6126
+Maine                    6013
+Iowa                     5672
+Hawaii                   5596
+Virginia                 5565
+Indiana                  5502
+South Carolina           5471
+Massachusetts            5465
+Arizona                  5461
+Utah                     5373
+Michigan                 5370
+Colorado                 5159
+Nebraska                 5107
+California               5096
+Connecticut              5053
+Georgia                  4978
+Vermont                  4844
+South Dakota             4404
+Montana                  4264
+Missouri                 4195
+New Jersey               3966
+New Hampshire            3756
+Puerto Rico              3589
+Idaho                    3468
+Alaska                   3205
+Rhode Island             3111
+Oregon                   3049
+Louisiana                3010
+West Virginia            2974
+New Mexico               2968
+Oklahoma                 2941
+Arkansas                 2940
+Pennsylvania             2729
+Tennessee                2725
+Illinois                 2607
+North Carolina           2551
+North Dakota             2498
+Mississippi              2438
+Kentucky                 2413
+Wyoming                  2410
+Delaware                 2155
+Alabama                  1902
+Nevada                   1769
+District of Columbia     1725
+Guam                     1549
+Virgin Islands            743
+Name: count, dtype: int64
+
+ Columna: sexo
+sexo
+Female    127806
+Male      118207
+Name: count, dtype: int64
+
+ Columna: salud_general
+salud_general
+Very good    86996
+Good         77407
+Excellent    41522
+Fair         30658
+Poor          9430
+Name: count, dtype: int64
+
+ Columna: ultimo_chequeo
+ultimo_chequeo
+Within past year (anytime less than 12 months ago)         198144
+Within past 2 years (1 year but less than 2 years ago)      23227
+Within past 5 years (2 years but less than 5 years ago)     13744
+5 or more years ago                                         10898
+Name: count, dtype: int64
+
+ Columna: actividades_fisicas
+actividades_fisicas
+Yes    191310
+No      54703
+Name: count, dtype: int64
+
+ Columna: dientes_removidos
+dientes_removidos
+None of them              131585
+1 to 5                     74701
+6 or more, but not all     25949
+All                        13778
+Name: count, dtype: int64
+
+ Columna: ataque_cardiaco
+ataque_cardiaco
+No     232578
+Yes     13435
+Name: count, dtype: int64
+
+ Columna: angina
+angina
+No     231060
+Yes     14953
+Name: count, dtype: int64
+
+ Columna: ACV
+ACV
+No     235902
+Yes     10111
+Name: count, dtype: int64
+
+ Columna: asma
+asma
+No     209486
+Yes     36527
+Name: count, dtype: int64
+
+ Columna: cancer_piel
+cancer_piel
+No     224994
+Yes     21019
+Name: count, dtype: int64
+
+ Columna: EPOC
+EPOC
+No     227019
+Yes     18994
+Name: count, dtype: int64
+
+ Columna: trastorno_depre
+trastorno_depre
+No     195393
+Yes     50620
+Name: count, dtype: int64
+
+ Columna: enfermedad_riñon
+enfermedad_riñon
+No     234729
+Yes     11284
+Name: count, dtype: int64
+
+ Columna: artritis
+artritis
+No     161132
+Yes     84881
+Name: count, dtype: int64
+
+ Columna: diabetes
+diabetes
+No                                         204827
+Yes                                         33811
+No, pre-diabetes or borderline diabetes      5392
+Yes, but only during pregnancy (female)      1983
+Name: count, dtype: int64
+
+ Columna: sordo_semisordo
+sordo_semisordo
+No     224981
+Yes     21032
+Name: count, dtype: int64
+
+ Columna: ciego_semiciego
+ciego_semiciego
+No     233787
+Yes     12226
+Name: count, dtype: int64
+
+ Columna: dif_concentracion
+dif_concentracion
+No     219793
+Yes     26220
+Name: count, dtype: int64
+
+ Columna: dif_caminar
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dif_caminar
+No     209945
+Yes     36068
+Name: count, dtype: int64
+
+ Columna: dif_vestirduchar
+dif_vestirduchar
+No     237673
+Yes      8340
+Name: count, dtype: int64
+
+ Columna: dif_encargo
+dif_encargo
+No     229629
+Yes     16384
+Name: count, dtype: int64
+
+ Columna: estado_fumador
+estado_fumador
+Never smoked                             147731
+Former smoker                             68524
+Current smoker - now smokes every day     21659
+Current smoker - now smokes some days      8099
+Name: count, dtype: int64
+
+ Columna: uso_cigarroelect
+uso_cigarroelect
+Never used e-cigarettes in my entire life    190119
+Not at all (right now)                        43281
+Use them some days                             6658
+Use them every day                             5955
+Name: count, dtype: int64
+
+ Columna: escaner_torax
+escaner_torax
+No     141818
+Yes    104195
+Name: count, dtype: int64
+
+ Columna: categoria_etnica
+categoria_etnica
+White only, Non-Hispanic         186327
+Hispanic                          22570
+Black only, Non-Hispanic          19330
+Other race only, Non-Hispanic     12205
+Multiracial, Non-Hispanic          5581
+Name: count, dtype: int64
+
+ Columna: categoria_edad
+categoria_edad
+Age 65 to 69       28555
+Age 60 to 64       26719
+Age 70 to 74       25737
+Age 55 to 59       22224
+Age 50 to 54       19912
+Age 75 to 79       18133
+Age 80 or older    17816
+Age 40 to 44       16973
+Age 45 to 49       16753
+Age 35 to 39       15614
+Age 30 to 34       13346
+Age 18 to 24       13122
+Age 25 to 29       11109
+Name: count, dtype: int64
+
+ Columna: bebedor_alcohol
+bebedor_alcohol
+Yes    135299
+No     110714
+Name: count, dtype: int64
+
+ Columna: prueba_VIH
+prueba_VIH
+No     161513
+Yes     84500
+Name: count, dtype: int64
+
+ Columna: gripa_vac
+gripa_vac
+Yes    131188
+No     114825
+Name: count, dtype: int64
+
+ Columna: pneumo
+pneumo
+No     146128
+Yes     99885
+Name: count, dtype: int64
+
+ Columna: tetanos
+tetanos
+No, did not receive any tetanus shot in the past 10 years    81743
+Yes, received tetanus shot but not sure what type            74118
+Yes, received Tdap                                           70282
+Yes, received tetanus shot, but not Tdap                     19870
+Name: count, dtype: int64
+
+ Columna: alto_riesgo_ap
+alto_riesgo_ap
+No     235437
+Yes     10576
+Name: count, dtype: int64
+
+ Columna: covid
+covid
+No                                                               167297
+Yes                                                               70324
+Tested positive using home test without a health professional      8392
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reemplazar las clases por &#39;No&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span>
+    <span class="s2">&quot;Yes, but only during pregnancy (female)&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;No, pre-diabetes or borderline diabetes&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span>
+<span class="p">})</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;diabetes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>diabetes
+No     212202
+Yes     33811
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sexo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sexo
+Female    0.519509
+Male      0.480491
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lista de variables a graficar</span>
+<span class="nb">vars</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;sexo&#39;</span><span class="p">,</span> <span class="s1">&#39;salud_general&#39;</span><span class="p">,</span> <span class="s1">&#39;actividades_fisicas&#39;</span><span class="p">,</span> <span class="s1">&#39;diabetes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;estado_fumador&#39;</span><span class="p">,</span> <span class="s1">&#39;uso_cigarroelect&#39;</span><span class="p">,</span> <span class="s1">&#39;categoria_etnica&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;categoria_edad&#39;</span><span class="p">,</span> <span class="s1">&#39;covid&#39;</span><span class="p">,</span> <span class="s1">&#39;bebedor_alcohol&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Parámetros de la cuadrícula</span>
+<span class="n">per_row</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">per_row</span><span class="p">)</span>
+
+<span class="c1"># Crear figura y ejes</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">per_row</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">per_row</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">rows</span><span class="p">),</span> <span class="n">squeeze</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Loop para generar cada gráfico</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span> <span class="nb">vars</span><span class="p">):</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+           <span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución de </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia relativa&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="c1"># Eliminar ejes vacíos si los hay</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">n</span><span class="p">:]:</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b54daea1636b1ab37f521d98d1f4ae8f3366a2e74fc9beeddb44620958b32a53.png" src="_images/b54daea1636b1ab37f521d98d1f4ae8f3366a2e74fc9beeddb44620958b32a53.png" />
+</div>
+</div>
+<p>Los gráficos muestran la distribución relativa de distintas variables categóricas relevantes para el análisis de salud. A continuación, se resume lo observado:</p>
+<ul class="simple">
+<li><p><strong>Sexo</strong></p>
+<ul>
+<li><p>Distribución equilibrada entre hombres y mujeres.</p></li>
+</ul>
+</li>
+<li><p><strong>Salud general</strong></p>
+<ul>
+<li><p>La mayoría de los participantes se consideran con salud <strong>“Muy buena” o “Buena”</strong>.</p></li>
+<li><p>Pocas personas se califican con salud <strong>“Pobre”</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Actividades físicas</strong></p>
+<ul>
+<li><p>Alrededor del <strong>65%</strong> de los encuestados reportan realizar actividad física.</p></li>
+</ul>
+</li>
+<li><p><strong>Diabetes</strong></p>
+<ul>
+<li><p>Más de la mitad no presenta diabetes.</p></li>
+<li><p>Una pequeña proporción reporta haber tenido diabetes durante el embarazo o prediabetes.</p></li>
+</ul>
+</li>
+<li><p><strong>Estado fumador</strong></p>
+<ul>
+<li><p>Predominan quienes <strong>nunca han fumado</strong>, seguidos por <strong>exfumadores</strong>.</p></li>
+<li><p>Los fumadores actuales son minoría.</p></li>
+</ul>
+</li>
+<li><p><strong>Uso de cigarrillos electrónicos</strong></p>
+<ul>
+<li><p>Mayoría nunca ha usado cigarrillos electrónicos.</p></li>
+<li><p>Bajo uso diario o frecuente.</p></li>
+</ul>
+</li>
+<li><p><strong>Categoría étnica</strong></p>
+<ul>
+<li><p>Predominio de personas <strong>blancas no hispanas</strong>.</p></li>
+<li><p>Minorías étnicas representan porcentajes mucho menores.</p></li>
+</ul>
+</li>
+<li><p><strong>Categoría de edad</strong></p>
+<ul>
+<li><p>La muestra está bien distribuida, aunque destaca el grupo de edad <strong>65–69 años</strong> como el más representado.</p></li>
+<li><p>Se observa una disminución progresiva hacia los grupos de menor edad.</p></li>
+</ul>
+</li>
+<li><p><strong>Covid</strong></p>
+<ul>
+<li><p>Mayoría no ha reportado infección por COVID-19.</p></li>
+<li><p>Una fracción pequeña reportó test positivo.</p></li>
+</ul>
+</li>
+<li><p><strong>Bebedor de alcohol</strong></p>
+<ul>
+<li><p>Ligera mayoría indicó consumir alcohol.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="correlacion-entre-variables-numericas">
+<h2><strong>Correlación entre variables numéricas</strong><a class="headerlink" href="#correlacion-entre-variables-numericas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de correlación&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/afaa1ed7c256d701320c3831c2cbf5b6e84e10318fb7492315e1f5d74cb3efcf.png" src="_images/afaa1ed7c256d701320c3831c2cbf5b6e84e10318fb7492315e1f5d74cb3efcf.png" />
+</div>
+</div>
+<p>La matriz de correlación muestra la relación lineal entre variables numéricas del conjunto de datos. Los valores van de <strong>-1 a 1</strong>, donde:</p>
+<ul class="simple">
+<li><p><strong>1</strong> indica una correlación positiva perfecta.</p></li>
+<li><p><strong>0</strong> indica ausencia de correlación lineal.</p></li>
+<li><p><strong>-1</strong> indica una correlación negativa perfecta.</p></li>
+</ul>
+<section id="principales-observaciones">
+<h3><strong>Principales observaciones</strong>:<a class="headerlink" href="#principales-observaciones" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">peso_kilos</span></code> y <code class="docutils literal notranslate"><span class="pre">bmi</span></code></strong>:</p>
+<ul>
+<li><p>Fuerte correlación positiva (<strong>0.86</strong>), lo esperado ya que el índice de masa corporal (IMC) depende directamente del peso.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">altura_metros</span></code> y <code class="docutils literal notranslate"><span class="pre">peso_kilos</span></code></strong>:</p>
+<ul>
+<li><p>Correlación moderada (<strong>0.47</strong>), lo cual indica que las personas más altas tienden a pesar más, aunque no linealmente.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">dias_salud_fisica</span></code> y <code class="docutils literal notranslate"><span class="pre">dias_salud_mental</span></code></strong>:</p>
+<ul>
+<li><p>Correlación positiva moderada (<strong>0.31</strong>), lo cual sugiere que quienes reportan mala salud física también tienden a reportar malestar mental.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">horas_sueño</span></code></strong>:</p>
+<ul>
+<li><p>Muestra <strong>baja o nula correlación</strong> con las demás variables, indicando que el número de horas dormidas no está linealmente relacionado con salud física, mental o medidas corporales.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">bmi</span></code> y <code class="docutils literal notranslate"><span class="pre">dias_salud_fisica</span></code></strong>:</p>
+<ul>
+<li><p>Correlación baja pero positiva (<strong>0.12</strong>), lo que podría sugerir que valores más altos de IMC están ligeramente asociados a más días de mala salud física.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="analisis-bivariado">
+<h2><strong>Analisis bivariado</strong><a class="headerlink" href="#analisis-bivariado" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;sexo&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;diabetes&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribución de Diabetes según Sexo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Sexo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Conteo&#39;</span><span class="p">)</span>
+<span class="c1"># Colocar la leyenda debajo del gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Diabetes&#39;</span><span class="p">,</span>
+           <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span>
+           <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.20</span><span class="p">),</span>
+           <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/51d43c88e92c82d779ade81dc4c68589a0435c2133ad7dfd3cd8812744cafbf3.png" src="_images/51d43c88e92c82d779ade81dc4c68589a0435c2133ad7dfd3cd8812744cafbf3.png" />
+</div>
+</div>
+<p>El gráfico muestra que la mayoría de los encuestados, tanto hombres como mujeres, <strong>no presentan diabetes</strong>. Sin embargo, se observa una <strong>proporción ligeramente mayor de hombres con diagnóstico de diabetes</strong> en comparación con las mujeres. Además, solo las mujeres reportan casos de diabetes <strong>durante el embarazo</strong>, como era de esperarse. También se identifican casos de <strong>prediabetes o diabetes limítrofe</strong> en ambos sexos, aunque en menor proporción.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_diab</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diabetes&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;bmi&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;dias_salud_fisica&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df_diab</span><span class="p">,</span>
+    <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">},</span>
+    <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Relación entre BMI y días de mala salud física</span><span class="se">\n</span><span class="s1">(solo diabéticos)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;BMI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Días salud física mala&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/217ba145fb8533bfddca4efcfa1ba58307e967d7bd6c952e9f6da883f0497a10.png" src="_images/217ba145fb8533bfddca4efcfa1ba58307e967d7bd6c952e9f6da883f0497a10.png" />
+</div>
+</div>
+<p>El gráfico muestra una <strong>relación positiva</strong> entre el índice de masa corporal (BMI) y los <strong>días de mala salud física</strong> en personas con diabetes. A medida que el BMI aumenta, también tiende a aumentar el número de días reportados con malestar físico. Aunque la dispersión es alta, la <strong>tendencia general</strong> sugiere que un mayor BMI podría estar asociado con una peor condición física en personas diabéticas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">order_edad</span> <span class="o">=</span> <span class="n">df_diab</span><span class="p">[</span><span class="s1">&#39;categoria_edad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;categoria_edad&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;dias_salud_mental&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df_diab</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order_edad</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Días de mala salud mental por edad</span><span class="se">\n</span><span class="s1">(solo diabéticos)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Categoría de edad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Días salud mental mala&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/375fc4b00185c8ee10de4b7b65207389f6d2c3a7da266c4ddc16307a433dbaa1.png" src="_images/375fc4b00185c8ee10de4b7b65207389f6d2c3a7da266c4ddc16307a433dbaa1.png" />
+</div>
+</div>
+<p>El gráfico muestra la distribución de <strong>días de mala salud mental</strong> entre personas con diabetes, segmentadas por categoría de edad. Se observa una <strong>tendencia clara</strong>: los grupos de edad más jóvenes (especialmente entre <strong>18 y 34 años</strong>) reportan <strong>más días de malestar mental</strong> en promedio, mientras que los adultos mayores tienden a reportar <strong>menos días de afectación</strong>. Esta diferencia sugiere una posible <strong>vulnerabilidad emocional o psicológica mayor en personas jóvenes con diabetes</strong>, en comparación con los grupos mayores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top10_estados</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diabetes&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Yes&#39;</span><span class="p">][</span><span class="s1">&#39;estado&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 3. Graficar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">top10_estados</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top 10 Estados con Mayor Número de Casos de Diabetes (Yes)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Estado&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Conteo de Casos de Diabetes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ea6b3110ad7551c4f5b2ec13daed445da3f98b4274db8be9d70c4f4dc4235d03.png" src="_images/ea6b3110ad7551c4f5b2ec13daed445da3f98b4274db8be9d70c4f4dc4235d03.png" />
+</div>
+</div>
+<p>El gráfico presenta los <strong>10 estados con mayor número de casos de diabetes diagnosticada</strong> (respuesta “Yes”). <strong>Washington</strong> encabeza la lista con la mayor cantidad de personas con diabetes, seguido por <strong>Ohio</strong> y <strong>Maryland</strong>. Estos resultados permiten identificar regiones con una mayor carga de esta enfermedad, lo cual podría estar relacionado con factores sociodemográficos, acceso a servicios de salud o estilos de vida particulares de cada estado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;actividades_fisicas&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;diabetes&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Diabetes según Actividad Física&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Realiza actividad física&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Conteo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Diabetes&#39;</span><span class="p">,</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span>
+    <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">),</span>
+    <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6b5a4eb1b5bd68e0c92af3ab307b5eaf89d5e2c884ac7a12e4b926d68f1b3c63.png" src="_images/6b5a4eb1b5bd68e0c92af3ab307b5eaf89d5e2c884ac7a12e4b926d68f1b3c63.png" />
+</div>
+</div>
+<p>El gráfico muestra la relación entre la actividad física y la presencia de diabetes. Se observa que la <strong>mayoría de las personas que realizan actividad física no tienen diabetes</strong>. Sin embargo, también hay casos de diabetes entre quienes sí realizan ejercicio, aunque en menor proporción que entre quienes no lo hacen. En el grupo que <strong>no realiza actividad física</strong>, la proporción de personas con diabetes es <strong>visiblemente mayor</strong>, lo que sugiere una posible <strong>asociación negativa entre la inactividad física y el diagnóstico de diabetes</strong>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bienvenido al Estudio de Diabetes</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6">Variables numéricas (6)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas-34">Variables categóricas (34)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-los-datos"><strong>Análisis Exploratorio de los Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-variable-numericas"><strong>Análisis de variable numéricas</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-outliers"><strong>Análisis de Outliers</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-variables-categoricas-relevantes"><strong>Análisis de Variables Categoricas Relevantes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlacion-entre-variables-numericas"><strong>Correlación entre variables numéricas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principales-observaciones"><strong>Principales observaciones</strong>:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado"><strong>Analisis bivariado</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mariana Franco, Jeronimo Dominguez, Juan Andres Ramos
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
