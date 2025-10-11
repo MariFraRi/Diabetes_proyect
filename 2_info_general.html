@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Introducción &#8212; Proyecto Final ML</title>
+    <title>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022 &#8212; Proyecto Final ML</title>
   
   
   
@@ -57,7 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2_info_general';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -173,8 +173,8 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     1. Introducción
                 </a>
             </li>
@@ -252,7 +252,7 @@
       
       
       
-      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2F2_info_general.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -282,7 +282,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/2_info_general.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +292,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -353,7 +353,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -364,11 +366,23 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Introducción</h1>
+    <h1>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><strong>Variables numéricas (6)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoticas-34"><strong>Variables Categóticas (34)</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -378,18 +392,64 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduccion">
-<h1><strong>1. Introducción</strong><a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
-<p><strong>Integrantes:</strong> Mariana Franco, Jerónimo Domínguez, Juan Andrés Ramos</p>
-<p>El presente proyecto final de Machine Learning tiene como objetivo aplicar, comparar y evaluar distintos modelos de predicción utilizando la base de datos seleccionada. A través de este trabajo se busca no solo construir modelos con un adecuado rendimiento, sino también comprender el proceso completo de un proyecto de aprendizaje automático, desde la preparación de los datos hasta la interpretación de los resultados.</p>
-<p>En primer lugar, se realizará un análisis exploratorio de datos (EDA) para conocer la estructura de la base, identificar patrones, valores atípicos y posibles problemas de calidad de datos que puedan afectar el desempeño de los modelos. Posteriormente, se aplicarán técnicas de preprocesamiento como imputación de valores faltantes, codificación de variables categóricas, escalamiento y selección de características.</p>
-<p>Con los datos preparados, se entrenarán diferentes algoritmos de predicción, entre los que se incluyen modelos de regresión (Ridge, Lasso, regresión logística) y modelos más orientados a la clasificación, según el problema planteado. Cada modelo será evaluado bajo métricas específicas (precisión, F1-score, ROC-AUC, error cuadrático medio, entre otras) con el fin de comparar su desempeño y determinar cuál ofrece mejores resultados en este contexto.</p>
-<p>Finalmente, se discutirán los hallazgos obtenidos y se plantearán conclusiones acerca de la utilidad de los modelos, las variables más relevantes para la predicción y posibles mejoras futuras. Este proyecto no solo tiene un carácter práctico, sino también formativo, al integrar los distintos componentes del ciclo de vida de un modelo de Machine Learning aplicado a datos reales.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="9_conclusion.html"><strong>9. Conclusiones</strong></a></li>
+  <section class="tex2jax_ignore mathjax_ignore" id="estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022">
+<h1><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong><a class="headerlink" href="#estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022" title="Link to this heading">#</a></h1>
+<p><strong>Descripción:</strong></p>
+<p>En este análisis exploratorio (EDA) utilizamos el dataset <code class="docutils literal notranslate"><span class="pre">heart_2022_no_nans.csv</span></code> para identificar y caracterizar los principales factores asociados a la aparición de diabetes en adultos de Estados Unidos durante 2022. El objetivo es comprender la distribución de las variables clave, detectar correlaciones relevantes y sentar las bases para la aplicación de distintos modelos predictivo.</p>
+<p><strong>Objetivos:</strong></p>
+<ol class="arabic simple">
+<li><p>Describir la distribución de variables demográficas y de salud relacionadas con la diabetes (BMI, actividad física, tabaquismo, etc.).</p></li>
+<li><p>Identificar correlaciones y patrones entre predictores potenciales y la presencia de diabetes.</p></li>
+<li><p>Detectar valores atípicos y evaluar la calidad de los datos.</p></li>
+<li><p>Proponer próximos pasos para un modelo predictivo.</p></li>
+</ol>
+<p><strong>Fuente de datos:</strong></p>
+<ul class="simple">
+<li><p>link: <a class="reference external" href="https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022">https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022</a></p></li>
+<li><p>Archivo: <code class="docutils literal notranslate"><span class="pre">heart_2022_no_nans.csv</span></code> (246 022 registros, 40 variables, sin valores nulos).</p></li>
 </ul>
-</div>
+<hr class="docutils" />
+<section id="informacion-general-de-los-datos">
+<h2><strong>Información general de los Datos</strong><a class="headerlink" href="#informacion-general-de-los-datos" title="Link to this heading">#</a></h2>
+<p>El dataset contiene 40 variables que se clasifican en dos grandes grupos:</p>
+<section id="variables-numericas-6">
+<h3><strong>Variables numéricas (6)</strong><a class="headerlink" href="#variables-numericas-6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysicalHealthDays</span></code></strong>: Número de días en el último mes con mala salud física.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">MentalHealthDays</span></code></strong>: Número de días en el último mes con mala salud mental.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">SleepHours</span></code></strong>: Horas promedio de sueño por noche.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HeightInMeters</span></code></strong>: Altura en metros.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">WeightInKilograms</span></code></strong>: Peso en kilogramos.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">BMI</span></code></strong>: Índice de Masa Corporal.</p></li>
+</ul>
+</section>
+<section id="variables-categoticas-34">
+<h3><strong>Variables Categóticas (34)</strong><a class="headerlink" href="#variables-categoticas-34" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">State</span></code></strong>: Estado de residencia en EE. UU.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Sex</span></code></strong>: Sexo del encuestado.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">GeneralHealth</span></code></strong>: Autopercepción del estado de salud general.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">LastCheckupTime</span></code></strong>: Tiempo desde la última revisión médica.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysicalActivities</span></code></strong>: Realiza actividad física regularmente (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">RemovedTeeth</span></code></strong>: Número de dientes extraídos.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HadHeartAttack</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadAngina</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadStroke</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadAsthma</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadSkinCancer</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadCOPD</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadDepressiveDisorder</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadKidneyDisease</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadArthritis</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadDiabetes</span></code></strong>: Antecedentes de condiciones de salud (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DeafOrHardOfHearing</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">BlindOrVisionDifficulty</span></code></strong>: Discapacidades sensoriales (auditiva y visual).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DifficultyConcentrating</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">DifficultyWalking</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">DifficultyDressingBathing</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">DifficultyErrands</span></code></strong>: Dificultades funcionales en tareas diarias (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">SmokerStatus</span></code></strong>: Estado de fumador (Nunca, Ex-fumador, Fumador).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ECigaretteUsage</span></code></strong>: Uso de cigarrillos electrónicos (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ChestScan</span></code></strong>: Realización de escáner de tórax (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">RaceEthnicityCategory</span></code></strong>: Categoría de raza o etnia.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">AgeCategory</span></code></strong>: Categoría de edad.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">AlcoholDrinkers</span></code></strong>: Consumo de alcohol en el último mes (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HIVTesting</span></code></strong>: Prueba de VIH alguna vez (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">FluVaxLast12</span></code></strong>: Vacunación contra la gripe en los últimos 12 meses (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PneumoVaxEver</span></code></strong>: Vacunación antineumocócica alguna vez (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">TetanusLast10Tdap</span></code></strong>: Vacunación de tétanos (Tdap) en los últimos 10 años (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HighRiskLastYear</span></code></strong>: Exposición a entornos de alto riesgo COVID-19 en el último año (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">CovidPos</span></code></strong>: Resultado positivo de COVID-19 en el último año (Sí/No).</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -428,6 +488,25 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><strong>Variables numéricas (6)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoticas-34"><strong>Variables Categóticas (34)</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

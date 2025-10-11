@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Estudio de Predictores de Diabetes en la Población Estadounidense 2022 &#8212; Proyecto Final ML</title>
+    <title>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022 &#8212; Proyecto Final ML</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'info_general';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Entregable 1" href="Eda_Diabetes.html" />
-    <link rel="prev" title="Proyecto Final ML" href="intro.html" />
+    <link rel="next" title="3. Análisis Exploratorio" href="EDA.html" />
+    <link rel="prev" title="1. Introducción" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,14 +175,19 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Proyecto Final ML
+                    1. Introducción
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Eda_Diabetes.html"><strong>Entregable 1</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Eda_Diabetes_2.html"><strong>Entregable 2</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelado.html"><strong>4. Implementación de Modelos sin Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="balanceo.html"><strong>5. Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizacion.html"><strong>6. Optimización</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="validacion.html"><strong>7. Validación</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluacion.html"><strong>8. Evaluación</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_conclusion.html"><strong>9. Conclusiones</strong></a></li>
 </ul>
 
     </div>
@@ -368,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Estudio de Predictores de Diabetes en la Población Estadounidense 2022</h1>
+    <h1>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,8 +384,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><em>Variables numéricas (6)</em></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas-34">Variables categóricas (34)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><strong>Variables numéricas (6)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoticas-34"><strong>Variables Categóticas (34)</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -395,7 +400,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022">
-<h1><strong>Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong><a class="headerlink" href="#estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022" title="Link to this heading">#</a></h1>
+<h1><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong><a class="headerlink" href="#estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022" title="Link to this heading">#</a></h1>
 <p><strong>Descripción:</strong></p>
 <p>En este análisis exploratorio (EDA) utilizamos el dataset <code class="docutils literal notranslate"><span class="pre">heart_2022_no_nans.csv</span></code> para identificar y caracterizar los principales factores asociados a la aparición de diabetes en adultos de Estados Unidos durante 2022. El objetivo es comprender la distribución de las variables clave, detectar correlaciones relevantes y sentar las bases para la aplicación de distintos modelos predictivo.</p>
 <p><strong>Objetivos:</strong></p>
@@ -415,42 +420,41 @@ document.write(`
 <h2><strong>Información general de los Datos</strong><a class="headerlink" href="#informacion-general-de-los-datos" title="Link to this heading">#</a></h2>
 <p>El dataset contiene 40 variables que se clasifican en dos grandes grupos:</p>
 <section id="variables-numericas-6">
-<h3><em>Variables numéricas (6)</em><a class="headerlink" href="#variables-numericas-6" title="Link to this heading">#</a></h3>
+<h3><strong>Variables numéricas (6)</strong><a class="headerlink" href="#variables-numericas-6" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">PhysicalHealthDays</span></code>: Número de días en el último mes con mala salud física.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MentalHealthDays</span></code>: Número de días en el último mes con mala salud mental.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SleepHours</span></code>: Horas promedio de sueño por noche.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HeightInMeters</span></code>: Altura en metros.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WeightInKilograms</span></code>: Peso en kilogramos.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BMI</span></code>: Índice de Masa Corporal.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysicalHealthDays</span></code></strong>: Número de días en el último mes con mala salud física.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">MentalHealthDays</span></code></strong>: Número de días en el último mes con mala salud mental.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">SleepHours</span></code></strong>: Horas promedio de sueño por noche.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HeightInMeters</span></code></strong>: Altura en metros.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">WeightInKilograms</span></code></strong>: Peso en kilogramos.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">BMI</span></code></strong>: Índice de Masa Corporal.</p></li>
 </ul>
 </section>
-<section id="variables-categoricas-34">
-<h3>Variables categóricas (34)<a class="headerlink" href="#variables-categoricas-34" title="Link to this heading">#</a></h3>
+<section id="variables-categoticas-34">
+<h3><strong>Variables Categóticas (34)</strong><a class="headerlink" href="#variables-categoticas-34" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">State</span></code>: Estado de residencia en EE. UU.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Sex</span></code>: Sexo del encuestado.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GeneralHealth</span></code>: Autopercepción del estado de salud general.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LastCheckupTime</span></code>: Tiempo desde la última revisión médica.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PhysicalActivities</span></code>: Realiza actividad física regularmente (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RemovedTeeth</span></code>: Número de dientes extraídos.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HadHeartAttack</span></code>, <code class="docutils literal notranslate"><span class="pre">HadAngina</span></code>, <code class="docutils literal notranslate"><span class="pre">HadStroke</span></code>, <code class="docutils literal notranslate"><span class="pre">HadAsthma</span></code>, <code class="docutils literal notranslate"><span class="pre">HadSkinCancer</span></code>, <code class="docutils literal notranslate"><span class="pre">HadCOPD</span></code>, <code class="docutils literal notranslate"><span class="pre">HadDepressiveDisorder</span></code>, <code class="docutils literal notranslate"><span class="pre">HadKidneyDisease</span></code>, <code class="docutils literal notranslate"><span class="pre">HadArthritis</span></code>, <code class="docutils literal notranslate"><span class="pre">HadDiabetes</span></code>: Antecedentes de condiciones de salud (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DeafOrHardOfHearing</span></code>, <code class="docutils literal notranslate"><span class="pre">BlindOrVisionDifficulty</span></code>: Discapacidades sensoriales (auditiva y visual).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DifficultyConcentrating</span></code>, <code class="docutils literal notranslate"><span class="pre">DifficultyWalking</span></code>, <code class="docutils literal notranslate"><span class="pre">DifficultyDressingBathing</span></code>, <code class="docutils literal notranslate"><span class="pre">DifficultyErrands</span></code>: Dificultades funcionales en tareas diarias (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SmokerStatus</span></code>: Estado de fumador (Nunca, Ex-fumador, Fumador).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ECigaretteUsage</span></code>: Uso de cigarrillos electrónicos (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ChestScan</span></code>: Realización de escáner de tórax (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RaceEthnicityCategory</span></code>: Categoría de raza o etnia.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AgeCategory</span></code>: Categoría de edad.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AlcoholDrinkers</span></code>: Consumo de alcohol en el último mes (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HIVTesting</span></code>: Prueba de VIH alguna vez (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">FluVaxLast12</span></code>: Vacunación contra la gripe en los últimos 12 meses (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PneumoVaxEver</span></code>: Vacunación antineumocócica alguna vez (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TetanusLast10Tdap</span></code>: Vacunación de tétanos (Tdap) en los últimos 10 años (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HighRiskLastYear</span></code>: Exposición a entornos de alto riesgo COVID-19 en el último año (Sí/No).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CovidPos</span></code>: Resultado positivo de COVID-19 en el último año (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">State</span></code></strong>: Estado de residencia en EE. UU.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Sex</span></code></strong>: Sexo del encuestado.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">GeneralHealth</span></code></strong>: Autopercepción del estado de salud general.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">LastCheckupTime</span></code></strong>: Tiempo desde la última revisión médica.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PhysicalActivities</span></code></strong>: Realiza actividad física regularmente (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">RemovedTeeth</span></code></strong>: Número de dientes extraídos.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HadHeartAttack</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadAngina</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadStroke</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadAsthma</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadSkinCancer</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadCOPD</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadDepressiveDisorder</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadKidneyDisease</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadArthritis</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">HadDiabetes</span></code></strong>: Antecedentes de condiciones de salud (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DeafOrHardOfHearing</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">BlindOrVisionDifficulty</span></code></strong>: Discapacidades sensoriales (auditiva y visual).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DifficultyConcentrating</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">DifficultyWalking</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">DifficultyDressingBathing</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">DifficultyErrands</span></code></strong>: Dificultades funcionales en tareas diarias (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">SmokerStatus</span></code></strong>: Estado de fumador (Nunca, Ex-fumador, Fumador).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ECigaretteUsage</span></code></strong>: Uso de cigarrillos electrónicos (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ChestScan</span></code></strong>: Realización de escáner de tórax (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">RaceEthnicityCategory</span></code></strong>: Categoría de raza o etnia.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">AgeCategory</span></code></strong>: Categoría de edad.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">AlcoholDrinkers</span></code></strong>: Consumo de alcohol en el último mes (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HIVTesting</span></code></strong>: Prueba de VIH alguna vez (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">FluVaxLast12</span></code></strong>: Vacunación contra la gripe en los últimos 12 meses (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PneumoVaxEver</span></code></strong>: Vacunación antineumocócica alguna vez (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">TetanusLast10Tdap</span></code></strong>: Vacunación de tétanos (Tdap) en los últimos 10 años (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">HighRiskLastYear</span></code></strong>: Exposición a entornos de alto riesgo COVID-19 en el último año (Sí/No).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">CovidPos</span></code></strong>: Resultado positivo de COVID-19 en el último año (Sí/No).</p></li>
 </ul>
-<hr class="docutils" />
 </section>
 </section>
 </section>
@@ -491,15 +495,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Proyecto Final ML</p>
+        <p class="prev-next-title"><strong>1. Introducción</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="Eda_Diabetes.html"
+       href="EDA.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Entregable 1</strong></p>
+        <p class="prev-next-title"><strong>3. Análisis Exploratorio</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -520,8 +524,8 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><em>Variables numéricas (6)</em></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoricas-34">Variables categóricas (34)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><strong>Variables numéricas (6)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoticas-34"><strong>Variables Categóticas (34)</strong></a></li>
 </ul>
 </li>
 </ul>

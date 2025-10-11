@@ -1,4 +1,4 @@
-# Proyecto Final ML
+# **1. Introducción**
 
 **Integrantes:** Mariana Franco, Jerónimo Domínguez, Juan Andrés Ramos
 
