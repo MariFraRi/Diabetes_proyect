@@ -182,7 +182,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado sin Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_balanceo.html"><strong>5. Balanceo</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
@@ -390,7 +390,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-randomforestclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-xgbclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-linearsvc"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa"><strong>Tabla Comparativa</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -670,8 +670,8 @@ weighted avg       0.85      0.72      0.76     73804
 </div>
 </div>
 </section>
-<section id="tabla-comparativa">
-<h2><strong>Tabla Comparativa</strong><a class="headerlink" href="#tabla-comparativa" title="Link to this heading">#</a></h2>
+<section id="tabla-comparativa-modelos-validados">
+<h2><strong>Tabla Comparativa modelos validados</strong><a class="headerlink" href="#tabla-comparativa-modelos-validados" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_comparativa</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados_finales</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -861,7 +861,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-randomforestclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-xgbclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-linearsvc"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa"><strong>Tabla Comparativa</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a></li>
 </ul>
   </nav></div>
 
