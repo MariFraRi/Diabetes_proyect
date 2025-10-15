@@ -182,7 +182,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado sin Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_balanceo.html"><strong>5. Balanceo</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>7. Validación</strong></a></li>
@@ -383,6 +383,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos"><strong>Objetivos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-l1-y-l2"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-knn-neighborsclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-naive-bayes"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong></a></li>
@@ -403,6 +404,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="validacion">
 <h1><strong>7. Validación</strong><a class="headerlink" href="#validacion" title="Link to this heading">#</a></h1>
+<p>En esta sección se desarrolla el proceso de <strong>validación de modelos</strong>, con el objetivo de evaluar de manera más rigurosa el rendimiento real de los algoritmos optimizados.<br />
+Mientras que en la etapa anterior se analizó la eficiencia computacional sin validación cruzada, aquí se busca <strong>garantizar la estabilidad, generalización y confiabilidad de los resultados</strong> obtenidos por cada modelo.</p>
+<p>La validación se realiza mediante la técnica de <strong>validación cruzada estratificada (Stratified K-Fold)</strong>, que permite dividir los datos en varios subconjuntos o <em>folds</em> manteniendo la proporción original de clases.<br />
+Cada modelo se entrena en una combinación de estos subconjuntos y se evalúa en los restantes, repitiendo el proceso varias veces para obtener métricas promedio más representativas del desempeño general.</p>
+<p>Durante esta etapa, se aplican los siguientes pasos:</p>
+<ol class="arabic simple">
+<li><p>Entrenamiento de los modelos previamente optimizados bajo esquemas de validación cruzada.</p></li>
+<li><p>Cálculo de métricas de evaluación como <strong>Accuracy, Recall, F1-score y AUC</strong>, promediadas sobre los <em>folds</em>.</p></li>
+<li><p>Comparación de los resultados validados con los obtenidos en la fase sin validación para analizar la consistencia y la capacidad de generalización.</p></li>
+<li><p>Selección de los modelos con mejor equilibrio entre rendimiento y estabilidad.</p></li>
+</ol>
+<section id="objetivos">
+<h2><strong>Objetivos</strong><a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Validar la solidez y generalización de los modelos optimizados.</p></li>
+<li><p>Identificar posibles casos de sobreajuste o subajuste.</p></li>
+<li><p>Evaluar la variabilidad del rendimiento de cada modelo mediante métricas promedio y desviaciones estándar.</p></li>
+<li><p>Determinar el modelo con el mejor comportamiento global y más confiable para su interpretación final.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Manejo y análisis de datos ---</span>
@@ -481,12 +501,14 @@ document.write(`
     <span class="p">],</span>
     <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;drop&quot;</span>
 <span class="p">)</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="n">cat_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cat_cols</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="modelo-de-regresion-logistica-l1-y-l2">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong><a class="headerlink" href="#modelo-de-regresion-logistica-l1-y-l2" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -500,8 +522,6 @@ document.write(`
     <span class="s1">&#39;model__penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="s1">&#39;l2&#39;</span><span class="p">],</span>
     <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="p">}</span>
-
-<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="n">grid_logreg</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
     <span class="n">estimator</span><span class="o">=</span><span class="n">pipe_logreg</span><span class="p">,</span>
@@ -533,12 +553,73 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 8 candidates, totalling 40 fits
 
  VALIDACIÓN CON DATOS BALANCEADOS COMPLETADA
+Tiempo total: 59.86 s
  Mejor AUC promedio (CV): 0.856
  Mejores parámetros: {&#39;model__C&#39;: 10, &#39;model__penalty&#39;: &#39;l1&#39;}
 </pre></div>
 </div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_test_score</th>
+      <th>param_model__penalty</th>
+      <th>param_model__C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>0.856031</td>
+      <td>l1</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.856031</td>
+      <td>l2</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.856028</td>
+      <td>l1</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.856026</td>
+      <td>l2</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.855967</td>
+      <td>l1</td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-</div>
+<p>El modelo de <strong>Regresión Logística</strong> con <strong>penalización L1</strong> y un valor de <strong>C = 10</strong> obtuvo el <strong>mejor AUC promedio (0.856)</strong> durante la validación cruzada, demostrando una excelente capacidad para discriminar entre clases.<br />
+El hecho de que las configuraciones con penalización <code class="docutils literal notranslate"><span class="pre">l2</span></code> y valores cercanos de <code class="docutils literal notranslate"><span class="pre">C</span></code> presenten resultados similares indica una <strong>alta estabilidad del modelo</strong> frente a variaciones en los hiperparámetros, lo que refuerza su robustez.</p>
+<p>Además, el incremento del AUC respecto a la fase sin validación (≈0.789) evidencia que el balanceo de clases y el ajuste de parámetros <strong>mejoraron significativamente la sensibilidad del modelo</strong>, especialmente hacia la clase minoritaria.<br />
+En conclusión, la Regresión Logística validada se consolida como uno de los modelos <strong>más confiables y equilibrados</strong>, combinando interpretabilidad, buen desempeño y consistencia en la generalización.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_logreg</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s2">&quot;modelo_logistica.pkl&quot;</span><span class="p">)</span>
@@ -596,7 +677,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 16 candidates, totalling 80 fits
 
 VALIDACIÓN COMPLETADA - KNN
-Tiempo: 1701.12 s
+Tiempo: 1819.15 s
  Mejor AUC (CV): 0.917
  Mejores parámetros: {&#39;model__metric&#39;: &#39;minkowski&#39;, &#39;model__n_neighbors&#39;: 9, &#39;model__weights&#39;: &#39;distance&#39;}
 </pre></div>
@@ -665,6 +746,11 @@ Tiempo: 1701.12 s
 </table>
 </div></div></div>
 </div>
+<p>El modelo <strong>KNN</strong> con <strong>9 vecinos</strong>, ponderación por <strong>distancia</strong> y métrica <strong>Minkowski</strong> alcanzó el <strong>mejor AUC promedio (0.917)</strong>, superando ampliamente los resultados obtenidos en la fase sin validación (AUC ≈ 0.755).<br />
+Este incremento notable evidencia una <strong>mejor discriminación entre clases</strong> y un aprendizaje más equilibrado tras aplicar el balanceo de datos.</p>
+<p>El uso de la ponderación <code class="docutils literal notranslate"><span class="pre">distance</span></code> permitió que los vecinos más cercanos tuvieran mayor influencia en las predicciones, lo cual contribuyó a mejorar tanto la precisión como la sensibilidad del modelo.<br />
+No obstante, el <strong>alto tiempo de ejecución (≈30 minutos)</strong> refleja el costo computacional del KNN, especialmente con un número elevado de vecinos y un conjunto de datos balanceado.</p>
+<p>En conclusión, el modelo <strong>KNN validado</strong> presenta un <strong>rendimiento sobresaliente en AUC</strong>, consolidándose como uno de los algoritmos con <strong>mejor capacidad de clasificación y generalización</strong>, aunque con una mayor demanda de recursos computacionales.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_knn</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s1">&#39;modelo_knn.pkl&#39;</span><span class="p">)</span>
@@ -718,14 +804,9 @@ Tiempo: 1701.12 s
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 4 candidates, totalling 20 fits
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\franc\anaconda3\envs\ml_env\Lib\site-packages\joblib\externals\loky\process_executor.py:782: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VALIDACIÓN COMPLETADA - NAIVE BAYES
-Tiempo: 14.55 s
+
+VALIDACIÓN COMPLETADA - NAIVE BAYES
+Tiempo: 21.32 s
 Mejor AUC (CV): 0.788
 Mejores parámetros: {&#39;model__var_smoothing&#39;: 1e-06}
 </pre></div>
@@ -777,6 +858,10 @@ Mejores parámetros: {&#39;model__var_smoothing&#39;: 1e-06}
 </table>
 </div></div></div>
 </div>
+<p>El modelo <strong>Gaussian Naive Bayes</strong> obtuvo un <strong>AUC promedio de 0.788</strong>, mostrando un desempeño consistente y prácticamente idéntico entre todas las configuraciones de <code class="docutils literal notranslate"><span class="pre">var_smoothing</span></code>.<br />
+Esto demuestra que el modelo es <strong>robusto frente a pequeños cambios en la suavización de varianza</strong>, manteniendo un comportamiento estable y predecible.</p>
+<p>Aunque el AUC es menor en comparación con modelos más complejos (como KNN o XGBoost), su <strong>bajo costo computacional (≈21 s)</strong> y su <strong>simplicidad de implementación</strong> lo convierten en una opción eficiente para tareas de clasificación rápida o como modelo base (<em>baseline</em>).<br />
+En conclusión, <strong>Naive Bayes validado</strong> ofrece <strong>buen equilibrio entre rendimiento y eficiencia</strong>, siendo ideal para contextos donde la interpretabilidad y la velocidad son prioritarias.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_nb</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s1">&#39;modelo_nb.pkl&#39;</span><span class="p">)</span>
@@ -833,7 +918,7 @@ Mejores parámetros: {&#39;model__var_smoothing&#39;: 1e-06}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 8 candidates, totalling 40 fits
 
  VALIDACIÓN COMPLETADA - DECISION TREE
-Tiempo: 34.64 s
+Tiempo: 38.44 s
  Mejor AUC (CV): 0.855
  Mejores parámetros: {&#39;model__criterion&#39;: &#39;gini&#39;, &#39;model__max_depth&#39;: 10}
 </pre></div>
@@ -894,11 +979,12 @@ Tiempo: 34.64 s
     </tr>
   </tbody>
 </table>
-</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;modelo_tree.pkl&#39;]
-</pre></div>
+</div></div></div>
 </div>
-</div>
-</div>
+<p>El modelo <strong>Decision Tree</strong> con una profundidad máxima de <strong>10</strong> y criterio <strong>gini</strong> alcanzó el <strong>mejor AUC promedio (0.855)</strong>, evidenciando una mejora considerable respecto al AUC obtenido en la fase sin validación (≈0.749).<br />
+Este aumento refleja una <strong>mayor capacidad del modelo para discriminar entre clases</strong> tras aplicar balanceo y validación cruzada, lo que sugiere una estructura más estable y generalizable.</p>
+<p>Las configuraciones más simples (profundidades menores) mostraron una caída en el AUC, lo que indica que un árbol con mayor profundidad logra capturar mejor la complejidad del problema sin sobreajustarse excesivamente.<br />
+En resumen, el modelo <strong>Decision Tree validado</strong> presenta un <strong>rendimiento sólido, interpretable y bien equilibrado</strong>, siendo una opción confiable cuando se busca explicabilidad sin un alto costo computacional.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_tree</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s1">&#39;modelo_tree.pkl&#39;</span><span class="p">)</span>
@@ -1028,6 +1114,11 @@ Tiempo: 3347.74 s
 </div>
 </div>
 </div>
+<p>El modelo <strong>Random Forest</strong> alcanzó un <strong>AUC promedio sobresaliente de 0.969</strong>, posicionándose como uno de los <strong>mejores modelos validados</strong> en términos de capacidad predictiva.<br />
+La combinación de <strong>300 árboles</strong> sin restricción de profundidad permitió una alta flexibilidad y una excelente discriminación entre clases, sin evidenciar sobreajuste significativo gracias al proceso de validación cruzada.</p>
+<p>El incremento en el AUC respecto a la fase sin validación (≈0.795) demuestra una mejora sustancial en la <strong>generalización del modelo</strong> y en su capacidad para adaptarse a los datos balanceados.<br />
+El costo computacional fue elevado (≈55 minutos), lo cual es esperable en ensambles grandes, pero se justifica por el rendimiento obtenido.</p>
+<p>En resumen, el <strong>Random Forest validado</strong> se consolida como <strong>uno de los modelos más robustos, estables y precisos</strong>, logrando una excelente relación entre rendimiento predictivo y fiabilidad, aunque con un alto requerimiento de tiempo y recursos computacionales.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_rf</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s1">&#39;modelo_rf.pkl&#39;</span><span class="p">)</span>
@@ -1082,23 +1173,14 @@ Tiempo: 3347.74 s
     <span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">,</span> <span class="s1">&#39;param_model__n_estimators&#39;</span><span class="p">,</span> <span class="s1">&#39;param_model__max_depth&#39;</span><span class="p">,</span> <span class="s1">&#39;param_model__learning_rate&#39;</span><span class="p">]</span>
 <span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df_resultados_xgb</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-
-<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_xgb</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s1">&#39;modelo_xgb_cv.pkl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 27 candidates, totalling 135 fits
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\franc\anaconda3\envs\ml_env\Lib\site-packages\xgboost\training.py:183: UserWarning: [00:04:09] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { &quot;use_label_encoder&quot; } are not used.
 
-  bst.update(dtrain, iteration=i, fobj=obj)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> VALIDACIÓN COMPLETADA - XGBOOST
-Tiempo: 271.58 s
+ VALIDACIÓN COMPLETADA - XGBOOST
+Tiempo: 294.67 s
  Mejor AUC (CV): 0.966
  Mejores parámetros: {&#39;model__learning_rate&#39;: 0.1, &#39;model__max_depth&#39;: 8, &#39;model__n_estimators&#39;: 300}
 </pre></div>
@@ -1165,11 +1247,13 @@ Tiempo: 271.58 s
     </tr>
   </tbody>
 </table>
-</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;modelo_xgb_cv.pkl&#39;]
-</pre></div>
+</div></div></div>
 </div>
-</div>
-</div>
+<p>El modelo <strong>XGBoost</strong> alcanzó un <strong>AUC promedio de 0.966</strong>, confirmando su <strong>excelente capacidad de clasificación y generalización</strong> tras el proceso de validación cruzada.<br />
+La combinación de <strong>300 árboles</strong>, <strong>profundidad moderada (8)</strong> y una <strong>tasa de aprendizaje media (0.1)</strong> permitió un equilibrio óptimo entre precisión y estabilidad, maximizando el poder predictivo sin sobreajustar los datos.</p>
+<p>En comparación con la fase sin validación (AUC ≈ 0.805), el incremento de más de 16 puntos evidencia una <strong>mejora notable en la discriminación de clases</strong>, gracias al balanceo de datos y al ajuste fino de hiperparámetros.<br />
+Además, el tiempo de ejecución (≈5 minutos) fue razonable considerando la complejidad del modelo y la cantidad de árboles utilizados.</p>
+<p>En conclusión, el <strong>XGBoost validado</strong> se posiciona como <strong>uno de los modelos más potentes del estudio</strong>, destacando por su alto rendimiento, eficiencia y capacidad de generalización, con un excelente equilibrio entre complejidad y desempeño.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_xgb</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s1">&#39;modelo_xgb.pkl&#39;</span><span class="p">)</span>
@@ -1282,6 +1366,11 @@ Tiempo total: 54.43 s
 </table>
 </div></div></div>
 </div>
+<p>El modelo <strong>Linear SVC calibrado</strong> con <strong>C = 10</strong> alcanzó un <strong>AUC promedio de 0.856</strong>, mostrando un desempeño robusto y estable en la clasificación de las clases tras el proceso de validación cruzada.<br />
+Las diferencias mínimas entre los distintos valores de <code class="docutils literal notranslate"><span class="pre">C</span></code> indican una <strong>alta estabilidad del modelo</strong>, lo que demuestra que su rendimiento no depende fuertemente de pequeñas variaciones en el grado de regularización.</p>
+<p>El incremento del AUC respecto a la fase sin validación (≈0.789) evidencia una <strong>mejora sustancial en la capacidad de discriminación</strong>, atribuida tanto al balanceo de los datos como al uso de probabilidades calibradas.<br />
+Además, el tiempo de validación fue razonable, manteniendo una buena relación entre <strong>eficiencia computacional y calidad predictiva</strong>.</p>
+<p>En conclusión, el <strong>Linear SVC calibrado validado</strong> se consolida como un modelo <strong>lineal altamente estable y confiable</strong>, ofreciendo un rendimiento competitivo frente a algoritmos más complejos, pero con la ventaja adicional de una <strong>interpretabilidad y eficiencia superiores</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">grid_svm</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="s1">&#39;modelo_svm.pkl&#39;</span><span class="p">)</span>
@@ -1361,6 +1450,7 @@ Tiempo total: 54.43 s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos"><strong>Objetivos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-l1-y-l2"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-knn-neighborsclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-naive-bayes"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong></a></li>

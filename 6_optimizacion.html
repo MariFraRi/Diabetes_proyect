@@ -383,6 +383,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos"><strong>Objetivos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-l1-y-l2"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-knn-neighborsclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-naive-bayes"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong></a></li>
@@ -404,6 +405,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="optimizacion">
 <h1><strong>6. Optimización</strong><a class="headerlink" href="#optimizacion" title="Link to this heading">#</a></h1>
+<p>En esta sección se implementan estrategias de <strong>optimización computacional</strong> orientadas a mejorar la eficiencia de los modelos de Machine Learning sin modificar su arquitectura ni realizar procesos de validación avanzada.<br />
+El objetivo principal es <strong>reducir los tiempos de entrenamiento y predicción</strong> manteniendo un rendimiento predictivo estable, aprovechando las herramientas que ofrece cada algoritmo para optimizar su ejecución.</p>
+<p>A diferencia de la etapa de validación, donde se buscan los mejores hiperparámetros mediante <em>GridSearchCV</em> o <em>cross-validation</em>, aquí se prioriza la <strong>optimización del rendimiento computacional</strong> a través de configuraciones internas y técnicas específicas como:</p>
+<ul class="simple">
+<li><p><strong>KNN:</strong> uso de estructuras eficientes para búsqueda de vecinos, como <code class="docutils literal notranslate"><span class="pre">BallTree</span></code> o <code class="docutils literal notranslate"><span class="pre">KDTree</span></code>, que aceleran el proceso de cálculo de distancias.</p></li>
+<li><p><strong>Regresiones Ridge y Lasso:</strong> selección de <em>solvers</em> optimizados como <code class="docutils literal notranslate"><span class="pre">saga</span></code> o <code class="docutils literal notranslate"><span class="pre">liblinear</span></code>, que mejoran la velocidad de convergencia.</p></li>
+<li><p><strong>Naive Bayes:</strong> implementación de <code class="docutils literal notranslate"><span class="pre">partial_fit()</span></code> para entrenar por lotes, ideal en grandes volúmenes de datos.</p></li>
+<li><p><strong>XGBoost:</strong> configuración de parámetros como <code class="docutils literal notranslate"><span class="pre">tree_method='hist'</span></code> y <code class="docutils literal notranslate"><span class="pre">early_stopping_rounds</span></code> para agilizar el proceso de boosting.</p></li>
+<li><p><strong>SVM:</strong> uso de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code> o <code class="docutils literal notranslate"><span class="pre">SGDClassifier</span></code> para aproximar el modelo con menor costo computacional.</p></li>
+</ul>
+<section id="objetivos">
+<h2><strong>Objetivos</strong><a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Analizar el impacto de la optimización en los tiempos de entrenamiento de cada modelo.</p></li>
+<li><p>Mantener un equilibrio entre velocidad y desempeño (accuracy, recall, F1, AUC).</p></li>
+<li><p>Identificar qué técnicas proporcionan los mayores beneficios en términos de eficiencia.</p></li>
+<li><p>Preparar los modelos optimizados para su posterior validación y análisis interpretativo.</p></li>
+</ul>
+<p>En resumen, esta fase busca que los modelos sean <strong>más eficientes, escalables y prácticos para su implementación</strong>, asegurando un uso racional de los recursos computacionales sin comprometer su capacidad predictiva.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Manejo y análisis de datos ---</span>
@@ -463,6 +483,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Se importa la particion balanceada.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_cols</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
@@ -485,6 +506,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="modelo-de-regresion-logistica-l1-y-l2">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong><a class="headerlink" href="#modelo-de-regresion-logistica-l1-y-l2" title="Link to this heading">#</a></h2>
 <p>Aplicamos <strong>Regresión Logística</strong> porque es un modelo interpretable y adecuado para problemas
@@ -588,6 +610,14 @@ usamos el parámetro <code class="docutils literal notranslate"><span class="pre
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probando: {&#39;penalty&#39;: &#39;l1&#39;, &#39;C&#39;: 0.01}
+Probando: {&#39;penalty&#39;: &#39;l1&#39;, &#39;C&#39;: 0.1}
+Probando: {&#39;penalty&#39;: &#39;l1&#39;, &#39;C&#39;: 1}
+Probando: {&#39;penalty&#39;: &#39;l2&#39;, &#39;C&#39;: 0.01}
+Probando: {&#39;penalty&#39;: &#39;l2&#39;, &#39;C&#39;: 0.1}
+Probando: {&#39;penalty&#39;: &#39;l2&#39;, &#39;C&#39;: 1}
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -624,7 +654,7 @@ usamos el parámetro <code class="docutils literal notranslate"><span class="pre
       <td>0.409985</td>
       <td>0.707582</td>
       <td>0.720110</td>
-      <td>9.39</td>
+      <td>10.67</td>
     </tr>
     <tr>
       <th>1</th>
@@ -634,7 +664,7 @@ usamos el parámetro <code class="docutils literal notranslate"><span class="pre
       <td>0.409192</td>
       <td>0.708370</td>
       <td>0.718877</td>
-      <td>7.71</td>
+      <td>7.22</td>
     </tr>
     <tr>
       <th>2</th>
@@ -644,7 +674,7 @@ usamos el parámetro <code class="docutils literal notranslate"><span class="pre
       <td>0.408912</td>
       <td>0.708370</td>
       <td>0.718552</td>
-      <td>7.85</td>
+      <td>7.18</td>
     </tr>
     <tr>
       <th>5</th>
@@ -654,7 +684,7 @@ usamos el parámetro <code class="docutils literal notranslate"><span class="pre
       <td>0.409040</td>
       <td>0.708370</td>
       <td>0.718701</td>
-      <td>6.71</td>
+      <td>6.32</td>
     </tr>
     <tr>
       <th>4</th>
@@ -664,7 +694,7 @@ usamos el parámetro <code class="docutils literal notranslate"><span class="pre
       <td>0.409157</td>
       <td>0.707483</td>
       <td>0.719189</td>
-      <td>6.66</td>
+      <td>6.35</td>
     </tr>
     <tr>
       <th>3</th>
@@ -674,15 +704,18 @@ usamos el parámetro <code class="docutils literal notranslate"><span class="pre
       <td>0.409518</td>
       <td>0.703342</td>
       <td>0.721248</td>
-      <td>6.81</td>
+      <td>6.36</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor combinación: {&#39;Penalty&#39;: &#39;l1&#39;, &#39;C&#39;: 0.01, &#39;AUC&#39;: 0.7888349993562084, &#39;F1&#39;: 0.4099854331495816, &#39;Recall&#39;: 0.7075815833579808, &#39;Accuracy&#39;: 0.7201100211370658, &#39;Tiempo (s)&#39;: 9.39}
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor combinación: {&#39;Penalty&#39;: &#39;l1&#39;, &#39;C&#39;: 0.01, &#39;AUC&#39;: 0.7888349993562084, &#39;F1&#39;: 0.4099854331495816, &#39;Recall&#39;: 0.7075815833579808, &#39;Accuracy&#39;: 0.7201100211370658, &#39;Tiempo (s)&#39;: 10.67}
 </pre></div>
 </div>
 </div>
 </div>
+<p>El modelo con penalización <strong>L1</strong> y un valor pequeño de <code class="docutils literal notranslate"><span class="pre">C</span></code> (alta regularización) logró el mejor equilibrio entre rendimiento y generalización, alcanzando el <strong>AUC más alto (0.7888)</strong> y un <strong>recall de 0.71</strong>, lo que indica una buena capacidad para identificar casos positivos.<br />
+Aunque el tiempo de entrenamiento fue ligeramente mayor que en las configuraciones con penalización L2, la mejora en desempeño compensa este costo computacional.<br />
+En conjunto, estos resultados muestran que <strong>la regularización L1 con C=0.01 proporciona la mejor relación entre eficiencia y precisión</strong> para la regresión logística en esta etapa de optimización sin validación.</p>
 </section>
 <section id="modelo-de-knn-neighborsclassifier">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong><a class="headerlink" href="#modelo-de-knn-neighborsclassifier" title="Link to this heading">#</a></h2>
@@ -876,6 +909,10 @@ Probando: {&#39;n_neighbors&#39;: 11, &#39;weights&#39;: &#39;distance&#39;, &#3
 </div>
 </div>
 </div>
+<p>El modelo con <strong>11 vecinos</strong>, ponderación por <strong>distancia</strong> y métrica <strong>Manhattan</strong> presentó el mejor desempeño global, alcanzando el <strong>AUC más alto (0.7548)</strong> y un <strong>F1 de 0.381</strong>, lo que refleja un equilibrio razonable entre precisión y sensibilidad.<br />
+El uso de la ponderación <code class="docutils literal notranslate"><span class="pre">distance</span></code> permitió que los vecinos más cercanos tuvieran mayor influencia en la predicción, mejorando ligeramente las métricas respecto a la configuración con <code class="docutils literal notranslate"><span class="pre">uniform</span></code>.</p>
+<p>Sin embargo, el tiempo de entrenamiento fue considerablemente mayor (368 s), lo que indica que el costo computacional crece con el número de vecinos y la complejidad de la métrica utilizada.<br />
+En resumen, esta configuración ofrece el <strong>mejor rendimiento predictivo</strong> para KNN en esta fase, aunque con un <strong>alto costo de procesamiento</strong>, lo que debe tenerse en cuenta al comparar su eficiencia con otros modelos.</p>
 </section>
 <section id="modelo-de-naive-bayes">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong><a class="headerlink" href="#modelo-de-naive-bayes" title="Link to this heading">#</a></h2>
@@ -1030,6 +1067,9 @@ Probando: {&#39;var_smoothing&#39;: 1e-06}
 </div>
 </div>
 </div>
+<p>El modelo <strong>GaussianNB</strong> alcanzó un <strong>AUC de 0.739</strong> y un <strong>recall alto (0.83)</strong>, lo que demuestra su <strong>capacidad para detectar correctamente la mayoría de los casos positivos</strong>, aunque con una <strong>precisión baja</strong> que reduce el valor de <em>F1-score</em>.<br />
+Este comportamiento es característico del Naive Bayes, que prioriza la sensibilidad a costa de un mayor número de falsos positivos.</p>
+<p>Los resultados muestran que el parámetro <code class="docutils literal notranslate"><span class="pre">var_smoothing</span></code> <strong>no afecta significativamente las métricas</strong> dentro del rango evaluado, manteniendo un rendimiento estable con un <strong>tiempo de ejecución muy bajo</strong>, lo que confirma que GaussianNB es un modelo <strong>ligero, rápido y adecuado como baseline</strong> para comparación con métodos más complejos.</p>
 </section>
 <section id="modelo-de-decisiontreeclassifier">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></strong><a class="headerlink" href="#modelo-de-decisiontreeclassifier" title="Link to this heading">#</a></h2>
@@ -1195,6 +1235,10 @@ Probando: {&#39;max_depth&#39;: 10, &#39;criterion&#39;: &#39;entropy&#39;}
 </div>
 </div>
 </div>
+<p>El árbol con <strong>profundidad máxima de 10</strong> y criterio <strong>entropy</strong> logró el mejor rendimiento general, con un <strong>AUC de 0.749</strong> y un <strong>F1-score de 0.377</strong>, manteniendo un equilibrio razonable entre sensibilidad (<em>recall</em>) y precisión.<br />
+Una mayor profundidad permitió al modelo capturar más patrones de los datos, mejorando la capacidad predictiva respecto a configuraciones más simples, aunque con un ligero incremento en el tiempo de entrenamiento.</p>
+<p>No obstante, el modelo aún muestra cierto riesgo de <strong>sobreajuste</strong>, dado que árboles más profundos tienden a adaptarse demasiado al conjunto de entrenamiento.<br />
+En conclusión, la configuración seleccionada logra un <strong>compromiso adecuado entre complejidad, desempeño y eficiencia</strong>, siendo una base sólida antes de aplicar validación cruzada o técnicas de ensamblado.</p>
 </section>
 <section id="modelo-de-randomforestclassifier">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong><a class="headerlink" href="#modelo-de-randomforestclassifier" title="Link to this heading">#</a></h2>
@@ -1362,6 +1406,10 @@ Probando: {&#39;n_estimators&#39;: 500, &#39;max_depth&#39;: None}
 </div>
 </div>
 </div>
+<p>El modelo con <strong>500 árboles</strong> y sin restricción de profundidad alcanzó el mejor rendimiento global, logrando un <strong>AUC de 0.795</strong> y una <strong>precisión global del 82.9 %</strong>, lo que demuestra una excelente capacidad de clasificación.<br />
+El incremento en la cantidad de árboles permitió una mayor estabilidad y reducción de varianza en las predicciones, aunque con un aumento considerable en el tiempo de entrenamiento.</p>
+<p>El <em>recall</em> relativamente bajo (0.38) sugiere que el modelo tiende a <strong>favorecer la clase mayoritaria</strong>, algo esperable en conjuntos de datos desbalanceados.<br />
+En general, el <strong>Random Forest optimizado</strong> ofrece una combinación sólida de <strong>precisión, robustez y capacidad de generalización</strong>, posicionándose entre los modelos más estables y confiables del análisis, aunque con un costo computacional elevado.</p>
 </section>
 <section id="modelo-de-xgbclassifier">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong><a class="headerlink" href="#modelo-de-xgbclassifier" title="Link to this heading">#</a></h2>
@@ -1526,6 +1574,10 @@ Probando: {&#39;n_estimators&#39;: 300, &#39;max_depth&#39;: 8, &#39;learning_ra
 </div>
 </div>
 </div>
+<p>El modelo con <strong>300 árboles</strong>, una <strong>profundidad moderada (8)</strong> y una <strong>tasa de aprendizaje baja (0.03)</strong> alcanzó el <strong>mejor AUC (0.805)</strong> y la <strong>mayor exactitud (85.1 %)</strong>, evidenciando una excelente capacidad de generalización.<br />
+Aunque el <em>recall</em> (0.30) es menor que en configuraciones con tasas de aprendizaje más altas, el modelo logró un <strong>equilibrio estable entre precisión y sensibilidad</strong>, con un aumento progresivo en la estabilidad a medida que se incrementaron los estimadores.</p>
+<p>El mayor número de árboles y la baja tasa de aprendizaje permitieron que el modelo <strong>aprendiera de forma más controlada</strong>, reduciendo el riesgo de sobreajuste y mejorando su robustez.<br />
+En conclusión, esta configuración de XGBoost ofrece <strong>el mejor compromiso entre desempeño, precisión y eficiencia computacional</strong>, posicionándolo como uno de los modelos más potentes en esta fase de optimización sin validación.</p>
 </section>
 <section id="modelo-de-linearsvc">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong><a class="headerlink" href="#modelo-de-linearsvc" title="Link to this heading">#</a></h2>
@@ -1682,6 +1734,9 @@ Probando: {&#39;model__base_estimator__C&#39;: 10}
 </div>
 </div>
 </div>
+<p>El modelo <strong>LinearSVC</strong> con <strong>C = 0.01</strong> alcanzó el mejor desempeño global, presentando un <strong>AUC de 0.789</strong> y un <em>recall</em> del 70.6 %, lo que refleja un balance adecuado entre sensibilidad y precisión.<br />
+Los valores de <code class="docutils literal notranslate"><span class="pre">C</span></code> más altos no mejoraron las métricas y, en algunos casos, aumentaron significativamente el tiempo de ejecución (por ejemplo, 232.85 segundos con <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">=</span> <span class="pre">0.1</span></code>), lo que evidencia un mayor costo computacional sin ganancia de rendimiento.</p>
+<p>En conclusión, la configuración seleccionada demuestra que un nivel de <strong>regularización moderado (C bajo)</strong> permite al modelo <strong>mantener buena generalización, estabilidad y eficiencia</strong>, consolidándose como una opción sólida dentro de la etapa de optimización sin validación.</p>
 </section>
 <section id="tabla-comparativa-de-modelos-optimizados">
 <h2><strong>Tabla Comparativa de modelos optimizados</strong><a class="headerlink" href="#tabla-comparativa-de-modelos-optimizados" title="Link to this heading">#</a></h2>
@@ -1812,6 +1867,18 @@ Probando: {&#39;model__base_estimator__C&#39;: 10}
 </table>
 </div></div></div>
 </div>
+<p>Los resultados muestran diferencias claras en el comportamiento de los modelos una vez optimizados:</p>
+<ul class="simple">
+<li><p><strong>XGBoost (Opt)</strong> obtuvo el <strong>mejor AUC (0.805)</strong> y la <strong>mayor precisión global (85.1%)</strong>, demostrando un equilibrio notable entre capacidad de generalización y eficiencia. Aunque su <em>recall</em> fue bajo (0.296), su estabilidad y rendimiento general lo posicionan como el modelo más sólido.</p></li>
+<li><p><strong>Random Forest (Opt)</strong> presentó un desempeño muy competitivo, con AUC de 0.795 y F1 de 0.382, pero su <strong>tiempo de entrenamiento (76 s)</strong> fue el más alto, evidenciando un costo computacional elevado.</p></li>
+<li><p><strong>Linear SVC (Opt)</strong> y <strong>Regresión Logística (Opt)</strong> mostraron resultados similares, destacando por su <strong>alto recall (~0.71)</strong>, lo que indica que son capaces de identificar correctamente la mayoría de los casos positivos. Además, ofrecen tiempos de entrenamiento moderados y gran estabilidad entre <em>train</em> y <em>test</em>, reflejando <strong>buena generalización</strong>.</p></li>
+<li><p><strong>KNN (Opt)</strong>, a pesar de su buena precisión (0.70) y recall aceptable (0.67), tiende al <strong>sobreajuste (train_score = 0.9997)</strong> y requiere un costo computacional bajo, pero su rendimiento es inferior frente a modelos más robustos.</p></li>
+<li><p><strong>Decision Tree (Opt)</strong> mejoró respecto a la versión sin restricción de profundidad, pero mantiene un <em>recall</em> moderado (0.61) y una alta varianza entre entrenamiento y prueba.</p></li>
+<li><p><strong>Naive Bayes (Opt)</strong> conserva su <strong>simplicidad y rapidez (3.79 s)</strong>, con buen <em>recall</em> (0.83), aunque su <em>accuracy</em> bajo (0.50) evidencia que genera muchos falsos positivos.</p></li>
+</ul>
+<p>Los resultados indican que <strong>XGBoost</strong> y <strong>Random Forest</strong> son los modelos con <strong>mejor desempeño global</strong>, destacando por su capacidad de generalización y estabilidad.<br />
+Por otro lado, <strong>Linear SVC</strong> y <strong>Regresión Logística</strong> mantienen un <strong>buen balance entre recall y eficiencia computacional</strong>, siendo ideales en escenarios donde la detección de la clase positiva es prioritaria.<br />
+Finalmente, aunque modelos como <strong>Naive Bayes</strong> y <strong>KNN</strong> son útiles como referencia, su rendimiento inferior y sesgo hacia la clase mayoritaria limitan su aplicabilidad práctica en este contexto.</p>
 </section>
 </section>
 
@@ -1879,6 +1946,7 @@ Probando: {&#39;model__base_estimator__C&#39;: 10}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos"><strong>Objetivos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-l1-y-l2"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-knn-neighborsclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-naive-bayes"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong></a></li>

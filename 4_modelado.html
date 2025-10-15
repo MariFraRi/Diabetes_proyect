@@ -941,6 +941,12 @@ weighted avg       0.86      0.73      0.77     73804
 <img alt="_images/7fdc424e9408d78526073a4d90daa4479431cbb5b9c440fc281c26ecc6f36e79.png" src="_images/7fdc424e9408d78526073a4d90daa4479431cbb5b9c440fc281c26ecc6f36e79.png" />
 </div>
 </div>
+<p>La <strong>matriz de confusión</strong> permite visualizar cómo la Regresión Logística clasificó correctamente o incorrectamente los casos.<br />
+En este caso, el modelo predijo correctamente <strong>45.944 verdaderos negativos (clase 0)</strong> y <strong>7.801 verdaderos positivos (clase 1)</strong>, mientras que cometió <strong>17.717 falsos positivos</strong> (casos de clase 0 que fueron clasificados como 1) y <strong>2.342 falsos negativos</strong> (casos de clase 1 mal clasificados como 0).</p>
+<p>El <strong>Accuracy (0.728)</strong> indica que el modelo acierta en el 72.8 % de las predicciones totales.<br />
+Sin embargo, el <strong>Recall para la clase 1 (0.77)</strong> muestra que el modelo logra identificar correctamente el 77 % de los casos positivos, aunque con una <strong>precisión baja (0.31)</strong>, lo que significa que muchas de las predicciones positivas son falsos positivos.</p>
+<p>En resumen, el modelo tiene buen rendimiento general y es especialmente útil para detectar la clase minoritaria (recall alto), aunque tiende a sobreclasificar en la clase positiva, lo cual reduce la precisión.<br />
+Este comportamiento puede ser adecuado si el objetivo del problema es <strong>priorizar la detección de casos positivos</strong> aun a costa de cometer algunos falsos positivos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Curva ROC ===</span>
@@ -961,6 +967,10 @@ weighted avg       0.86      0.73      0.77     73804
 <img alt="_images/f8e4b2f2f857297fae32c7de7f8238ac23402495585f68a7e621566a3b31854c.png" src="_images/f8e4b2f2f857297fae32c7de7f8238ac23402495585f68a7e621566a3b31854c.png" />
 </div>
 </div>
+<p>La <strong>curva ROC (Receiver Operating Characteristic)</strong> muestra el equilibrio entre la <strong>tasa de verdaderos positivos (recall)</strong> y la <strong>tasa de falsos positivos (1 - especificidad)</strong> para distintos umbrales de decisión del modelo.<br />
+En este gráfico, la línea azul representa el rendimiento del modelo de <strong>Regresión Logística</strong> en la clasificación de casos de diabetes, mientras que la línea diagonal negra indica un modelo aleatorio (sin capacidad de discriminación).</p>
+<p>El valor <strong>AUC = 0.823</strong> (Área Bajo la Curva) refleja una <strong>buena capacidad de discriminación</strong>, ya que el modelo logra distinguir correctamente entre pacientes con y sin diabetes en más del 82 % de los casos.<br />
+Cuanto más se aleja la curva de la diagonal y se aproxima al vértice superior izquierdo, mayor es la habilidad del modelo para diferenciar las clases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_logreg</span> <span class="o">=</span> <span class="p">{</span>
@@ -977,6 +987,7 @@ weighted avg       0.86      0.73      0.77     73804
 </div>
 </div>
 </div>
+<p>En conclusión, el modelo de Regresión Logística presenta un <strong>desempeño sólido y equilibrado</strong>, combinando una buena sensibilidad con una tasa moderada de falsos positivos, lo que indica una adecuada capacidad predictiva para este problema.</p>
 </section>
 <section id="modelo-de-knn-neighborsclassifier">
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong><a class="headerlink" href="#modelo-de-knn-neighborsclassifier" title="Link to this heading">#</a></h2>
@@ -1015,6 +1026,10 @@ Test set score: 0.851
 </div>
 </div>
 </div>
+<p>Los resultados del modelo <strong>K-Nearest Neighbors (KNN)</strong> muestran un <strong>Training set score de 0.885</strong> y un <strong>Test set score de 0.851</strong>, lo que significa que el modelo alcanza una precisión del 88.5 % en los datos de entrenamiento y del 85.1 % en los datos de prueba.</p>
+<p>La diferencia entre ambos valores es moderada, lo cual sugiere que el modelo <strong>generaliza bien</strong> y no presenta un sobreajuste fuerte, aunque sí aprende ligeramente mejor los patrones del conjunto de entrenamiento.<br />
+Este comportamiento es típico en KNN, ya que su rendimiento depende de la cantidad de vecinos seleccionados y de la distribución de los datos.</p>
+<p>En general, el modelo logra un <strong>buen equilibrio entre ajuste y generalización</strong>, mostrando un desempeño estable al enfrentarse a nuevos datos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba</span> <span class="o">=</span> <span class="n">pipe_knn</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1051,6 +1066,9 @@ weighted avg       0.81      0.85      0.82     73804
 <img alt="_images/e310cba721322cc48aa380f50b7217ac68de4d068a5bf44538563a0aaf69b1ef.png" src="_images/e310cba721322cc48aa380f50b7217ac68de4d068a5bf44538563a0aaf69b1ef.png" />
 </div>
 </div>
+<p>La <strong>matriz de confusión</strong> del modelo <strong>K-Nearest Neighbors (KNN)</strong> muestra que el algoritmo predijo correctamente <strong>61.378 verdaderos negativos (clase 0)</strong> y <strong>1.466 verdaderos positivos (clase 1)</strong>, mientras que cometió <strong>2.283 falsos positivos</strong> y <strong>8.677 falsos negativos</strong>.</p>
+<p>El modelo alcanza una <strong>precisión global (Accuracy) del 85.1 %</strong>, lo cual indica un buen rendimiento general. Sin embargo, el <strong>Recall para la clase 1 (0.14)</strong> es bajo, lo que significa que el modelo <strong>solo logra identificar el 14 % de los casos positivos reales</strong>. En cambio, tiene un excelente desempeño en la clase 0 (negativa), con una <strong>precisión del 88 %</strong> y <strong>recall del 96 %</strong>, lo que refleja una clara tendencia del modelo a predecir la clase mayoritaria.</p>
+<p>En resumen, aunque el KNN ofrece una buena exactitud global, presenta <strong>limitaciones importantes frente al desbalance de clases</strong>, priorizando los aciertos en la clase negativa y dejando escapar la mayoría de los casos positivos. Esto sugiere la necesidad de aplicar técnicas de <strong>balanceo (como SMOTE o ADASYN)</strong> o ajustar el número de vecinos para mejorar la detección de la clase minoritaria.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Curva ROC ===</span>
@@ -1071,6 +1089,9 @@ weighted avg       0.81      0.85      0.82     73804
 <img alt="_images/1a2fe53929b6aa3d3a464cdd7c47c4f96e30a063efe8fcfb118cdf17abaf0b98.png" src="_images/1a2fe53929b6aa3d3a464cdd7c47c4f96e30a063efe8fcfb118cdf17abaf0b98.png" />
 </div>
 </div>
+<p>El gráfico ROC del modelo <strong>K-Nearest Neighbors (KNN)</strong> muestra un <strong>AUC de 0.695</strong>, lo que indica una <strong>capacidad de discriminación moderada</strong> entre las clases positiva y negativa. Aunque el modelo logra un buen desempeño general en términos de <em>accuracy</em>, su curva ROC se encuentra relativamente cerca de la diagonal, lo que evidencia una menor sensibilidad frente a la clase positiva.</p>
+<p>Por esta razón, es necesario <strong>comparar los diferentes modelos</strong> y analizar su comportamiento bajo las mismas condiciones. Cada algoritmo tiene una forma distinta de aprender patrones —por ejemplo, la Regresión Logística se basa en relaciones lineales, mientras que KNN depende de la proximidad entre observaciones—, lo que puede impactar de manera significativa en métricas como el <em>recall</em> o el <em>AUC</em>.</p>
+<p>Realizar esta comparación permite <strong>identificar el modelo más equilibrado</strong> entre sensibilidad, precisión y capacidad de generalización, evitando elegir un modelo que solo aparente buen rendimiento por sesgo hacia la clase mayoritaria o por sobreajuste en el entrenamiento. En resumen, la comparación objetiva de modelos busca seleccionar el que ofrezca el <strong>mejor compromiso entre desempeño y estabilidad</strong> en el contexto del problema de predicción.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_knn</span> <span class="o">=</span> <span class="p">{</span>
@@ -1127,6 +1148,10 @@ Test set score: 0.725
 </div>
 </div>
 </div>
+<p>El modelo <strong>Gaussian Naive Bayes (GaussianNB)</strong> obtuvo un <strong>Training set score de 0.724</strong> y un <strong>Test set score de 0.725</strong>, lo que significa que predice correctamente alrededor del 72.5 % de las observaciones tanto en los datos de entrenamiento como en los de prueba.<br />
+La similitud entre ambos valores indica que el modelo <strong>generaliza bien</strong> y no presenta sobreajuste ni subajuste significativo.<br />
+Esto es característico de los modelos probabilísticos como Naive Bayes, que tienden a ser simples, rápidos y eficientes, aunque suelen tener un rendimiento limitado cuando las relaciones entre variables no cumplen la suposición de independencia condicional.<br />
+En general, estos resultados reflejan un desempeño <strong>estable y consistente</strong>, ideal como modelo base (<em>baseline</em>) para comparar con otros algoritmos más complejos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba</span> <span class="o">=</span> <span class="n">pipe_nb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1163,6 +1188,11 @@ weighted avg       0.85      0.72      0.76     73804
 <img alt="_images/4541c9153a4c332bec07f37b01df264f299f0cc62da61b71781aae11d99759eb.png" src="_images/4541c9153a4c332bec07f37b01df264f299f0cc62da61b71781aae11d99759eb.png" />
 </div>
 </div>
+<p>La <strong>matriz de confusión</strong> del modelo <strong>Gaussian Naive Bayes (GaussianNB)</strong> muestra que el algoritmo clasificó correctamente <strong>46.415 verdaderos negativos (clase 0)</strong> y <strong>7.060 verdaderos positivos (clase 1)</strong>, mientras que cometió <strong>17.246 falsos positivos</strong> y <strong>3.083 falsos negativos</strong>.</p>
+<p>El modelo alcanza una <strong>precisión global (Accuracy) de 0.725</strong>, lo que significa que acierta en el 72.5 % de las predicciones totales.<br />
+Su desempeño es <strong>balanceado entre ambas clases</strong>, con un <strong>recall del 70 % para la clase positiva (1)</strong>, lo que indica una buena capacidad para detectar casos positivos, aunque su <strong>precisión (0.29)</strong> es baja, lo que implica un número considerable de falsos positivos.</p>
+<p>Este comportamiento es típico de Naive Bayes: logra buena sensibilidad a costa de reducir la precisión, debido a la simplicidad de su supuesto de independencia entre variables.<br />
+En resumen, el modelo <strong>generaliza bien y detecta correctamente una gran proporción de casos positivos</strong>, por lo que resulta útil como referencia inicial o modelo base en comparación con métodos más complejos como XGBoost o Random Forest.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Curva ROC ===</span>
@@ -1183,6 +1213,11 @@ weighted avg       0.85      0.72      0.76     73804
 <img alt="_images/ab8968a7d80bcbf613ba9a77f8288293891b4f167772cb7cdaab283dcab0cbbb.png" src="_images/ab8968a7d80bcbf613ba9a77f8288293891b4f167772cb7cdaab283dcab0cbbb.png" />
 </div>
 </div>
+<p>La <strong>curva ROC</strong> del modelo <strong>Gaussian Naive Bayes (GaussianNB)</strong> presenta un <strong>AUC de 0.775</strong>, lo que indica una <strong>buena capacidad de discriminación</strong> entre las clases positiva y negativa.<br />
+El área bajo la curva refleja que el modelo logra diferenciar correctamente los casos de pacientes con y sin diabetes en aproximadamente el 77.5 % de las ocasiones, lo cual representa un rendimiento sólido para un modelo probabilístico simple.</p>
+<p>La curva azul se mantiene claramente por encima de la diagonal (línea punteada), lo que evidencia que el modelo supera ampliamente el desempeño aleatorio.<br />
+Sin embargo, la pendiente más pronunciada al inicio y la posterior suavidad de la curva muestran que el modelo puede mejorar su equilibrio entre sensibilidad y especificidad mediante un mejor ajuste del umbral o técnicas de balanceo de clases.</p>
+<p>En conjunto, el <strong>GaussianNB</strong> ofrece un desempeño estable, rápido y con buena sensibilidad, siendo una <strong>base comparativa confiable</strong> frente a modelos más complejos que podrían alcanzar mayor precisión sin sacrificar interpretabilidad.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_nb</span> <span class="o">=</span> <span class="p">{</span>
@@ -1244,6 +1279,10 @@ Test set score: 0.800
 </div>
 </div>
 </div>
+<p>El modelo <strong>Decision Tree (Árbol de Decisión)</strong> alcanzó un <strong>Training set score de 0.999</strong> y un <strong>Test set score de 0.800</strong>, lo que indica un desempeño casi perfecto en los datos de entrenamiento, pero una caída considerable (alrededor del 20 %) al evaluar en datos de prueba.<br />
+Esta diferencia significativa entre ambos puntajes evidencia un <strong>claro sobreajuste (overfitting)</strong>: el árbol aprendió en exceso los patrones y detalles específicos del conjunto de entrenamiento, incluyendo ruido o particularidades no generalizables.</p>
+<p>Aunque el modelo logra un 80 % de precisión en el conjunto de prueba —lo que no es un mal resultado—, su alta complejidad lo hace menos confiable al enfrentarse a nuevos datos.<br />
+En resumen, el Árbol de Decisión muestra <strong>gran capacidad de aprendizaje pero baja generalización</strong>, por lo que será necesario aplicar estrategias como <strong>poda del árbol</strong>, <strong>limitación de profundidad (<code class="docutils literal notranslate"><span class="pre">max_depth</span></code>)</strong> o el uso de <strong>modelos de ensamblado (Random Forest, XGBoost)</strong> para mejorar la estabilidad del desempeño.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba_tree</span> <span class="o">=</span> <span class="n">pipe_tree</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1280,6 +1319,11 @@ weighted avg       0.80      0.80      0.80     73804
 <img alt="_images/fbb5ddf11e5b50e18dd349f467c02360baf31e34ee7f08dc5ae65d997c214889.png" src="_images/fbb5ddf11e5b50e18dd349f467c02360baf31e34ee7f08dc5ae65d997c214889.png" />
 </div>
 </div>
+<p>La <strong>matriz de confusión</strong> del modelo <strong>Decision Tree Classifier</strong> evidencia que el algoritmo clasificó correctamente <strong>56.403 verdaderos negativos (clase 0)</strong> y <strong>2.676 verdaderos positivos (clase 1)</strong>, mientras que cometió <strong>7.258 falsos positivos</strong> y <strong>7.467 falsos negativos</strong>.</p>
+<p>El modelo obtuvo una <strong>precisión global (Accuracy) del 80 %</strong>, lo que indica un buen desempeño general. Sin embargo, las métricas por clase muestran un <strong>desequilibrio importante</strong>: para la clase 0 (negativa), tanto la precisión como el recall son altos (≈0.89), pero para la clase 1 (positiva) ambos valores descienden a alrededor de 0.26–0.27.<br />
+Esto significa que el árbol tiende a <strong>favorecer la clase mayoritaria</strong>, detectando pocos casos positivos reales.</p>
+<p>El comportamiento coincide con el sobreajuste observado previamente: el modelo aprende demasiado los patrones del entrenamiento, lo que limita su capacidad para generalizar a nuevos datos.<br />
+En conclusión, el Árbol de Decisión <strong>muestra buen rendimiento en precisión global, pero deficiente en sensibilidad hacia la clase positiva</strong>, por lo que requiere ajustar hiperparámetros (como <code class="docutils literal notranslate"><span class="pre">max_depth</span></code>, <code class="docutils literal notranslate"><span class="pre">min_samples_split</span></code> o <code class="docutils literal notranslate"><span class="pre">criterion</span></code>) o aplicar técnicas de balanceo para mejorar su desempeño en problemas desbalanceados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Curva ROC ===</span>
@@ -1300,6 +1344,11 @@ weighted avg       0.80      0.80      0.80     73804
 <img alt="_images/852ecd215523c6363bbfa30eaa99b8595e84c8a42b9db9cddbcc925e77590b99.png" src="_images/852ecd215523c6363bbfa30eaa99b8595e84c8a42b9db9cddbcc925e77590b99.png" />
 </div>
 </div>
+<p>La <strong>curva ROC</strong> del modelo <strong>Decision Tree Classifier</strong> muestra un <strong>AUC de 0.575</strong>, lo que indica una <strong>baja capacidad de discriminación</strong> entre las clases positiva y negativa.<br />
+El valor del AUC, cercano a 0.5, sugiere que el modelo apenas supera el comportamiento de un clasificador aleatorio, lo que confirma que el árbol de decisión no logra distinguir adecuadamente entre los pacientes con y sin diabetes.</p>
+<p>Este resultado está alineado con las métricas previas: aunque el modelo obtuvo un buen <em>accuracy</em> general (0.80), su <strong>recall y precisión para la clase positiva son bajos</strong>, reflejando un sesgo hacia la clase mayoritaria.<br />
+El sobreajuste observado en el entrenamiento hace que el modelo pierda capacidad predictiva cuando se enfrenta a nuevos datos.</p>
+<p>En conclusión, el <strong>AUC de 0.575</strong> evidencia que el Árbol de Decisión, en su configuración actual, <strong>no es el modelo más adecuado para este problema</strong>, y sería recomendable aplicar poda, ajustar parámetros de regularización o considerar métodos de ensamblado como <strong>Random Forest</strong> o <strong>XGBoost</strong> para mejorar la capacidad de generalización y la estabilidad del modelo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_tree</span> <span class="o">=</span> <span class="p">{</span>
@@ -1362,6 +1411,11 @@ Test set score: 0.864
 </div>
 </div>
 </div>
+<p>El modelo <strong>Random Forest Classifier</strong> alcanzó un <strong>Training set score de 1.000</strong> y un <strong>Test set score de 0.864</strong>, lo que refleja un ajuste casi perfecto en los datos de entrenamiento y un muy buen rendimiento en el conjunto de prueba.<br />
+Sin embargo, la diferencia entre ambos valores indica un <strong>ligero sobreajuste (overfitting)</strong>, ya que el modelo aprende con gran precisión los patrones del conjunto de entrenamiento, pero pierde algo de capacidad de generalización al aplicarse a datos nuevos.</p>
+<p>Este comportamiento es común en los <strong>ensambles de árboles</strong> cuando no se limitan parámetros como <code class="docutils literal notranslate"><span class="pre">max_depth</span></code>, <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> o <code class="docutils literal notranslate"><span class="pre">min_samples_split</span></code>.<br />
+Aun así, con un 86.4 % de precisión en prueba, el Random Forest demuestra una <strong>excelente capacidad predictiva</strong>, aprovechando la combinación de múltiples árboles para reducir la varianza y mejorar la estabilidad del modelo.<br />
+En conjunto, el modelo ofrece un <strong>buen equilibrio entre desempeño y robustez</strong>, siendo uno de los algoritmos más consistentes dentro del benchmark.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba_rf</span> <span class="o">=</span> <span class="n">pipe_rf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1398,6 +1452,13 @@ weighted avg       0.82      0.86      0.82     73804
 <img alt="_images/aa9297ef594cae104ce0c6b7a90d41e5879f51528ebe6e97d37490807dc79b39.png" src="_images/aa9297ef594cae104ce0c6b7a90d41e5879f51528ebe6e97d37490807dc79b39.png" />
 </div>
 </div>
+<p>La <strong>matriz de confusión</strong> del modelo <strong>Random Forest Classifier</strong> muestra que el algoritmo clasificó correctamente <strong>62.914 verdaderos negativos (clase 0)</strong> y <strong>849 verdaderos positivos (clase 1)</strong>, mientras que cometió <strong>747 falsos positivos</strong> y <strong>9.294 falsos negativos</strong>.</p>
+<p>El modelo obtiene una <strong>precisión global (Accuracy) del 86.4 %</strong>, lo que representa un desempeño general sobresaliente.<br />
+No obstante, el análisis detallado por clases revela un <strong>alto rendimiento para la clase 0 (negativa)</strong>, con una precisión del 87 % y un recall del 99 %, pero un <strong>rendimiento débil en la clase 1 (positiva)</strong>, donde el recall apenas alcanza el 8 %.<br />
+Esto significa que el modelo identifica correctamente casi todos los casos negativos, pero <strong>falla al detectar la mayoría de los positivos</strong>, lo que sugiere un <strong>sesgo hacia la clase mayoritaria</strong>.</p>
+<p>Este comportamiento es común en datasets desbalanceados, incluso en modelos potentes como Random Forest.<br />
+Aunque el algoritmo logra una predicción muy estable y confiable en términos globales, para mejorar su sensibilidad hacia la clase minoritaria sería recomendable aplicar <strong>técnicas de balanceo (SMOTE, ADASYN o ajuste de <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>)</strong> o ajustar parámetros como la profundidad de los árboles.</p>
+<p>En resumen, el <strong>Random Forest</strong> es un modelo con excelente capacidad de generalización y precisión global, pero requiere ajustes adicionales para equilibrar su sensibilidad frente a clases desbalanceadas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Curva ROC ===</span>
@@ -1418,6 +1479,11 @@ weighted avg       0.82      0.86      0.82     73804
 <img alt="_images/3ab5cf434ff7a1d6d617282697315d245a5ce9c78727e37fe5e1a376582ab4ab.png" src="_images/3ab5cf434ff7a1d6d617282697315d245a5ce9c78727e37fe5e1a376582ab4ab.png" />
 </div>
 </div>
+<p>La <strong>curva ROC</strong> del modelo <strong>Random Forest Classifier</strong> presenta un <strong>AUC de 0.802</strong>, lo que refleja una <strong>buena capacidad de discriminación</strong> entre las clases positiva y negativa.<br />
+El área bajo la curva indica que el modelo distingue correctamente a los pacientes con y sin diabetes en aproximadamente el <strong>80 % de los casos</strong>, superando ampliamente el rendimiento de un clasificador aleatorio (línea diagonal).</p>
+<p>Aunque el modelo logra una curva ROC elevada y un desempeño global sólido, el análisis anterior mostró que su <strong>recall para la clase positiva es bajo</strong>, lo que significa que el modelo identifica muy bien a los pacientes sin diabetes, pero <strong>tiende a omitir muchos de los casos positivos reales</strong>.</p>
+<p>En resumen, el <strong>AUC = 0.802</strong> demuestra que el Random Forest posee una estructura predictiva robusta y con buena capacidad de generalización.<br />
+No obstante, para lograr un mejor equilibrio entre sensibilidad y especificidad, se recomienda <strong>ajustar el umbral de decisión o aplicar técnicas de balanceo de clases</strong>, con el fin de mejorar la detección de los casos positivos sin comprometer demasiado la precisión global.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_rf</span> <span class="o">=</span> <span class="p">{</span>
@@ -1446,7 +1512,6 @@ weighted avg       0.82      0.86      0.82     73804
     <span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">XGBClassifier</span><span class="p">(</span>
         <span class="n">tree_method</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span>
         <span class="n">eval_metric</span><span class="o">=</span><span class="s2">&quot;logloss&quot;</span><span class="p">,</span>
-        <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
         <span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
         <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -1462,14 +1527,6 @@ weighted avg       0.82      0.86      0.82     73804
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">pipe_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">train_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\franc\anaconda3\envs\ml_env\Lib\site-packages\xgboost\training.py:183: UserWarning: [12:11:00] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { &quot;use_label_encoder&quot; } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
 </pre></div>
 </div>
 </div>
@@ -1490,6 +1547,10 @@ Test set score: 0.866
 </div>
 </div>
 </div>
+<p>El modelo <strong>XGBoost Classifier</strong> obtuvo un <strong>Training set score de 0.874</strong> y un <strong>Test set score de 0.866</strong>, lo que indica un <strong>rendimiento alto y equilibrado</strong> tanto en los datos de entrenamiento como en los de prueba.<br />
+La pequeña diferencia entre ambos puntajes demuestra que el modelo <strong>generaliza correctamente</strong> y no presenta signos de sobreajuste, manteniendo una excelente estabilidad predictiva.</p>
+<p>Este resultado refleja la capacidad del algoritmo XGBoost para manejar relaciones no lineales y combinar múltiples árboles de decisión de manera optimizada, gracias a su enfoque de <strong>gradient boosting</strong> y sus mecanismos internos de regularización (<code class="docutils literal notranslate"><span class="pre">lambda</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>).<br />
+En conjunto, el modelo ofrece una <strong>gran capacidad de aprendizaje y buena generalización</strong>, convirtiéndose en uno de los candidatos más sólidos dentro del conjunto de modelos evaluados para la predicción de diabetes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba_xgb</span> <span class="o">=</span> <span class="n">pipe_xgb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1526,6 +1587,13 @@ weighted avg       0.83      0.87      0.83     73804
 <img alt="_images/c596ed5d499b071446741c62609d111f2236d27ada62ce311cc41a34c2154145.png" src="_images/c596ed5d499b071446741c62609d111f2236d27ada62ce311cc41a34c2154145.png" />
 </div>
 </div>
+<p>La <strong>matriz de confusión</strong> del modelo <strong>XGBoost Classifier</strong> muestra que el algoritmo predijo correctamente <strong>62.540 verdaderos negativos (clase 0)</strong> y <strong>1.377 verdaderos positivos (clase 1)</strong>, mientras que cometió <strong>1.121 falsos positivos</strong> y <strong>8.766 falsos negativos</strong>.</p>
+<p>El modelo alcanza una <strong>precisión global (Accuracy) del 86.6 %</strong>, lo que evidencia un <strong>desempeño sólido y consistente</strong>.<br />
+Sin embargo, el análisis por clases revela que, aunque el modelo es muy efectivo identificando la clase 0 (con una precisión del 88 % y un recall del 98 %), tiene dificultades para reconocer los casos positivos (clase 1), con un recall bajo de 0.14.<br />
+Esto significa que el modelo <strong>tiende a subestimar la clase minoritaria</strong>, clasificando la mayoría de los positivos como negativos.</p>
+<p>Este comportamiento puede deberse al <strong>desbalance de clases</strong> en el dataset, una situación común en problemas médicos o de diagnóstico.<br />
+Pese a ello, el XGBoost sigue mostrando <strong>una estructura de decisión estable y una excelente generalización</strong>, destacando entre los modelos analizados por su equilibrio entre rendimiento, robustez y capacidad de ajuste mediante hiperparámetros.<br />
+Para mejorar su sensibilidad, sería recomendable <strong>ajustar el umbral de decisión o aplicar técnicas de balanceo</strong> como SMOTE o pesos de clase adaptativos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Curva ROC ===</span>
@@ -1546,6 +1614,12 @@ weighted avg       0.83      0.87      0.83     73804
 <img alt="_images/d5a07eec1fb97e99317dda6f022a503808830deca4b7a2977fb38ecb294518e5.png" src="_images/d5a07eec1fb97e99317dda6f022a503808830deca4b7a2977fb38ecb294518e5.png" />
 </div>
 </div>
+<p>La <strong>curva ROC</strong> del modelo <strong>XGBoost Classifier</strong> presenta un <strong>AUC de 0.822</strong>, lo que demuestra una <strong>excelente capacidad de discriminación</strong> entre las clases positiva y negativa.<br />
+El valor del área bajo la curva indica que el modelo es capaz de distinguir correctamente a los pacientes con y sin diabetes en aproximadamente el <strong>82 % de los casos</strong>, un desempeño superior al de la mayoría de los modelos evaluados.</p>
+<p>La forma de la curva, alejada de la diagonal, evidencia un equilibrio adecuado entre sensibilidad (recall) y especificidad, aunque con una ligera inclinación hacia la precisión en la clase negativa.<br />
+Esto concuerda con las métricas previas, donde el modelo mostró gran efectividad para identificar los casos negativos, pero menor sensibilidad para la clase positiva.</p>
+<p>En conjunto, el <strong>XGBoost</strong> se destaca como un modelo <strong>robusto, estable y con alta capacidad predictiva</strong>, combinando precisión y generalización gracias a su mecanismo de <em>gradient boosting</em>.<br />
+Con un ajuste fino de hiperparámetros o mediante técnicas de balanceo de clases, podría mejorar aún más su desempeño en la detección de casos positivos sin comprometer la exactitud global.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_xgb</span> <span class="o">=</span> <span class="p">{</span>
@@ -1603,6 +1677,11 @@ Test set score: 0.866
 </div>
 </div>
 </div>
+<p>El modelo <strong>Linear Support Vector Classifier (LinearSVC)</strong> obtuvo un <strong>Training set score de 0.866</strong> y un <strong>Test set score de 0.866</strong>, mostrando un <strong>rendimiento equilibrado y estable</strong> en ambos conjuntos.<br />
+La igualdad entre los dos puntajes indica que el modelo <strong>generaliza correctamente</strong> y no presenta signos de sobreajuste ni subajuste, lo que refleja una muy buena capacidad de aprendizaje lineal.</p>
+<p>El <strong>LinearSVC</strong> busca maximizar el margen que separa las clases en el espacio de características, lo que lo hace especialmente útil cuando los datos presentan una separación aproximada lineal.<br />
+Este resultado sugiere que el modelo logra capturar correctamente las relaciones principales del dataset sin caer en una complejidad excesiva.</p>
+<p>En general, el LinearSVC demuestra un <strong>desempeño sólido y consistente</strong>, ofreciendo una combinación equilibrada entre simplicidad, interpretabilidad y capacidad predictiva, lo que lo convierte en una opción confiable dentro del conjunto de modelos comparados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba_svm</span> <span class="o">=</span> <span class="n">pipe_svm</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1639,6 +1718,12 @@ weighted avg       0.83      0.87      0.83     73804
 <img alt="_images/c820fe9b1d8dc6b7920560e934c63ca7cde16b61458c2d64205527cd3f009fd2.png" src="_images/c820fe9b1d8dc6b7920560e934c63ca7cde16b61458c2d64205527cd3f009fd2.png" />
 </div>
 </div>
+<p>La <strong>matriz de confusión</strong> del modelo <strong>LinearSVC</strong> muestra que el algoritmo clasificó correctamente <strong>62.436 verdaderos negativos (clase 0)</strong> y <strong>1.493 verdaderos positivos (clase 1)</strong>, mientras que cometió <strong>1.225 falsos positivos</strong> y <strong>8.650 falsos negativos</strong>.</p>
+<p>El modelo obtuvo una <strong>precisión global (Accuracy) del 86.6 %</strong>, lo cual representa un <strong>rendimiento estable y bien balanceado</strong> entre los conjuntos de entrenamiento y prueba.<br />
+Sin embargo, se observa que el <strong>recall para la clase positiva (0.15)</strong> sigue siendo bajo, lo que indica que el modelo <strong>no detecta una gran proporción de los casos positivos</strong>, aunque mantiene una buena precisión (0.55) al clasificar esa clase.</p>
+<p>Este comportamiento sugiere que el <strong>LinearSVC</strong> es muy efectivo para identificar la clase mayoritaria (negativa), pero conserva un sesgo hacia ella debido al desbalance de los datos.<br />
+A pesar de ello, su desempeño general y su capacidad de generalización lo convierten en uno de los modelos lineales más consistentes del análisis, ideal como alternativa más simple y eficiente que modelos basados en árboles o boosting.<br />
+Para mejorar su sensibilidad hacia la clase positiva, se podrían aplicar <strong>técnicas de balanceo</strong> o ajustar el parámetro <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba_svm</span><span class="p">)</span>
@@ -1660,6 +1745,11 @@ weighted avg       0.83      0.87      0.83     73804
 <img alt="_images/7410b98ae4bd9f4c859f260f5d56dccbedd0da77ca2c3bdc11cc2892c87a93fa.png" src="_images/7410b98ae4bd9f4c859f260f5d56dccbedd0da77ca2c3bdc11cc2892c87a93fa.png" />
 </div>
 </div>
+<p>La <strong>curva ROC</strong> del modelo <strong>LinearSVC Calibrado</strong> presenta un <strong>AUC de 0.823</strong>, lo que refleja una <strong>muy buena capacidad de discriminación</strong> entre las clases positiva y negativa.<br />
+El valor del área bajo la curva indica que el modelo puede diferenciar correctamente los casos de pacientes con y sin diabetes en el <strong>82.3 % de las veces</strong>, posicionándose al nivel de los mejores modelos del conjunto analizado.</p>
+<p>La calibración del modelo —que permite obtener probabilidades ajustadas— mejora notablemente su desempeño frente al LinearSVC original, logrando un mejor equilibrio entre sensibilidad y especificidad.<br />
+Esto se evidencia en la forma de la curva, que se mantiene alejada de la diagonal aleatoria, alcanzando valores altos de <strong>recall</strong> incluso con un bajo nivel de falsos positivos.</p>
+<p>En conjunto, el <strong>LinearSVC calibrado</strong> combina la <strong>eficiencia de un modelo lineal</strong> con una <strong>capacidad predictiva optimizada</strong>, ofreciendo una alternativa competitiva y estable frente a modelos más complejos como XGBoost o Random Forest, pero con menor costo computacional y buena interpretabilidad.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_svm</span> <span class="o">=</span> <span class="p">{</span>
@@ -1806,6 +1896,9 @@ weighted avg       0.83      0.87      0.83     73804
 </table>
 </div></div></div>
 </div>
+<p>El modelo <strong>Regresión Logística</strong> ofrece el <strong>mejor equilibrio global entre AUC, recall y F1-score</strong>, siendo además interpretable y eficiente en tiempo de entrenamiento.<br />
+El <strong>Linear SVC calibrado</strong> se posiciona como una alternativa lineal igualmente sólida, mientras que <strong>XGBoost</strong> y <strong>Random Forest</strong> destacan por su capacidad predictiva, aunque con menor sensibilidad frente a la clase positiva.</p>
+<p>En general, los modelos lineales resultan más adecuados para este problema, priorizando la <strong>detección correcta de casos positivos (alto recall)</strong> sin sacrificar la generalización.</p>
 </section>
 </section>
 

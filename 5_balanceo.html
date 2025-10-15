@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Optimización" href="6_optimizacion.html" />
-    <link rel="prev" title="4. Modelado sin Balanceo" href="4_modelado.html" />
+    <link rel="prev" title="4. Modelado Benchmark" href="4_modelado.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,7 +182,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado sin Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>5. Balanceo</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
@@ -383,6 +383,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-balanceo"><strong>Objetivos del balanceo</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia"><strong>Metodología</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diabetes-desbalanceada"><strong><code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> (Desbalanceada)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balance-de-variable-objetivo-con-smotenc"><strong>Balance de variable objetivo con <code class="docutils literal notranslate"><span class="pre">SMOTENC</span></code></strong></a></li>
 </ul>
@@ -398,6 +400,29 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="balanceo">
 <h1><strong>5. Balanceo</strong><a class="headerlink" href="#balanceo" title="Link to this heading">#</a></h1>
+<p>En esta sección se abordan las <strong>técnicas de balanceo de clases</strong> aplicadas al conjunto de datos, con el fin de mejorar el desempeño de los modelos en problemas donde existe un <strong>desbalance entre las clases objetivo</strong>.<br />
+En este caso, la variable dependiente (por ejemplo, presencia o ausencia de diabetes) presenta una proporción desigual de observaciones entre clases, lo cual puede generar que los modelos tiendan a favorecer la clase mayoritaria y presenten un <em>recall</em> bajo para la clase minoritaria.</p>
+<p>El <strong>balanceo de clases</strong> busca corregir este problema mediante estrategias que ajustan la distribución de los datos antes del entrenamiento, permitiendo que los algoritmos aprendan de manera más equitativa.<br />
+Las principales técnicas empleadas en este análisis son:</p>
+<ul class="simple">
+<li><p><strong>SMOTE (Synthetic Minority Over-sampling Technique):</strong> genera ejemplos sintéticos de la clase minoritaria a partir de la combinación de sus vecinos más cercanos, aumentando su representatividad sin duplicar registros.</p></li>
+<li><p><strong>ADASYN (Adaptive Synthetic Sampling):</strong> crea observaciones sintéticas de manera adaptativa, concentrándose en aquellas regiones del espacio donde la clase minoritaria está menos representada.</p></li>
+<li><p><strong>Class Weight = ‘balanced’:</strong> ajusta automáticamente los pesos de las clases dentro del modelo, otorgando mayor importancia a la clase menos frecuente durante el proceso de entrenamiento.</p></li>
+</ul>
+<section id="objetivos-del-balanceo">
+<h2><strong>Objetivos del balanceo</strong><a class="headerlink" href="#objetivos-del-balanceo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Reducir el sesgo de los modelos hacia la clase mayoritaria.</p></li>
+<li><p>Mejorar las métricas asociadas a la clase minoritaria, especialmente <strong>Recall</strong> y <strong>F1-score</strong>.</p></li>
+<li><p>Comparar el desempeño de los modelos antes y después del balanceo para determinar su impacto en la capacidad de detección.</p></li>
+<li><p>Identificar la técnica que logra el mejor equilibrio entre sensibilidad (recall) y precisión (precision).</p></li>
+</ul>
+</section>
+<section id="metodologia">
+<h2><strong>Metodología</strong><a class="headerlink" href="#metodologia" title="Link to this heading">#</a></h2>
+<p>Cada modelo se entrena primero con los datos originales y luego con los datos balanceados, aplicando las técnicas mencionadas.<br />
+Posteriormente, se evalúan las métricas de desempeño (<strong>Accuracy, Recall, F1, AUC</strong>) y se comparan mediante tablas y gráficos para analizar los efectos del balanceo sobre la calidad de las predicciones.</p>
+<p>En resumen, esta etapa busca garantizar que los modelos no solo sean precisos, sino también <strong>justos y sensibles ante las clases minoritarias</strong>, mejorando así su utilidad en contextos reales donde los falsos negativos pueden tener consecuencias importantes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -445,6 +470,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="diabetes-desbalanceada">
 <h2><strong><code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> (Desbalanceada)</strong><a class="headerlink" href="#diabetes-desbalanceada" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -498,6 +524,7 @@ dtype: int64
 <img alt="_images/7dfe82b95f0b8b6a11c33ecb23856fcb73d91c3666a34b3c8af4e4f3adfc03e6.png" src="_images/7dfe82b95f0b8b6a11c33ecb23856fcb73d91c3666a34b3c8af4e4f3adfc03e6.png" />
 </div>
 </div>
+<p>El gráfico muestra la <strong>distribución de la variable objetivo (diabetes)</strong> en el conjunto de entrenamiento, evidenciando un <strong>marcado desbalance entre las clases</strong>. La clase <strong>0 (no diabetes)</strong> concentra la mayoría de las observaciones, con más de 140.000 registros, mientras que la clase <strong>1 (diabetes)</strong> apenas supera los 20.000 casos. Esta diferencia significativa implica que los modelos de clasificación podrían inclinarse hacia la clase mayoritaria, reduciendo su capacidad para detectar correctamente los casos positivos. Por ello, resulta necesario aplicar <strong>técnicas de balanceo de clases</strong> que permitan mejorar la representación de la clase minoritaria y, en consecuencia, el desempeño del modelo en términos de <em>recall</em> y <em>F1-score</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_cols</span><span class="p">]</span>
@@ -520,6 +547,12 @@ dtype: int64
 </section>
 <section id="balance-de-variable-objetivo-con-smotenc">
 <h2><strong>Balance de variable objetivo con <code class="docutils literal notranslate"><span class="pre">SMOTENC</span></code></strong><a class="headerlink" href="#balance-de-variable-objetivo-con-smotenc" title="Link to this heading">#</a></h2>
+<p>Para abordar el desbalance observado en la variable objetivo, se aplicó la técnica <strong>SMOTENC (Synthetic Minority Over-sampling Technique for Nominal and Continuous variables)</strong>.<br />
+A diferencia del SMOTE tradicional, que solo funciona con variables numéricas, <strong>SMOTENC permite generar nuevas observaciones sintéticas considerando tanto variables continuas como categóricas</strong>, lo cual resulta ideal para conjuntos de datos mixtos como el de este estudio.</p>
+<p>El funcionamiento de SMOTENC consiste en <strong>identificar los vecinos más cercanos de cada observación de la clase minoritaria</strong> y, a partir de ellos, crear ejemplos sintéticos intermedios que preservan la estructura y diversidad del conjunto de datos.<br />
+Durante este proceso, las variables categóricas se tratan mediante codificación interna (manteniendo categorías válidas), mientras que las numéricas se interpolan de manera continua.</p>
+<p>De esta forma, el método <strong>incrementa la representación de la clase minoritaria</strong> sin duplicar registros existentes ni alterar la distribución general de las variables, mejorando así la capacidad de los modelos para <strong>aprender patrones representativos de ambas clases</strong>.<br />
+Tras aplicar SMOTENC, la proporción entre clases se equilibra significativamente, permitiendo obtener modelos con mayor sensibilidad (<em>recall</em>) y un mejor desempeño general en la detección de casos positivos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTENC</span>
@@ -563,6 +596,7 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
+<p>Los datos de Train ya se encuentran balanceados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_resampled</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -737,6 +771,7 @@ Name: count, dtype: int64
 <p>5 rows × 24 columns</p>
 </div></div></div>
 </div>
+<p>Guardamos los subconjuntos balanceados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_resampled</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;X_train_resampled.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -784,7 +819,7 @@ Name: count, dtype: int64
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>4. Modelado sin Balanceo</strong></p>
+        <p class="prev-next-title"><strong>4. Modelado Benchmark</strong></p>
       </div>
     </a>
     <a class="right-next"
@@ -812,6 +847,8 @@ Name: count, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-balanceo"><strong>Objetivos del balanceo</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia"><strong>Metodología</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diabetes-desbalanceada"><strong><code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> (Desbalanceada)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balance-de-variable-objetivo-con-smotenc"><strong>Balance de variable objetivo con <code class="docutils literal notranslate"><span class="pre">SMOTENC</span></code></strong></a></li>
 </ul>

@@ -390,7 +390,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-randomforestclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-xgbclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-linearsvc"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-contextual-del-desempeno-de-los-modelos"><strong>Interpretación contextual del desempeño de los modelos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión general</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -408,6 +412,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -418,6 +423,8 @@ document.write(`
 
 <span class="c1"># Cargar tus datos de prueba</span>
 <span class="c1"># (deben ser los originales, sin balanceo)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;X_train_resampled.csv&quot;</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;y_train_resampled.csv&quot;</span><span class="p">)[</span><span class="s1">&#39;diabetes&#39;</span><span class="p">]</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;X_test.csv&quot;</span><span class="p">)</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;y_test.csv&quot;</span><span class="p">)[</span><span class="s1">&#39;diabetes&#39;</span><span class="p">]</span>
 </pre></div>
@@ -426,8 +433,16 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaluar_modelo</span><span class="p">(</span><span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">ruta_pkl</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaluar_modelo</span><span class="p">(</span><span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">ruta_pkl</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    
     <span class="n">modelo</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ruta_pkl</span><span class="p">)</span>
+    
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">train_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="n">train_score</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">test_score</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
     
     <span class="c1"># Predicciones</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -444,7 +459,7 @@ document.write(`
     <span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔹 Modelo: </span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Train Score: </span><span class="si">{</span><span class="n">train_score</span><span class="si">}</span><span class="s2"> | Test Score: </span><span class="si">{</span><span class="n">test_score</span><span class="si">}</span><span class="s2"> | Train Time: </span><span class="si">{</span><span class="n">train_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Report:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
     
@@ -467,7 +482,7 @@ document.write(`
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="n">nombre_modelo</span><span class="p">,</span> <span class="s1">&#39;AUC&#39;</span><span class="p">:</span> <span class="n">auc</span><span class="p">,</span> <span class="s1">&#39;F1&#39;</span><span class="p">:</span> <span class="n">f1</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">acc</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="n">nombre_modelo</span><span class="p">,</span> <span class="s1">&#39;AUC&#39;</span><span class="p">:</span> <span class="n">auc</span><span class="p">,</span> <span class="s1">&#39;F1&#39;</span><span class="p">:</span> <span class="n">f1</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">acc</span><span class="p">,</span><span class="s1">&#39;Train Score&#39;</span><span class="p">:</span><span class="n">train_score</span><span class="p">,</span> <span class="s1">&#39;Test Score&#39;</span><span class="p">:</span> <span class="n">test_score</span><span class="p">,</span> <span class="s1">&#39;Train Time (s)&#39;</span><span class="p">:</span> <span class="n">train_time</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -477,14 +492,19 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Regresión Logística&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_logistica.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Regresión Logística&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_logistica.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Regresión Logística
-AUC: 0.788 | F1: 0.409 | Recall: 0.708 | Accuracy: 0.719
+AUC: 0.788 | F1: 0.409 | Recall: 0.708 | Accuracy: 0.719 | Train Score: 0.7801078490113841 | Test Score: 0.7185111918053222 | Train Time: 9.08 s
 
 Classification Report:
               precision    recall  f1-score   support
@@ -506,13 +526,13 @@ weighted avg       0.85      0.72      0.76     73804
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong><a class="headerlink" href="#modelo-de-knn-neighborsclassifier" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;KNN&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_knn.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;KNN&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_knn.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: KNN
-AUC: 0.748 | F1: 0.374 | Recall: 0.697 | Accuracy: 0.680
+AUC: 0.748 | F1: 0.374 | Recall: 0.697 | Accuracy: 0.680 | Train Score: 0.9996903211907824 | Test Score: 0.6799089480244973 | Train Time: 1.94 s
 
 Classification Report:
               precision    recall  f1-score   support
@@ -534,13 +554,13 @@ weighted avg       0.84      0.68      0.73     73804
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong><a class="headerlink" href="#modelo-de-naive-bayes" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Naive Bayes&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_nb.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Naive Bayes&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_nb.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Naive Bayes
-AUC: 0.739 | F1: 0.315 | Recall: 0.834 | Accuracy: 0.502
+AUC: 0.739 | F1: 0.315 | Recall: 0.834 | Accuracy: 0.502 | Train Score: 0.6922297547478474 | Test Score: 0.5020595089697035 | Train Time: 2.11 s
 
 Classification Report:
               precision    recall  f1-score   support
@@ -562,13 +582,13 @@ weighted avg       0.84      0.50      0.57     73804
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></strong><a class="headerlink" href="#modelo-de-decisiontreeclassifier" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Árbol de Decisión&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_tree.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Árbol de Decisión&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_tree.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Árbol de Decisión
-AUC: 0.751 | F1: 0.377 | Recall: 0.630 | Accuracy: 0.713
+AUC: 0.751 | F1: 0.377 | Recall: 0.630 | Accuracy: 0.713 | Train Score: 0.7793269198403134 | Test Score: 0.7134166169855293 | Train Time: 5.56 s
 
 Classification Report:
               precision    recall  f1-score   support
@@ -590,13 +610,13 @@ weighted avg       0.83      0.71      0.75     73804
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong><a class="headerlink" href="#modelo-de-randomforestclassifier" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_rf.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_rf.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Random Forest
-AUC: 0.794 | F1: 0.380 | Recall: 0.381 | Accuracy: 0.829
+AUC: 0.794 | F1: 0.380 | Recall: 0.381 | Accuracy: 0.829 | Train Score: 0.9996903211907824 | Test Score: 0.8292910953335862 | Train Time: 205.04 s
 
 Classification Report:
               precision    recall  f1-score   support
@@ -618,13 +638,13 @@ weighted avg       0.83      0.83      0.83     73804
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong><a class="headerlink" href="#modelo-de-xgbclassifier" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;XGBoost&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_xgb.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;XGBoost&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_xgb.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: XGBoost
-AUC: 0.808 | F1: 0.308 | Recall: 0.230 | Accuracy: 0.858
+AUC: 0.808 | F1: 0.308 | Recall: 0.230 | Accuracy: 0.858 | Train Score: 0.9284372664786154 | Test Score: 0.85807002330497 | Train Time: 7.06 s
 
 Classification Report:
               precision    recall  f1-score   support
@@ -646,13 +666,13 @@ weighted avg       0.83      0.86      0.84     73804
 <h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong><a class="headerlink" href="#modelo-de-linearsvc" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Linear SVC&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_svm.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Linear SVC&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_svm.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Linear SVC
-AUC: 0.789 | F1: 0.411 | Recall: 0.709 | Accuracy: 0.721
+AUC: 0.789 | F1: 0.411 | Recall: 0.709 | Accuracy: 0.721 | Train Score: 0.7792764287301149 | Test Score: 0.7208145899951223 | Train Time: 10.73 s
 
 Classification Report:
               precision    recall  f1-score   support
@@ -703,6 +723,9 @@ weighted avg       0.85      0.72      0.76     73804
       <th>F1</th>
       <th>Recall</th>
       <th>Accuracy</th>
+      <th>Train Score</th>
+      <th>Test Score</th>
+      <th>Train Time (s)</th>
     </tr>
   </thead>
   <tbody>
@@ -713,6 +736,9 @@ weighted avg       0.85      0.72      0.76     73804
       <td>0.308353</td>
       <td>0.230208</td>
       <td>0.858070</td>
+      <td>0.928437</td>
+      <td>0.858070</td>
+      <td>7.058608</td>
     </tr>
     <tr>
       <th>4</th>
@@ -721,6 +747,9 @@ weighted avg       0.85      0.72      0.76     73804
       <td>0.380123</td>
       <td>0.380854</td>
       <td>0.829291</td>
+      <td>0.999690</td>
+      <td>0.829291</td>
+      <td>205.036462</td>
     </tr>
     <tr>
       <th>6</th>
@@ -729,6 +758,9 @@ weighted avg       0.85      0.72      0.76     73804
       <td>0.411067</td>
       <td>0.708962</td>
       <td>0.720815</td>
+      <td>0.779276</td>
+      <td>0.720815</td>
+      <td>10.728178</td>
     </tr>
     <tr>
       <th>0</th>
@@ -737,6 +769,9 @@ weighted avg       0.85      0.72      0.76     73804
       <td>0.408844</td>
       <td>0.708272</td>
       <td>0.718511</td>
+      <td>0.780108</td>
+      <td>0.718511</td>
+      <td>9.082000</td>
     </tr>
     <tr>
       <th>3</th>
@@ -745,6 +780,9 @@ weighted avg       0.85      0.72      0.76     73804
       <td>0.376830</td>
       <td>0.630484</td>
       <td>0.713417</td>
+      <td>0.779327</td>
+      <td>0.713417</td>
+      <td>5.555804</td>
     </tr>
     <tr>
       <th>1</th>
@@ -753,6 +791,9 @@ weighted avg       0.85      0.72      0.76     73804
       <td>0.374464</td>
       <td>0.697131</td>
       <td>0.679909</td>
+      <td>0.999690</td>
+      <td>0.679909</td>
+      <td>1.943020</td>
     </tr>
     <tr>
       <th>2</th>
@@ -761,14 +802,29 @@ weighted avg       0.85      0.72      0.76     73804
       <td>0.315209</td>
       <td>0.833876</td>
       <td>0.502060</td>
+      <td>0.692230</td>
+      <td>0.502060</td>
+      <td>2.105533</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+<p><strong>XGBoost</strong> se posiciona como el <strong>modelo con mejor desempeño global</strong>, alcanzando el <strong>mayor AUC (0.808)</strong> y la <strong>mayor exactitud (85.8%)</strong>, además de un tiempo de entrenamiento razonable (7 s).<br />
+Su equilibrio entre precisión y capacidad de generalización lo convierte en la mejor opción para este conjunto de datos, aunque su <em>recall</em> (0.23) indica que tiende a ser conservador al detectar casos positivos.</p>
+<ul class="simple">
+<li><p><strong>Random Forest</strong> obtuvo un AUC cercano (0.794) y un desempeño general robusto, pero con un <strong>tiempo de entrenamiento considerablemente mayor (205 s)</strong>.<br />
+Su <em>recall</em> moderado (0.38) y su alta precisión lo hacen ideal cuando se busca un modelo estable, aunque con alto costo computacional.</p></li>
+<li><p><strong>Linear SVC</strong> y <strong>Regresión Logística</strong> presentaron resultados muy similares, con AUC ≈ 0.789 y <em>recall</em> ≈ 0.71, lo que evidencia su <strong>alta sensibilidad hacia la clase positiva</strong>.<br />
+Estos modelos lineales son más simples, rápidos y con buena capacidad de generalización, siendo ideales cuando se prioriza interpretabilidad y eficiencia.</p></li>
+<li><p><strong>Árbol de Decisión</strong> alcanzó un rendimiento intermedio (AUC 0.75), mostrando un buen equilibrio entre sensibilidad (0.63) y precisión, aunque con menor estabilidad frente a otros métodos de ensamblado.</p></li>
+<li><p><strong>KNN</strong> obtuvo un desempeño aceptable (AUC 0.75), con buen <em>recall</em> (0.70), pero sufre de <strong>sobreajuste (train_score ≈ 1)</strong> y una caída en generalización, lo que reduce su confiabilidad frente a nuevos datos.</p></li>
+<li><p><strong>Naive Bayes</strong>, aunque logra el <strong>mayor recall (0.83)</strong> —detectando la mayoría de los casos positivos—, presenta <strong>baja precisión y exactitud (0.50)</strong>, lo que indica una alta tasa de falsos positivos.<br />
+No obstante, su <strong>bajo tiempo de entrenamiento</strong> lo hace útil como modelo base o de referencia rápida.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_comparativa</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Modelo&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_comparativa</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Modelo&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparativa de AUC - Modelos Finales&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;AUC&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -777,16 +833,38 @@ weighted avg       0.85      0.72      0.76     73804
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\franc\AppData\Local\Temp\ipykernel_9396\2389005730.py:1: FutureWarning: 
-
-Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
-
-  sns.barplot(data=df_comparativa, x=&#39;AUC&#39;, y=&#39;Modelo&#39;, palette=&#39;viridis&#39;)
-</pre></div>
-</div>
-<img alt="_images/c3d7334b587d2880118b76e615e2d016fb3712ce68d220194a55c3d9a589ed28.png" src="_images/c3d7334b587d2880118b76e615e2d016fb3712ce68d220194a55c3d9a589ed28.png" />
+<img alt="_images/ef5ded1b0f8ea1cc53d398e3535147ace38f7aba91c0c49991b3f7d87659292b.png" src="_images/ef5ded1b0f8ea1cc53d398e3535147ace38f7aba91c0c49991b3f7d87659292b.png" />
 </div>
 </div>
+<p>El análisis comparativo demuestra que los modelos basados en <strong>árboles de ensamblado (XGBoost y Random Forest)</strong> son los más eficaces para este conjunto de datos, destacando por su capacidad predictiva y estabilidad.<br />
+Por su parte, los modelos <strong>lineales (Linear SVC y Regresión Logística)</strong> mantienen un excelente equilibrio entre desempeño y eficiencia, siendo adecuados para contextos donde la interpretabilidad y el costo computacional son factores clave.<br />
+En cambio, <strong>Naive Bayes</strong> y <strong>KNN</strong> se destacan por su simplicidad y rapidez, pero su rendimiento es menor en términos de precisión y generalización.</p>
+<section id="interpretacion-contextual-del-desempeno-de-los-modelos">
+<h3><strong>Interpretación contextual del desempeño de los modelos</strong><a class="headerlink" href="#interpretacion-contextual-del-desempeno-de-los-modelos" title="Link to this heading">#</a></h3>
+<p>En el contexto del estudio —la <strong>predicción de diabetes</strong>— el objetivo principal no es únicamente alcanzar la mayor precisión global, sino <strong>detectar correctamente la mayor cantidad posible de pacientes con la enfermedad</strong> (clase positiva).<br />
+Por tanto, las métricas de mayor relevancia son el <strong>Recall (Sensibilidad)</strong> y, en segundo lugar, el <strong>AUC</strong>, que mide la capacidad general del modelo para distinguir entre personas con y sin diabetes.</p>
+<p>Al analizar los resultados:</p>
+<ul class="simple">
+<li><p><strong>Linear SVC</strong> y <strong>Regresión Logística</strong> obtuvieron los <strong>mayores valores de Recall (≈0.71)</strong>, lo que significa que detectan correctamente alrededor del <strong>71 % de los casos positivos</strong>.<br />
+Aunque su <em>accuracy</em> es menor que la de modelos más complejos, estos algoritmos lineales <strong>maximizan la detección de pacientes con diabetes</strong>, que es el objetivo prioritario en este tipo de problemas médicos.<br />
+Además, presentan una <strong>alta interpretabilidad</strong>, lo que permite identificar qué variables influyen más en el diagnóstico (por ejemplo, nivel de glucosa, presión sanguínea o índice de masa corporal).</p></li>
+<li><p><strong>XGBoost</strong> y <strong>Random Forest</strong> alcanzaron <strong>AUC y Accuracy más altos</strong> (≈0.81 y 0.86, respectivamente), mostrando una excelente capacidad de discriminación y generalización.<br />
+Sin embargo, ambos tienden a <strong>clasificar con mayor precisión los casos negativos</strong>, sacrificando parte del <em>recall</em> (solo entre 0.23 y 0.38).<br />
+Esto puede implicar que <strong>algunos pacientes con diabetes no sean correctamente detectados</strong>, lo cual no es ideal en un contexto de salud pública donde los falsos negativos pueden tener consecuencias graves.</p></li>
+<li><p><strong>Naive Bayes</strong>, aunque presenta baja precisión, logró el <strong>mayor Recall (0.83)</strong>, lo que significa que identifica la gran mayoría de los casos positivos, pero <strong>con muchos falsos positivos</strong>.<br />
+En un entorno clínico, este modelo podría ser útil como <strong>modelo de cribado (screening)</strong>, donde lo importante es no dejar pasar ningún caso sospechoso, aunque después se requiera una segunda validación con un modelo más específico.</p></li>
+</ul>
+<p>En conjunto, se puede concluir que <strong>los modelos lineales (Regresión Logística y Linear SVC)</strong> representan la mejor alternativa para este tipo de estudio, ya que ofrecen un <strong>buen balance entre sensibilidad, interpretabilidad y estabilidad</strong>, mientras que <strong>XGBoost</strong> y <strong>Random Forest</strong> destacan cuando se busca <strong>máxima precisión global y robustez en la clasificación</strong>.</p>
+</section>
+<section id="conclusion-general">
+<h3><strong>Conclusión general</strong><a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Si el objetivo es <strong>detectar el mayor número de pacientes con diabetes (minimizar falsos negativos)</strong> → <strong>Regresión Logística o Linear SVC</strong> son las mejores opciones.</p></li>
+<li><p>Si se busca <strong>mayor exactitud global y robustez predictiva</strong> → <strong>XGBoost</strong> es el modelo más fuerte.</p></li>
+<li><p>Si se requiere <strong>una herramienta rápida de detección preliminar</strong> → <strong>Naive Bayes</strong> podría emplearse como filtro inicial.</p></li>
+</ul>
+<p>En resumen, para el problema analizado, los resultados son <strong>coherentes y adecuados</strong>, ya que los modelos alcanzan niveles de desempeño esperables en datos médicos reales: <strong>recall alto (~0.7–0.8), AUC sólido (~0.8) y generalización estable</strong>, cumpliendo con los objetivos del proyecto.</p>
+</section>
 </section>
 </section>
 
@@ -861,7 +939,11 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-randomforestclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-xgbclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-linearsvc"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-contextual-del-desempeno-de-los-modelos"><strong>Interpretación contextual del desempeño de los modelos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión general</strong></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
