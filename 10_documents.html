@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Introducción &#8212; Proyecto Final ML</title>
+    <title>10. Tabla de Modelos &#8212; Proyecto Final ML</title>
   
   
   
@@ -57,10 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10_documents';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022" href="2_info_general.html" />
+    <link rel="prev" title="9. Conclusiones" href="9_conclusion.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +123,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -143,7 +141,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -174,13 +172,13 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     1. Introducción
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
@@ -189,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_evaluacion.html"><strong>8. Evaluación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_conclusion.html"><strong>9. Conclusiones</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_documents.html"><strong>10. Tabla de Modelos</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>10. Tabla de Modelos</strong></a></li>
 </ul>
 
     </div>
@@ -261,7 +259,7 @@
       
       
       
-      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2F10_documents.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -291,7 +289,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/10_documents.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -301,7 +299,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -373,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Introducción</h1>
+    <h1>10. Tabla de Modelos</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -387,25 +385,58 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduccion">
-<h1><strong>1. Introducción</strong><a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
-<p><strong>Integrantes:</strong> Mariana Franco, Jerónimo Domínguez, Juan Andrés Ramos</p>
-<p>El presente proyecto final de Machine Learning tiene como objetivo aplicar, comparar y evaluar distintos modelos de predicción utilizando la base de datos seleccionada. A través de este trabajo se busca no solo construir modelos con un adecuado rendimiento, sino también comprender el proceso completo de un proyecto de aprendizaje automático, desde la preparación de los datos hasta la interpretación de los resultados.</p>
-<p>En primer lugar, se realizará un análisis exploratorio de datos (EDA) para conocer la estructura de la base, identificar patrones, valores atípicos y posibles problemas de calidad de datos que puedan afectar el desempeño de los modelos. Posteriormente, se aplicarán técnicas de preprocesamiento como imputación de valores faltantes, codificación de variables categóricas, escalamiento y selección de características.</p>
-<p>Con los datos preparados, se entrenarán diferentes algoritmos de predicción, entre los que se incluyen modelos de regresión (Ridge, Lasso, regresión logística) y modelos más orientados a la clasificación, según el problema planteado. Cada modelo será evaluado bajo métricas específicas (precisión, F1-score, ROC-AUC, error cuadrático medio, entre otras) con el fin de comparar su desempeño y determinar cuál ofrece mejores resultados en este contexto.</p>
-<p>Finalmente, se discutirán los hallazgos obtenidos y se plantearán conclusiones acerca de la utilidad de los modelos, las variables más relevantes para la predicción y posibles mejoras futuras. Este proyecto no solo tiene un carácter práctico, sino también formativo, al integrar los distintos componentes del ciclo de vida de un modelo de Machine Learning aplicado a datos reales.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_balanceo.html"><strong>5. Balanceo</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_evaluacion.html"><strong>8. Evaluación</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_conclusion.html"><strong>9. Conclusiones</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_documents.html"><strong>10. Tabla de Modelos</strong></a></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="tabla-de-modelos">
+<h1><strong>10. Tabla de Modelos</strong><a class="headerlink" href="#tabla-de-modelos" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><em>Modelo de Machine Learning para la Predicción de Diabetes (Aplicación Principal)</em></p></th>
+<th class="head text-center"><p><em>Modelo de Machine Learning Mejorado para Otras Aplicaciones</em></p></th>
+<th class="head text-center"><p><em>Modelo de Machine Learning Mejorado Aún No Aplicado a la Predicción de Diabetes</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Modelo A1 (“Age-Specific Diabetes Prediction Models Using Machine Learning and Anomaly Detection”) — <em>LightGBM</em> (Predicción de diabetes específica por edad)</p></td>
+<td class="text-center"><p><em>LightGBM + Bayesian Optimization</em> (Predicción de enfermedades cardíacas y hepáticas)</p></td>
+<td class="text-center"><p>LightGBM con Bayesian Optimization aún no probado en conjuntos de datos de diabetes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Modelo A2 (“A Fused Machine Learning Approach for Diabetes Prediction Using SVM and ANN with Fuzzy Logic”) — *TabNet, **SVM, **ANN, *<em>Fuzzy Logic</em> (Modelo híbrido de clasificación)</p></td>
+<td class="text-center"><p><em>TabNet + Transfer Learning</em> (Clasificación de cáncer y respuesta a medicamentos)</p></td>
+<td class="text-center"><p>La adaptación de TabNet con Transfer Learning no se ha explorado para diabetes</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Modelo A3 (“A Super Ensemble Learning Model for Early Diagnosis of Diabetes Mellitus”) — <em>Super Learner (Logistic Regression + Decision Tree + Random Forest + Gradient Boosting + SVM)</em> (Modelo meta-aprendiz)</p></td>
+<td class="text-center"><p><em>VAE + GAN Hybrid Model</em> (Detección temprana de Alzheimer y fallos industriales)</p></td>
+<td class="text-center"><p>El modelo híbrido VAE–GAN no se ha aplicado a la detección de diabetes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Modelo A4 (“Smart Healthcare Recommendation System Based on Deep Machine Learning and Data Fusion for Diabetes Prediction”) — <em>DNN + Data Fusion Ensemble</em> (Sistema inteligente de salud)</p></td>
+<td class="text-center"><p><em>Deep Ensemble + Sensor Data Fusion System</em> (Diagnóstico de COVID-19 y enfermedades pulmonares)</p></td>
+<td class="text-center"><p>Los sistemas de fusión basados en sensores no se han aplicado a la predicción del riesgo de diabetes</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Modelo A5 (“Age-Specific Diabetes Prediction Models Using Machine Learning and Anomaly Detection”) — <em>Isolation Forest (IF)</em> (Detección de anomalías no supervisada)</p></td>
+<td class="text-center"><p><em>Isolation Forest + PCA Fusion</em> (Detección de fraudes e intrusiones en redes)</p></td>
+<td class="text-center"><p>IF con fusión de características PCA no implementado para tamizaje de diabetes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Modelo A6 — <em>Support Vector Machine (SVM)</em> (Clasificador base)</p></td>
+<td class="text-center"><p><em>PSO–SVM (Particle Swarm Optimized SVM)</em> (Detección de cáncer de mama y análisis de ECG)</p></td>
+<td class="text-center"><p>Las variantes PSO–SVM no se han utilizado en pipelines de clasificación de diabetes</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Modelo A7 — <em>Artificial Neural Network (ANN)</em> (Clasificador profundo)</p></td>
+<td class="text-center"><p><em>GA–ANN (Genetic Algorithm Optimized ANN)</em> (Predicción de enfermedades cardíacas)</p></td>
+<td class="text-center"><p>La optimización GA–ANN aún no se ha explorado en la predicción de diabetes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Modelo A8 — <em>Fuzzy Logic System</em> (Integración de decisiones)</p></td>
+<td class="text-center"><p><em>ANFIS (Adaptive Neuro-Fuzzy Inference System)</em> (Predicción de hipertensión y riesgo de ACV)</p></td>
+<td class="text-center"><p>ANFIS no se aplica comúnmente en flujos de trabajo de diagnóstico de diabetes</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Modelo A9 — <em>Decision Tree</em> (Clasificación basada en reglas)</p></td>
+<td class="text-center"><p><em>XGBoost Decision Tree Ensemble</em> (Evaluación del riesgo de cáncer y pronóstico energético)</p></td>
+<td class="text-center"><p>XGBoost se ha aplicado a diabetes, pero no con enfoques de meta-apilamiento</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Modelo A10 — <em>Random Forest / Gradient Boosting</em> (Métodos de ensamble boosting)</p></td>
+<td class="text-center"><p><em>Stacked Ensemble (RF + GBM + SVM)</em> (Sistema de diagnóstico médico multidominio)</p></td>
+<td class="text-center"><p>El ensamble apilado completo con RF+GBM+SVM aún no ha sido validado en conjuntos de datos de diabetes</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 
@@ -439,14 +470,14 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="2_info_general.html"
-       title="next page">
+    <a class="left-prev"
+       href="9_conclusion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></p>
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>9. Conclusiones</strong></p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
