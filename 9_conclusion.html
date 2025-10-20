@@ -384,7 +384,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativa-de-modelos-antes-y-despues-de-la-validacion"><strong>Comparativa de Modelos Antes y Después de la Validación</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-general"><strong>Interpretación General</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión general</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión General</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -502,13 +502,14 @@ En el contexto del estudio (detección de diabetes), los <strong>modelos lineale
 los primeros por su <strong>interpretabilidad y recall alto</strong>, y los segundos por su <strong>precisión y poder predictivo global</strong>.</p>
 </section>
 <section id="conclusion-general">
-<h2><strong>Conclusión general</strong><a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Si el objetivo es <strong>detectar el mayor número de pacientes con diabetes (minimizar falsos negativos)</strong> → <strong>Regresión Logística o Linear SVC</strong> son las mejores opciones.</p></li>
-<li><p>Si se busca <strong>mayor exactitud global y robustez predictiva</strong> → <strong>XGBoost</strong> es el modelo más fuerte.</p></li>
-<li><p>Si se requiere <strong>una herramienta rápida de detección preliminar</strong> → <strong>Naive Bayes</strong> podría emplearse como filtro inicial.</p></li>
-</ul>
-<p>En resumen, para el problema analizado, los resultados son <strong>coherentes y adecuados</strong>, ya que los modelos alcanzan niveles de desempeño esperables en datos médicos reales: <strong>recall alto (~0.7–0.8), AUC sólido (~0.8) y generalización estable</strong>, cumpliendo con los objetivos del proyecto.</p>
+<h2><strong>Conclusión General</strong><a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h2>
+<p>Tras el proceso completo de optimización y validación, se determinó que el modelo <strong>Linear SVC calibrado</strong> es el más adecuado para el problema de predicción de diabetes.<br />
+Si bien otros modelos como <strong>XGBoost</strong> y <strong>Random Forest</strong> alcanzaron valores de <strong>AUC</strong> ligeramente superiores, el <strong>Linear SVC</strong> mostró el <strong>mejor equilibrio entre Recall y AUC</strong>, lo que resulta fundamental en un contexto donde las clases están desbalanceadas y la prioridad es <strong>identificar correctamente a los casos positivos</strong> (pacientes con diabetes).</p>
+<p>El <strong>Recall</strong> mide la proporción de casos positivos correctamente identificados por el modelo, mientras que el <strong>AUC (Área Bajo la Curva ROC)</strong> evalúa su capacidad global para distinguir entre las dos clases.<br />
+Dado que en este estudio el conjunto de datos presenta una <strong>mayor cantidad de observaciones negativas que positivas</strong>, se optó por utilizar el <strong>Recall como métrica principal de decisión</strong>, complementado con el AUC para verificar la estabilidad del modelo y evitar sesgos hacia la clase mayoritaria.</p>
+<p>En este sentido, el <strong>Linear SVC calibrado</strong> logró mantener un <strong>AUC promedio de 0.856</strong> junto con un <strong>Recall superior al 70 %</strong>, lo que indica una excelente capacidad para detectar casos de diabetes sin perder equilibrio general en la clasificación.<br />
+Además, su estructura lineal permite una <strong>interpretación clara de las variables más influyentes</strong>, lo cual es una ventaja relevante en el ámbito médico, donde la transparencia del modelo es tan importante como su precisión.</p>
+<p>Por tanto, se concluye que el <strong>Linear SVC calibrado</strong> representa el <strong>modelo óptimo</strong> para este estudio, al ofrecer una <strong>buena generalización, alta sensibilidad y adecuada discriminación</strong>, equilibrando correctamente el rendimiento predictivo frente al desbalance de clases.</p>
 </section>
 </section>
 
@@ -569,7 +570,7 @@ los primeros por su <strong>interpretabilidad y recall alto</strong>, y los segu
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativa-de-modelos-antes-y-despues-de-la-validacion"><strong>Comparativa de Modelos Antes y Después de la Validación</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-general"><strong>Interpretación General</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión general</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión General</strong></a></li>
 </ul>
   </nav></div>
 
