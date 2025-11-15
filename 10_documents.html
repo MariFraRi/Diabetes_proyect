@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="8_evaluacion.html"><strong>8. Evaluación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_conclusion.html"><strong>9. Conclusiones</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>10. Modelo original</strong></a></li>
+
 </ul>
 
     </div>
@@ -383,6 +384,34 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>10. Modelo original</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-y-contexto"><strong>1. Motivación y contexto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-fundamentales-tomadas-de-los-papers"><strong>2. Ideas fundamentales tomadas de los papers</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-cmboost-zhang-2019"><strong>Desde CMBoost (Zhang, 2019)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-pes-lai-2021"><strong>Desde Pes &amp; Lai (2021)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-kadkhodaei-et-al-2021"><strong>Desde Kadkhodaei et al. (2021)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-modelo-hibrido"><strong>3. Arquitectura del modelo híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-1-gradient-boosting-cost-sensitive"><strong>4. Bloque 1: Gradient Boosting Cost-Sensitive</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting"><strong>Boosting</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-sensitive"><strong>Cost-sensitive</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-balanced-random-forest"><strong>5. Bloque 2: Balanced Random Forest</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capa-de-fusion-ensamble-hibrido"><strong>6. Capa de fusión: ensamble híbrido</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-text-hibrido-y-1-x">[
+p_{\text{Híbrido}}(y=1|x)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-un-modelo-original"><strong>7. ¿Por qué es un modelo original?</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-existe-como-algoritmo-estandar">✔️ <strong>No existe como algoritmo estándar</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integra-estrategias-complementarias">✔️ <strong>Integra estrategias complementarias</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#se-deriva-directamente-de-la-teoria-de-los-papers">✔️ <strong>Se deriva directamente de la teoría de los papers</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resuelve-el-problema-que-los-papers-dejan-abierto">✔️ <strong>Resuelve el problema que los papers dejan abierto</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalidades"><strong>8. Generalidades</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cmboost-classifier"><strong>CMBoost Classifier</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toma-de-submuestra"><strong>Toma de Submuestra</strong></a></li>
 </ul>
@@ -390,6 +419,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-por-separado-de-modelos-complementarios"><strong>Aplicacion por separado de Modelos complementarios</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hybridcostsensitiveensemble"><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong></a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -402,6 +434,161 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="modelo-original">
 <h1><strong>10. Modelo original</strong><a class="headerlink" href="#modelo-original" title="Link to this heading">#</a></h1>
+<section id="motivacion-y-contexto">
+<h2><strong>1. Motivación y contexto</strong><a class="headerlink" href="#motivacion-y-contexto" title="Link to this heading">#</a></h2>
+<p>El algoritmo <strong>CMBoost</strong> (Zhang, 2019) propone una optimización del margen ponderado por costo para abordar problemas de clasificación desbalanceada. Sin embargo, su implementación exacta requiere manipular una matriz (N \times N), lo cual implica:</p>
+<ul class="simple">
+<li><p>complejidad espacial (O(N^2)),</p></li>
+<li><p>complejidad temporal elevada,</p></li>
+<li><p>consumo de memoria que crece cuadráticamente.</p></li>
+</ul>
+<p>En el dataset utilizado en este proyecto (≈ 300k observaciones), la implementación exacta genera errores del tipo:
+<code class="docutils literal notranslate"><span class="pre">MemoryError:</span> <span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">allocate</span> <span class="pre">&gt;600</span> <span class="pre">GiB</span></code></p>
+<p>Por tanto, se vuelve <strong>inviable</strong> aplicar CMBoost exactamente sobre el conjunto completo.</p>
+<p>Este hallazgo motiva el diseño de un <strong>modelo híbrido cost-sensitive escalable</strong>, basado en:</p>
+<ul class="simple">
+<li><p>las ideas centrales de CMBoost,</p></li>
+<li><p>técnicas modernas de cost-sensitive learning (Pes &amp; Lai, 2021),</p></li>
+<li><p>y enfoques de ensembles heterogéneos para big data (Kadkhodaei et al., 2021).</p></li>
+</ul>
+</section>
+<section id="ideas-fundamentales-tomadas-de-los-papers">
+<h2><strong>2. Ideas fundamentales tomadas de los papers</strong><a class="headerlink" href="#ideas-fundamentales-tomadas-de-los-papers" title="Link to this heading">#</a></h2>
+<section id="desde-cmboost-zhang-2019">
+<h3><strong>Desde CMBoost (Zhang, 2019)</strong><a class="headerlink" href="#desde-cmboost-zhang-2019" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Concepto de <strong>margen</strong>:<br />
+[
+\rho_i = y_i f(x_i)
+]</p></li>
+<li><p>Construcción mediante <strong>boosting</strong>:<br />
+[
+f(x) = \sum_{t=1}^{M} \alpha_t h_t(x)
+]</p></li>
+<li><p>Uso de <strong>ponderación cost-sensitive</strong> mediante pesos dependientes del desbalance ((d_i, k_i)).</p></li>
+</ul>
+</section>
+<section id="desde-pes-lai-2021">
+<h3><strong>Desde Pes &amp; Lai (2021)</strong><a class="headerlink" href="#desde-pes-lai-2021" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Uso de <strong>sample weights</strong> para penalizar más los errores en la clase minoritaria.</p></li>
+<li><p>Estrategias escalables que evitan optimizaciones cuadráticas grandes.</p></li>
+<li><p>Alineado con boosting moderno.</p></li>
+</ul>
+</section>
+<section id="desde-kadkhodaei-et-al-2021">
+<h3><strong>Desde Kadkhodaei et al. (2021)</strong><a class="headerlink" href="#desde-kadkhodaei-et-al-2021" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Uso de <strong>ensembles heterogéneos</strong> (modelos base diferentes).</p></li>
+<li><p>Mayor estabilidad y capacidad de generalización en big data.</p></li>
+</ul>
+</section>
+</section>
+<section id="arquitectura-del-modelo-hibrido">
+<h2><strong>3. Arquitectura del modelo híbrido</strong><a class="headerlink" href="#arquitectura-del-modelo-hibrido" title="Link to this heading">#</a></h2>
+<p>El modelo híbrido combina dos componentes complementarios:</p>
+<ol class="arabic simple">
+<li><p><strong>Gradient Boosting cost-sensitive</strong>, que incorpora el costo de la clase minoritaria directamente en la función de pérdida mediante <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>.</p></li>
+<li><p><strong>Balanced Random Forest</strong>, que maneja el desbalance mediante balanceo interno en el muestreo bootstrap de cada árbol.</p></li>
+</ol>
+<p>Finalmente, ambos modelos se fusionan mediante una combinación probabilística:</p>
+<p>[
+p_{\text{Híbrido}}(y=1|x) = \frac{1}{2} \left( p_{\text{GB}}(y=1|x) + p_{\text{RF}}(y=1|x) \right)
+]</p>
+<p>La arquitectura completa no existe como algoritmo estándar en sklearn, por lo que constituye un diseño propio y original.</p>
+</section>
+<section id="bloque-1-gradient-boosting-cost-sensitive">
+<h2><strong>4. Bloque 1: Gradient Boosting Cost-Sensitive</strong><a class="headerlink" href="#bloque-1-gradient-boosting-cost-sensitive" title="Link to this heading">#</a></h2>
+<section id="boosting">
+<h3><strong>Boosting</strong><a class="headerlink" href="#boosting" title="Link to this heading">#</a></h3>
+<p>El modelo de boosting toma la forma:</p>
+<p>[
+F(x) = \sum_{t=1}^{T} \nu \cdot h_t(x)
+]</p>
+<p>donde (h_t(x)) son árboles débiles y (\nu) el learning rate.</p>
+</section>
+<section id="cost-sensitive">
+<h3><strong>Cost-sensitive</strong><a class="headerlink" href="#cost-sensitive" title="Link to this heading">#</a></h3>
+<p>Se asigna un peso por observación:</p>
+<p>[
+w_i =
+\begin{cases}
+w_1, &amp; y_i = 1 \
+w_0, &amp; y_i = 0
+\end{cases}
+\quad\text{con } w_1 \gg w_0
+]</p>
+<p>La pérdida que se minimiza es:</p>
+<p>[
+\mathcal{L} = \sum_{i=1}^{N} w_i , \ell(y_i, F(x_i))
+]</p>
+<p>Esto implementa la filosofía cost-sensitive del CMBoost original.</p>
+</section>
+</section>
+<section id="bloque-2-balanced-random-forest">
+<h2><strong>5. Bloque 2: Balanced Random Forest</strong><a class="headerlink" href="#bloque-2-balanced-random-forest" title="Link to this heading">#</a></h2>
+<p>Cada árbol del bosque se entrena sobre un bootstrap balanceado:</p>
+<p>[
+|L^+| = |L^-|_{\text{subsample}}
+]</p>
+<p>El modelo final es:</p>
+<p>[
+f_{\text{RF}}(x) = \frac{1}{B} \sum_{b=1}^{B} h_b(x)
+]</p>
+<p>Este componente aporta robustez, capacidad para manejar ruido y estabilidad en big data.</p>
+</section>
+<section id="capa-de-fusion-ensamble-hibrido">
+<h2><strong>6. Capa de fusión: ensamble híbrido</strong><a class="headerlink" href="#capa-de-fusion-ensamble-hibrido" title="Link to this heading">#</a></h2>
+<p>Los modelos se combinan mediante un promedio simple de sus probabilidades:</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="p-text-hibrido-y-1-x">
+<h1>[
+p_{\text{Híbrido}}(y=1|x)<a class="headerlink" href="#p-text-hibrido-y-1-x" title="Link to this heading">#</a></h1>
+<p>\frac{ p_{\text{GB}}(y=1|x) + p_{\text{RF}}(y=1|x) }{2}
+]</p>
+<p>Esta combinación define un <strong>ensamble heterogéneo cost-sensitive</strong>, inspirado en los artículos analizados y diseñado para grandes volúmenes de datos.</p>
+<section id="por-que-es-un-modelo-original">
+<h2><strong>7. ¿Por qué es un modelo original?</strong><a class="headerlink" href="#por-que-es-un-modelo-original" title="Link to this heading">#</a></h2>
+<section id="no-existe-como-algoritmo-estandar">
+<h3>✔️ <strong>No existe como algoritmo estándar</strong><a class="headerlink" href="#no-existe-como-algoritmo-estandar" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>No está implementado en sklearn ni en imbalanced-learn.</p></li>
+<li><p>La clase <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code> fue programada manualmente.</p></li>
+</ul>
+</section>
+<section id="integra-estrategias-complementarias">
+<h3>✔️ <strong>Integra estrategias complementarias</strong><a class="headerlink" href="#integra-estrategias-complementarias" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Cost-sensitive boosting (pérdida ponderada)</p></li>
+<li><p>Balanced bagging (balanceo por bootstrap)</p></li>
+<li><p>Fusión probabilística (soft-ensemble)</p></li>
+</ul>
+</section>
+<section id="se-deriva-directamente-de-la-teoria-de-los-papers">
+<h3>✔️ <strong>Se deriva directamente de la teoría de los papers</strong><a class="headerlink" href="#se-deriva-directamente-de-la-teoria-de-los-papers" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Expresa la filosofía cost-sensitive de CMBoost.</p></li>
+<li><p>Usa manejo del desbalance tanto en pérdida como en muestreo.</p></li>
+<li><p>Implementa principios de ensembles heterogéneos para big data.</p></li>
+</ul>
+</section>
+<section id="resuelve-el-problema-que-los-papers-dejan-abierto">
+<h3>✔️ <strong>Resuelve el problema que los papers dejan abierto</strong><a class="headerlink" href="#resuelve-el-problema-que-los-papers-dejan-abierto" title="Link to this heading">#</a></h3>
+<p>CMBoost exacto falla en big data; el modelo híbrido <strong>mantiene su esencia</strong> pero es <strong>computacionalmente viable</strong> para 300k muestras.</p>
+</section>
+</section>
+<section id="generalidades">
+<h2><strong>8. Generalidades</strong><a class="headerlink" href="#generalidades" title="Link to this heading">#</a></h2>
+<p>El <strong>Modelo Híbrido Cost-Sensitive</strong> combina:</p>
+<ul class="simple">
+<li><p>boosting con pesos de clase,</p></li>
+<li><p>random forests balanceados,</p></li>
+<li><p>fusión probabilística,</p></li>
+<li><p>y preprocesamiento robusto,</p></li>
+</ul>
+<p>constituyendo una solución <strong>original, fundamentada y aplicable</strong> para clasificación masiva y desbalanceada.<br />
+El desempeño final confirma su utilidad, logrando <strong>alto recall de la clase minoritaria</strong> sin sacrificar el rendimiento general del sistema.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -453,6 +640,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="cmboost-classifier">
 <h2><strong>CMBoost Classifier</strong><a class="headerlink" href="#cmboost-classifier" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -2381,6 +2569,34 @@ weighted avg     0.8616    0.7309    0.7702     73804
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>10. Modelo original</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-y-contexto"><strong>1. Motivación y contexto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-fundamentales-tomadas-de-los-papers"><strong>2. Ideas fundamentales tomadas de los papers</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-cmboost-zhang-2019"><strong>Desde CMBoost (Zhang, 2019)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-pes-lai-2021"><strong>Desde Pes &amp; Lai (2021)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-kadkhodaei-et-al-2021"><strong>Desde Kadkhodaei et al. (2021)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-modelo-hibrido"><strong>3. Arquitectura del modelo híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-1-gradient-boosting-cost-sensitive"><strong>4. Bloque 1: Gradient Boosting Cost-Sensitive</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting"><strong>Boosting</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-sensitive"><strong>Cost-sensitive</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-balanced-random-forest"><strong>5. Bloque 2: Balanced Random Forest</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capa-de-fusion-ensamble-hibrido"><strong>6. Capa de fusión: ensamble híbrido</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-text-hibrido-y-1-x">[
+p_{\text{Híbrido}}(y=1|x)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-un-modelo-original"><strong>7. ¿Por qué es un modelo original?</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-existe-como-algoritmo-estandar">✔️ <strong>No existe como algoritmo estándar</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integra-estrategias-complementarias">✔️ <strong>Integra estrategias complementarias</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#se-deriva-directamente-de-la-teoria-de-los-papers">✔️ <strong>Se deriva directamente de la teoría de los papers</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resuelve-el-problema-que-los-papers-dejan-abierto">✔️ <strong>Resuelve el problema que los papers dejan abierto</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalidades"><strong>8. Generalidades</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cmboost-classifier"><strong>CMBoost Classifier</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toma-de-submuestra"><strong>Toma de Submuestra</strong></a></li>
 </ul>
@@ -2388,6 +2604,9 @@ weighted avg     0.8616    0.7309    0.7702     73804
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-por-separado-de-modelos-complementarios"><strong>Aplicacion por separado de Modelos complementarios</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hybridcostsensitiveensemble"><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong></a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
