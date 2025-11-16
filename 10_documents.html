@@ -188,7 +188,6 @@
 <li class="toctree-l1"><a class="reference internal" href="8_evaluacion.html"><strong>8. Evaluación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_conclusion.html"><strong>9. Conclusiones</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>10. Modelo original</strong></a></li>
-
 </ul>
 
     </div>
@@ -384,44 +383,35 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>10. Modelo original</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-y-contexto"><strong>1. Motivación y contexto</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-fundamentales-tomadas-de-los-papers"><strong>2. Ideas fundamentales tomadas de los papers</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-cmboost-zhang-2019"><strong>Desde CMBoost (Zhang, 2019)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-pes-lai-2021"><strong>Desde Pes &amp; Lai (2021)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-kadkhodaei-et-al-2021"><strong>Desde Kadkhodaei et al. (2021)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-del-problema-y-naturaleza-del-dataset"><strong>Contexto del problema y naturaleza del dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-central"><strong>Problema central</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-modelo-hibrido"><strong>3. Arquitectura del modelo híbrido</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-1-gradient-boosting-cost-sensitive"><strong>4. Bloque 1: Gradient Boosting Cost-Sensitive</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting"><strong>Boosting</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-sensitive"><strong>Cost-sensitive</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-de-los-modelos-existentes"><strong>Limitaciones de los modelos existentes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-surge-la-necesidad-de-un-modelo-hibrido"><strong>Por qué surge la necesidad de un modelo híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-teoricas-que-inspiran-el-modelo"><strong>Ideas teóricas que inspiran el modelo</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-cmboost-zhang-2019"><strong>Aporte tomado de CMBoost (Zhang, 2019)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-pes-lai-2021"><strong>Aporte tomado de Pes &amp; Lai (2021)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-kadkhodaei-et-al-2021"><strong>Aporte tomado de Kadkhodaei et al. (2021)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-balanced-random-forest"><strong>5. Bloque 2: Balanced Random Forest</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capa-de-fusion-ensamble-hibrido"><strong>6. Capa de fusión: ensamble híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-esta-construido-el-modelo-hibrido"><strong>Cómo está construido el modelo híbrido</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-cost-sensitive"><strong>Gradient Boosting Cost-Sensitive</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-random-forest"><strong>Balanced Random Forest</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-probabilistica-innovacion-propia-del-modelo"><strong>Fusión probabilística (innovación propia del modelo)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-text-hibrido-y-1-x">[
-p_{\text{Híbrido}}(y=1|x)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-un-modelo-original"><strong>7. ¿Por qué es un modelo original?</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-existe-como-algoritmo-estandar">✔️ <strong>No existe como algoritmo estándar</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integra-estrategias-complementarias">✔️ <strong>Integra estrategias complementarias</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#se-deriva-directamente-de-la-teoria-de-los-papers">✔️ <strong>Se deriva directamente de la teoría de los papers</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resuelve-el-problema-que-los-papers-dejan-abierto">✔️ <strong>Resuelve el problema que los papers dejan abierto</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalidades"><strong>8. Generalidades</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-resuelve-el-problema-del-dataset"><strong>Por qué este modelo resuelve el problema del dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-es-original"><strong>Por qué este modelo es original</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion"><strong>Implementación</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cmboost-classifier"><strong>CMBoost Classifier</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toma-de-submuestra"><strong>Toma de Submuestra</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-por-separado-de-modelos-complementarios"><strong>Aplicacion por separado de Modelos complementarios</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hybridcostsensitiveensemble"><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias"><strong>Referencias</strong></a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -434,161 +424,171 @@ p_{\text{Híbrido}}(y=1|x)</a><ul class="visible nav section-nav flex-column">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="modelo-original">
 <h1><strong>10. Modelo original</strong><a class="headerlink" href="#modelo-original" title="Link to this heading">#</a></h1>
-<section id="motivacion-y-contexto">
-<h2><strong>1. Motivación y contexto</strong><a class="headerlink" href="#motivacion-y-contexto" title="Link to this heading">#</a></h2>
-<p>El algoritmo <strong>CMBoost</strong> (Zhang, 2019) propone una optimización del margen ponderado por costo para abordar problemas de clasificación desbalanceada. Sin embargo, su implementación exacta requiere manipular una matriz (N \times N), lo cual implica:</p>
+<section id="contexto-del-problema-y-naturaleza-del-dataset">
+<h2><strong>Contexto del problema y naturaleza del dataset</strong><a class="headerlink" href="#contexto-del-problema-y-naturaleza-del-dataset" title="Link to this heading">#</a></h2>
+<p>El dataset Heart 2022 contiene 246.022 registros y 40 variables. La variable objetivo es:</p>
+<p>HadDiabetes (0 = no, 1 = sí)</p>
+<p>Distribución observada:</p>
 <ul class="simple">
-<li><p>complejidad espacial (O(N^2)),</p></li>
-<li><p>complejidad temporal elevada,</p></li>
-<li><p>consumo de memoria que crece cuadráticamente.</p></li>
+<li><p>Clase 0 (No diabetes): ~212.202 casos</p></li>
+<li><p>Clase 1 (Con diabetes): ~33.811 casos</p></li>
 </ul>
-<p>En el dataset utilizado en este proyecto (≈ 300k observaciones), la implementación exacta genera errores del tipo:
-<code class="docutils literal notranslate"><span class="pre">MemoryError:</span> <span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">allocate</span> <span class="pre">&gt;600</span> <span class="pre">GiB</span></code></p>
-<p>Por tanto, se vuelve <strong>inviable</strong> aplicar CMBoost exactamente sobre el conjunto completo.</p>
-<p>Este hallazgo motiva el diseño de un <strong>modelo híbrido cost-sensitive escalable</strong>, basado en:</p>
+<p>La clase positiva solo representa ~13.7%.</p>
+<section id="problema-central">
+<h3><strong>Problema central</strong><a class="headerlink" href="#problema-central" title="Link to this heading">#</a></h3>
+<p>Los modelos tradicionales:</p>
 <ul class="simple">
-<li><p>las ideas centrales de CMBoost,</p></li>
-<li><p>técnicas modernas de cost-sensitive learning (Pes &amp; Lai, 2021),</p></li>
-<li><p>y enfoques de ensembles heterogéneos para big data (Kadkhodaei et al., 2021).</p></li>
+<li><p>predicen casi siempre la clase 0,</p></li>
+<li><p>muestran accuracy alto pero recall muy bajo para la clase 1,</p></li>
+<li><p>no detectan adecuadamente casos de diabetes.</p></li>
 </ul>
-</section>
-<section id="ideas-fundamentales-tomadas-de-los-papers">
-<h2><strong>2. Ideas fundamentales tomadas de los papers</strong><a class="headerlink" href="#ideas-fundamentales-tomadas-de-los-papers" title="Link to this heading">#</a></h2>
-<section id="desde-cmboost-zhang-2019">
-<h3><strong>Desde CMBoost (Zhang, 2019)</strong><a class="headerlink" href="#desde-cmboost-zhang-2019" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Concepto de <strong>margen</strong>:<br />
-[
-\rho_i = y_i f(x_i)
-]</p></li>
-<li><p>Construcción mediante <strong>boosting</strong>:<br />
-[
-f(x) = \sum_{t=1}^{M} \alpha_t h_t(x)
-]</p></li>
-<li><p>Uso de <strong>ponderación cost-sensitive</strong> mediante pesos dependientes del desbalance ((d_i, k_i)).</p></li>
-</ul>
-</section>
-<section id="desde-pes-lai-2021">
-<h3><strong>Desde Pes &amp; Lai (2021)</strong><a class="headerlink" href="#desde-pes-lai-2021" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Uso de <strong>sample weights</strong> para penalizar más los errores en la clase minoritaria.</p></li>
-<li><p>Estrategias escalables que evitan optimizaciones cuadráticas grandes.</p></li>
-<li><p>Alineado con boosting moderno.</p></li>
-</ul>
-</section>
-<section id="desde-kadkhodaei-et-al-2021">
-<h3><strong>Desde Kadkhodaei et al. (2021)</strong><a class="headerlink" href="#desde-kadkhodaei-et-al-2021" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Uso de <strong>ensembles heterogéneos</strong> (modelos base diferentes).</p></li>
-<li><p>Mayor estabilidad y capacidad de generalización en big data.</p></li>
-</ul>
+<p>Como en salud pública es más grave perder un caso positivo que generar un falso positivo, el objetivo del proyecto es maximizar la sensibilidad (recall) de la clase 1.</p>
 </section>
 </section>
-<section id="arquitectura-del-modelo-hibrido">
-<h2><strong>3. Arquitectura del modelo híbrido</strong><a class="headerlink" href="#arquitectura-del-modelo-hibrido" title="Link to this heading">#</a></h2>
-<p>El modelo híbrido combina dos componentes complementarios:</p>
+<section id="limitaciones-de-los-modelos-existentes">
+<h2><strong>Limitaciones de los modelos existentes</strong><a class="headerlink" href="#limitaciones-de-los-modelos-existentes" title="Link to this heading">#</a></h2>
+<p>Se probaron modelos como:</p>
+<ul class="simple">
+<li><p>Regresión Logística</p></li>
+<li><p>Random Forest estándar</p></li>
+<li><p>Gradient Boosting estándar</p></li>
+<li><p>Modelos con class_weight</p></li>
+<li><p>Técnicas como SMOTENC</p></li>
+</ul>
+<p>Incluso así, el comportamiento fue:</p>
+<ul class="simple">
+<li><p>Bajo recall de la clase minoritaria</p></li>
+<li><p>Predicciones dominadas por la clase 0</p></li>
+<li><p>Incapacidad para modelar relaciones complejas entre variables clínicas, demográficas y de estilo de vida</p></li>
+</ul>
+<p>También se intentó implementar el algoritmo CMBoost (Zhang, 2019), que teóricamente es ideal para datos desbalanceados.<br />
+Sin embargo, CMBoost requiere construir matrices cuadradas del tamaño:</p>
+<p>N x N, donde N = número de registros (en este caso 246.022)</p>
+<p>Esto implica más de 600 GB de memoria, lo cual es inviable.</p>
+</section>
+<section id="por-que-surge-la-necesidad-de-un-modelo-hibrido">
+<h2><strong>Por qué surge la necesidad de un modelo híbrido</strong><a class="headerlink" href="#por-que-surge-la-necesidad-de-un-modelo-hibrido" title="Link to this heading">#</a></h2>
+<p>Se necesitaba un modelo que:</p>
 <ol class="arabic simple">
-<li><p><strong>Gradient Boosting cost-sensitive</strong>, que incorpora el costo de la clase minoritaria directamente en la función de pérdida mediante <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>.</p></li>
-<li><p><strong>Balanced Random Forest</strong>, que maneja el desbalance mediante balanceo interno en el muestreo bootstrap de cada árbol.</p></li>
+<li><p>Mantuviera la filosofía cost-sensitive de CMBoost.</p></li>
+<li><p>Fuera escalable y no dependiera de matrices gigantes.</p></li>
+<li><p>Funcionara con 246k muestras.</p></li>
+<li><p>Maximizara el recall de la clase minoritaria.</p></li>
+<li><p>Capturara relaciones no lineales y múltiples interacciones entre variables de salud.</p></li>
 </ol>
-<p>Finalmente, ambos modelos se fusionan mediante una combinación probabilística:</p>
-<p>[
-p_{\text{Híbrido}}(y=1|x) = \frac{1}{2} \left( p_{\text{GB}}(y=1|x) + p_{\text{RF}}(y=1|x) \right)
-]</p>
-<p>La arquitectura completa no existe como algoritmo estándar en sklearn, por lo que constituye un diseño propio y original.</p>
+<p>Dado que ningún modelo estándar cumplía con todo, se construyó un modelo nuevo:<br />
+<strong>El Modelo Híbrido Cost-Sensitive.</strong></p>
 </section>
-<section id="bloque-1-gradient-boosting-cost-sensitive">
-<h2><strong>4. Bloque 1: Gradient Boosting Cost-Sensitive</strong><a class="headerlink" href="#bloque-1-gradient-boosting-cost-sensitive" title="Link to this heading">#</a></h2>
-<section id="boosting">
-<h3><strong>Boosting</strong><a class="headerlink" href="#boosting" title="Link to this heading">#</a></h3>
-<p>El modelo de boosting toma la forma:</p>
-<p>[
-F(x) = \sum_{t=1}^{T} \nu \cdot h_t(x)
-]</p>
-<p>donde (h_t(x)) son árboles débiles y (\nu) el learning rate.</p>
-</section>
-<section id="cost-sensitive">
-<h3><strong>Cost-sensitive</strong><a class="headerlink" href="#cost-sensitive" title="Link to this heading">#</a></h3>
-<p>Se asigna un peso por observación:</p>
-<p>[
-w_i =
-\begin{cases}
-w_1, &amp; y_i = 1 \
-w_0, &amp; y_i = 0
-\end{cases}
-\quad\text{con } w_1 \gg w_0
-]</p>
-<p>La pérdida que se minimiza es:</p>
-<p>[
-\mathcal{L} = \sum_{i=1}^{N} w_i , \ell(y_i, F(x_i))
-]</p>
-<p>Esto implementa la filosofía cost-sensitive del CMBoost original.</p>
-</section>
-</section>
-<section id="bloque-2-balanced-random-forest">
-<h2><strong>5. Bloque 2: Balanced Random Forest</strong><a class="headerlink" href="#bloque-2-balanced-random-forest" title="Link to this heading">#</a></h2>
-<p>Cada árbol del bosque se entrena sobre un bootstrap balanceado:</p>
-<p>[
-|L^+| = |L^-|_{\text{subsample}}
-]</p>
-<p>El modelo final es:</p>
-<p>[
-f_{\text{RF}}(x) = \frac{1}{B} \sum_{b=1}^{B} h_b(x)
-]</p>
-<p>Este componente aporta robustez, capacidad para manejar ruido y estabilidad en big data.</p>
-</section>
-<section id="capa-de-fusion-ensamble-hibrido">
-<h2><strong>6. Capa de fusión: ensamble híbrido</strong><a class="headerlink" href="#capa-de-fusion-ensamble-hibrido" title="Link to this heading">#</a></h2>
-<p>Los modelos se combinan mediante un promedio simple de sus probabilidades:</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="p-text-hibrido-y-1-x">
-<h1>[
-p_{\text{Híbrido}}(y=1|x)<a class="headerlink" href="#p-text-hibrido-y-1-x" title="Link to this heading">#</a></h1>
-<p>\frac{ p_{\text{GB}}(y=1|x) + p_{\text{RF}}(y=1|x) }{2}
-]</p>
-<p>Esta combinación define un <strong>ensamble heterogéneo cost-sensitive</strong>, inspirado en los artículos analizados y diseñado para grandes volúmenes de datos.</p>
-<section id="por-que-es-un-modelo-original">
-<h2><strong>7. ¿Por qué es un modelo original?</strong><a class="headerlink" href="#por-que-es-un-modelo-original" title="Link to this heading">#</a></h2>
-<section id="no-existe-como-algoritmo-estandar">
-<h3>✔️ <strong>No existe como algoritmo estándar</strong><a class="headerlink" href="#no-existe-como-algoritmo-estandar" title="Link to this heading">#</a></h3>
+<section id="ideas-teoricas-que-inspiran-el-modelo">
+<h2><strong>Ideas teóricas que inspiran el modelo</strong><a class="headerlink" href="#ideas-teoricas-que-inspiran-el-modelo" title="Link to this heading">#</a></h2>
+<section id="aporte-tomado-de-cmboost-zhang-2019">
+<h3><strong>Aporte tomado de CMBoost (Zhang, 2019)</strong><a class="headerlink" href="#aporte-tomado-de-cmboost-zhang-2019" title="Link to this heading">#</a></h3>
+<p>CMBoost introduce dos conceptos principales:</p>
 <ul class="simple">
-<li><p>No está implementado en sklearn ni en imbalanced-learn.</p></li>
-<li><p>La clase <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code> fue programada manualmente.</p></li>
+<li><p>usar pesos mayores para la clase minoritaria,</p></li>
+<li><p>aumentar el margen medio y disminuir la varianza del margen para mejorar la generalización.</p></li>
+</ul>
+<p>Como no podemos calcular los márgenes globales por el tamaño del dataset, se toma la idea esencial:</p>
+<p>“Los ejemplos de la clase minoritaria deben tener un peso mayor en la función de pérdida.”</p>
+<p>Esto se implementa con un Gradient Boosting cost-sensitive usando sample_weight.</p>
+</section>
+<section id="aporte-tomado-de-pes-lai-2021">
+<h3><strong>Aporte tomado de Pes &amp; Lai (2021)</strong><a class="headerlink" href="#aporte-tomado-de-pes-lai-2021" title="Link to this heading">#</a></h3>
+<p>Este paper muestra que se puede imitar el comportamiento de modelos cost-sensitive complejos utilizando:</p>
+<ul class="simple">
+<li><p>sample weighting,</p></li>
+<li><p>penalizaciones proporcionales al desbalance,</p></li>
+<li><p>ajustes directos en la función de pérdida.</p></li>
+</ul>
+<p>Esto permite adoptar la esencia teórica de CMBoost pero manteniendo una implementación eficiente.</p>
+</section>
+<section id="aporte-tomado-de-kadkhodaei-et-al-2021">
+<h3><strong>Aporte tomado de Kadkhodaei et al. (2021)</strong><a class="headerlink" href="#aporte-tomado-de-kadkhodaei-et-al-2021" title="Link to this heading">#</a></h3>
+<p>Este trabajo demuestra que:</p>
+<ul class="simple">
+<li><p>combinar modelos diferentes,</p></li>
+<li><p>con distintos sesgos inductivos,</p></li>
+<li><p>mejora el rendimiento en Big Data,</p></li>
+<li><p>y especialmente en datasets desbalanceados.</p></li>
+</ul>
+<p>Por eso se incorpora un segundo bloque: Balanced Random Forest.</p>
+<p>Este modelo:</p>
+<ul class="simple">
+<li><p>hace bootstrap balanceado dentro del árbol,</p></li>
+<li><p>maneja naturalmente variables categóricas,</p></li>
+<li><p>aporta robustez y estabilidad.</p></li>
 </ul>
 </section>
-<section id="integra-estrategias-complementarias">
-<h3>✔️ <strong>Integra estrategias complementarias</strong><a class="headerlink" href="#integra-estrategias-complementarias" title="Link to this heading">#</a></h3>
+</section>
+<section id="como-esta-construido-el-modelo-hibrido">
+<h2><strong>Cómo está construido el modelo híbrido</strong><a class="headerlink" href="#como-esta-construido-el-modelo-hibrido" title="Link to this heading">#</a></h2>
+<p>El modelo final combina dos módulos:</p>
+<section id="gradient-boosting-cost-sensitive">
+<h3><strong>Gradient Boosting Cost-Sensitive</strong><a class="headerlink" href="#gradient-boosting-cost-sensitive" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Cost-sensitive boosting (pérdida ponderada)</p></li>
-<li><p>Balanced bagging (balanceo por bootstrap)</p></li>
-<li><p>Fusión probabilística (soft-ensemble)</p></li>
+<li><p>Utiliza sample_weight para penalizar más los errores en la clase 1.</p></li>
+<li><p>Optimiza una pérdida donde los casos positivos tienen mayor impacto.</p></li>
+<li><p>Captura patrones suaves, continuos y no lineales.</p></li>
 </ul>
 </section>
-<section id="se-deriva-directamente-de-la-teoria-de-los-papers">
-<h3>✔️ <strong>Se deriva directamente de la teoría de los papers</strong><a class="headerlink" href="#se-deriva-directamente-de-la-teoria-de-los-papers" title="Link to this heading">#</a></h3>
+<section id="balanced-random-forest">
+<h3><strong>Balanced Random Forest</strong><a class="headerlink" href="#balanced-random-forest" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Expresa la filosofía cost-sensitive de CMBoost.</p></li>
-<li><p>Usa manejo del desbalance tanto en pérdida como en muestreo.</p></li>
-<li><p>Implementa principios de ensembles heterogéneos para big data.</p></li>
+<li><p>Re-muestrea internamente para tener igual cantidad de positivos y negativos en cada árbol.</p></li>
+<li><p>Captura relaciones fuertes, abruptas y basadas en interacciones entre variables.</p></li>
 </ul>
 </section>
-<section id="resuelve-el-problema-que-los-papers-dejan-abierto">
-<h3>✔️ <strong>Resuelve el problema que los papers dejan abierto</strong><a class="headerlink" href="#resuelve-el-problema-que-los-papers-dejan-abierto" title="Link to this heading">#</a></h3>
-<p>CMBoost exacto falla en big data; el modelo híbrido <strong>mantiene su esencia</strong> pero es <strong>computacionalmente viable</strong> para 300k muestras.</p>
-</section>
-</section>
-<section id="generalidades">
-<h2><strong>8. Generalidades</strong><a class="headerlink" href="#generalidades" title="Link to this heading">#</a></h2>
-<p>El <strong>Modelo Híbrido Cost-Sensitive</strong> combina:</p>
+<section id="fusion-probabilistica-innovacion-propia-del-modelo">
+<h3><strong>Fusión probabilística (innovación propia del modelo)</strong><a class="headerlink" href="#fusion-probabilistica-innovacion-propia-del-modelo" title="Link to this heading">#</a></h3>
+<p>Las probabilidades de ambos modelos se combinan:</p>
+<p>prob_final = (prob_GB + prob_RF) / 2</p>
+<p>Esto aporta:</p>
 <ul class="simple">
-<li><p>boosting con pesos de clase,</p></li>
-<li><p>random forests balanceados,</p></li>
-<li><p>fusión probabilística,</p></li>
-<li><p>y preprocesamiento robusto,</p></li>
+<li><p>estabilidad,</p></li>
+<li><p>reducción de sesgo hacia la clase mayoritaria,</p></li>
+<li><p>mejor sensibilidad,</p></li>
+<li><p>y aprovechamiento simultáneo de dos enfoques diferentes.</p></li>
 </ul>
-<p>constituyendo una solución <strong>original, fundamentada y aplicable</strong> para clasificación masiva y desbalanceada.<br />
-El desempeño final confirma su utilidad, logrando <strong>alto recall de la clase minoritaria</strong> sin sacrificar el rendimiento general del sistema.</p>
+<p>Esta capa final <strong>no existe en CMBoost, ni en los otros papers, ni en sklearn</strong>.<br />
+Es el componente completamente original del modelo.</p>
+</section>
+</section>
+<section id="por-que-este-modelo-resuelve-el-problema-del-dataset">
+<h2><strong>Por qué este modelo resuelve el problema del dataset</strong><a class="headerlink" href="#por-que-este-modelo-resuelve-el-problema-del-dataset" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Maneja el desbalance desde dos frentes:</p>
+<ul class="simple">
+<li><p>cost-sensitive boosting,</p></li>
+<li><p>bootstrap balanceado en Random Forest.</p></li>
+</ul>
+</li>
+<li><p>Captura relaciones complejas entre 40 variables variadas.</p></li>
+<li><p>Es escalable:</p>
+<ul class="simple">
+<li><p>no usa matrices cuadradas,</p></li>
+<li><p>no genera MemoryError,</p></li>
+<li><p>se puede entrenar con 246k registros.</p></li>
+</ul>
+</li>
+<li><p>Maximiza el recall de la clase con diabetes, que es el objetivo fundamental.</p></li>
+<li><p>Equilibra precisión y sensibilidad mediante la capa de fusión.</p></li>
+<li><p>Nace directamente de las necesidades del proyecto y de las limitaciones reales encontradas en la práctica.</p></li>
+</ol>
+</section>
+<section id="por-que-este-modelo-es-original">
+<h2><strong>Por qué este modelo es original</strong><a class="headerlink" href="#por-que-este-modelo-es-original" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>No existe en sklearn ni en imbalanced-learn.</p></li>
+<li><p>No es CMBoost, pero está inspirado en su marco teórico.</p></li>
+<li><p>No es ningún modelo de los papers revisados, pero combina ideas de los tres.</p></li>
+<li><p>Es una arquitectura híbrida diseñada específicamente para datos de salud desbalanceados.</p></li>
+<li><p>Su capa de fusión probabilística es una contribución original.</p></li>
+</ul>
+<p>El modelo surge como una solución práctica, teóricamente fundamentada y computacionalmente viable para el dataset de 2022.</p>
+</section>
+<section id="implementacion">
+<h2><strong>Implementación</strong><a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
+<p>Se importan las librerías.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -616,6 +616,7 @@ El desempeño final confirma su utilidad, logrando <strong>alto recall de la cla
 </div>
 </div>
 </div>
+<p>Se importan las bases necesarias.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;df_limpio.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">])</span>
@@ -643,6 +644,15 @@ El desempeño final confirma su utilidad, logrando <strong>alto recall de la cla
 </section>
 <section id="cmboost-classifier">
 <h2><strong>CMBoost Classifier</strong><a class="headerlink" href="#cmboost-classifier" title="Link to this heading">#</a></h2>
+<p>El algoritmo <strong>CMBoost</strong> (Zhang, 2019) propone una optimización del margen ponderado por costo para abordar problemas de clasificación desbalanceada. Sin embargo, su implementación exacta requiere manipular una matriz (N \times N), lo cual implica:</p>
+<ul class="simple">
+<li><p>complejidad espacial (O(N^2)),</p></li>
+<li><p>complejidad temporal elevada,</p></li>
+<li><p>consumo de memoria que crece cuadráticamente.</p></li>
+</ul>
+<p>En el dataset utilizado en este proyecto (≈ 300k observaciones), la implementación exacta genera errores del tipo:</p>
+<p><code class="docutils literal notranslate"><span class="pre">MemoryError:</span> <span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">allocate</span> <span class="pre">&gt;600</span> <span class="pre">GiB</span></code></p>
+<p>Por tanto, se vuelve <strong>inviable</strong> aplicar CMBoost exactamente sobre el conjunto completo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CMBoostClassifier</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">):</span>
@@ -950,6 +960,14 @@ El desempeño final confirma su utilidad, logrando <strong>alto recall de la cla
 </div>
 <section id="toma-de-submuestra">
 <h3><strong>Toma de Submuestra</strong><a class="headerlink" href="#toma-de-submuestra" title="Link to this heading">#</a></h3>
+<p>El algoritmo CMBoost no puede aplicarse al dataset completo porque requiere construir matrices internas de tamaño N x N. Con 246.000 registros, esto supera ampliamente la memoria disponible (más de 600 GB), haciendo imposible su ejecución total.</p>
+<p>Para poder evaluar su comportamiento y rescatar sus ideas principales, se toma una submuestra del dataset. Esta submuestra permite:</p>
+<ul class="simple">
+<li><p>Probar el funcionamiento del algoritmo en un entorno controlado.</p></li>
+<li><p>Analizar si realmente mejora la detección de la clase minoritaria.</p></li>
+<li><p>Revisar cómo se comporta frente a modelos tradicionales.</p></li>
+</ul>
+<p>El objetivo de esta submuestra no es entrenar el modelo final, sino entender qué elementos teóricos de CMBoost pueden incorporarse posteriormente al Modelo Híbrido Cost-Sensitive, que sí es escalable al dataset completo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -977,7 +995,7 @@ El desempeño final confirma su utilidad, logrando <strong>alto recall de la cla
 <span class="n">sub_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">pos_sample</span><span class="p">,</span> <span class="n">neg_sample</span><span class="p">])</span>
 <span class="n">rng</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">sub_idx</span><span class="p">)</span>
 
-<span class="c1"># 👇 IMPORTANTÍSIMO: usamos iloc para mantener DataFrame/Serie</span>
+<span class="c1"># IMPORTANTÍSIMO: usamos iloc para mantener DataFrame/Serie</span>
 <span class="n">X_sub</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sub_idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">y_sub</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sub_idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -996,6 +1014,12 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
+<p>En esta submuestra se cuenta con un total de 5.000 observaciones y 39 variables predictoras. La variable objetivo <code class="docutils literal notranslate"><span class="pre">diabetes</span></code> presenta la siguiente distribución de clases:</p>
+<ul class="simple">
+<li><p>Clase 1 (con diabetes): 3.000 registros</p></li>
+<li><p>Clase 0 (sin diabetes): 2.000 registros</p></li>
+</ul>
+<p>Esto significa que, a diferencia del dataset completo, la submuestra está moderadamente balanceada a favor de la clase positiva. Esta configuración es útil para probar el CMBoost y otros modelos cost-sensitive en un entorno donde la clase minoritaria del problema original (personas con diabetes) está mejor representada, facilitando la evaluación de su capacidad de detección.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
@@ -1017,6 +1041,12 @@ Tamaño test : 1500
 </div>
 </div>
 </div>
+<p>La submuestra se dividió en dos conjuntos:</p>
+<ul class="simple">
+<li><p><strong>Train:</strong> 3.500 observaciones</p></li>
+<li><p><strong>Test:</strong> 1.500 observaciones</p></li>
+</ul>
+<p>Esta partición permite entrenar los modelos en un conjunto suficientemente amplio para aprender los patrones principales, mientras que el conjunto de prueba mantiene una proporción adecuada para evaluar el desempeño general y la capacidad de generalización del modelo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1031,6 +1061,13 @@ Tamaño test : 1500
 </div>
 </div>
 </div>
+<p>En el dataset completo se observa un fuerte desbalance en la variable objetivo:</p>
+<ul class="simple">
+<li><p>Clase 0 (sin diabetes): 212.202 registros</p></li>
+<li><p>Clase 1 (con diabetes): 33.811 registros</p></li>
+</ul>
+<p>Esto significa que la clase positiva representa aproximadamente solo el 13.7% del total.<br />
+Este desbalance severo es uno de los principales desafíos del problema, ya que los modelos tradicionales tienden a favorecer la clase mayoritaria y fallan en detectar casos positivos, lo que afecta directamente el objetivo de maximizar el recall en la predicción de diabetes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1044,6 +1081,12 @@ Tamaño test : 1500
 </div>
 </div>
 </div>
+<p>En la submuestra utilizada para probar CMBoost y otros métodos, la distribución de clases es la siguiente:</p>
+<ul class="simple">
+<li><p>Clase 0 (sin diabetes): 1.400 registros</p></li>
+<li><p>Clase 1 (con diabetes): 2.100 registros</p></li>
+</ul>
+<p>A diferencia del dataset completo, esta submuestra presenta un desbalance moderado a favor de la clase positiva. Esto facilita la evaluación de modelos cost-sensitive y permite analizar su comportamiento sin las limitaciones extremas del desbalance original.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -2168,6 +2211,7 @@ weighted avg     0.6903    0.6900    0.6685      1500
 </div>
 </div>
 </div>
+<p>En la submuestra de prueba (1.500 registros), el modelo obtuvo una accuracy global de 0.69, con un desempeño claramente orientado a la detección de la clase positiva. La matriz de confusión muestra que se identificaron correctamente 791 de los 900 casos de diabetes (clase 1), lo que se refleja en un recall muy alto de 0.8789 y un F1-score de 0.7728 para esta clase, a costa de una menor sensibilidad en la clase 0 (recall de 0.4067 y F1-score de 0.5121). En conjunto, estos resultados indican que el modelo aplicado sobre la submuestra cumple el objetivo de priorizar la identificación de personas con diabetes, aun sacrificando parte del rendimiento en la clase negativa, lo cual es coherente con la naturaleza del problema y la importancia de minimizar falsos negativos en un contexto de salud.</p>
 </section>
 </section>
 <section id="aplicacion-por-separado-de-modelos-complementarios">
@@ -2237,6 +2281,7 @@ weighted avg     0.8628    0.7201    0.7618     73804
 </div>
 </div>
 </div>
+<p>El modelo Gradient Boosting cost-sensitive, entrenado con pesos calculados por clase ({0: 0.5797, 1: 3.6380}), muestra un rendimiento claramente orientado a mejorar la detección de la clase minoritaria. En el conjunto completo de prueba (73.804 registros), la matriz de confusión refleja que el modelo identifica correctamente 7.883 de los 10.143 casos positivos, logrando un recall de 0.7772 para la clase 1, muy superior al que ofrecen modelos tradicionales sin ajuste de costos. Aunque la precisión de esta clase es baja (0.2999), el comportamiento es coherente con la estrategia cost-sensitive: se privilegia reducir los falsos negativos (es decir, no dejar pasar casos reales de diabetes) aun a costa de aumentar falsos positivos. Para la clase 0, el modelo mantiene buena precisión (0.9524), pero su recall desciende a 0.7110 debido al énfasis en detectar la clase minoritaria. En conjunto, los resultados muestran que el Gradient Boosting ponderado cumple su propósito: mejorar significativamente la identificación de personas con diabetes en un dataset altamente desbalanceado, logrando un balance adecuado entre sensibilidad y rendimiento general.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">BalancedRandomForestClassifier</span>
@@ -2282,9 +2327,11 @@ weighted avg     0.8592    0.7400    0.7769     73804
 </div>
 </div>
 </div>
+<p>El modelo Balanced Random Forest muestra un desempeño sólido en el dataset completo, con una accuracy global de 0.74 y un comportamiento equilibrado entre ambas clases dentro de un contexto de desbalance severo. La matriz de confusión indica que se identifican correctamente 7.476 de los 10.143 casos de diabetes (clase 1), alcanzando un recall de 0.7371 y un F1-score de 0.4380 para esta clase, lo que confirma su capacidad para recuperar una proporción importante de positivos. Al mismo tiempo, la clase 0 mantiene una precisión alta (0.9465) y un recall de 0.7405, con un F1-score de 0.8309, lo que refleja que el modelo sigue siendo fuerte en la clase mayoritaria. En conjunto, estos resultados muestran que Balanced Random Forest es especialmente útil para manejar el desbalance del problema, ya que logra una buena sensibilidad para la clase con diabetes sin deteriorar de forma extrema el rendimiento en la clase negativa, mejorando así el equilibrio entre detección de casos positivos y estabilidad general del modelo.</p>
 </section>
 <section id="modelo-original-hybridcostsensitiveensemble">
 <h2><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong><a class="headerlink" href="#modelo-original-hybridcostsensitiveensemble" title="Link to this heading">#</a></h2>
+<p>El modelo original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code> combina dos enfoques complementarios para manejar el fuerte desbalance del dataset: un Gradient Boosting cost-sensitive, que asigna mayor peso a los casos positivos para mejorar su detección, y un Balanced Random Forest, que utiliza muestreo balanceado en cada árbol para reducir el sesgo hacia la clase mayoritaria. Las probabilidades de ambos modelos se fusionan mediante un promedio simple, creando un ensamble híbrido capaz de incrementar significativamente el recall de la clase minoritaria sin perder estabilidad en la clase mayoritaria.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
@@ -2463,6 +2510,7 @@ weighted avg     0.8616    0.7309    0.7702     73804
 </div>
 </div>
 </div>
+<p>El Modelo Híbrido combina las predicciones del Gradient Boosting cost-sensitive y del Balanced Random Forest para obtener un desempeño más equilibrado frente al desbalance severo del dataset. En el conjunto completo de prueba, el modelo logra una accuracy de 0.7309 y, sobre todo, un recall de 0.7600 para la clase 1, detectando 7.709 de los 10.143 casos reales de diabetes. Esto mejora la sensibilidad respecto a cada modelo por separado, mientras mantiene un rendimiento estable en la clase 0 (recall de 0.7263 y F1-score de 0.8232). La matriz de confusión refleja este equilibrio: menos falsos negativos que un modelo tradicional y un comportamiento más robusto frente al desbalance. En conjunto, el ensamble híbrido ofrece una mejor combinación de detección de casos positivos y estabilidad general que cualquiera de los dos modelos base por sí solo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Probabilidades de la clase positiva (ajusta el índice si tu clase positiva no es 1)</span>
@@ -2487,6 +2535,7 @@ weighted avg     0.8616    0.7309    0.7702     73804
 <img alt="_images/8498991c3ca7a2671563f08623367ac48f6c7cc2e7e599c191e5d67f31538ab9.png" src="_images/8498991c3ca7a2671563f08623367ac48f6c7cc2e7e599c191e5d67f31538ab9.png" />
 </div>
 </div>
+<p>La curva ROC del modelo híbrido muestra una mejora clara frente al azar, alcanzando un AUC de <strong>0.823</strong>, lo que indica una capacidad sólida para discriminar entre individuos con y sin diabetes. La curva se eleva de forma pronunciada en los primeros tramos, reflejando que el modelo logra altos niveles de <strong>recall</strong> incluso con incrementos moderados en la tasa de falsos positivos. Este comportamiento es característico de modelos que priorizan la detección de la clase minoritaria, coherente con el enfoque cost-sensitive y el uso combinado de dos algoritmos balanceados. En conjunto, la curva ROC confirma que el ensamble híbrido mantiene una buena capacidad discriminativa en un escenario fuertemente desbalanceado.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thresholds_recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
@@ -2511,6 +2560,22 @@ weighted avg     0.8616    0.7309    0.7702     73804
 <img alt="_images/0fb57f76cd2e20478fc66659cbf1e1ef0394b52578e1f794bc948569d85519ee.png" src="_images/0fb57f76cd2e20478fc66659cbf1e1ef0394b52578e1f794bc948569d85519ee.png" />
 </div>
 </div>
+<p>La gráfica de <strong>recall de la clase positiva en función del umbral</strong> muestra cómo varía la capacidad del modelo híbrido para identificar correctamente los casos de diabetes a medida que se endurece el criterio de decisión. Con umbrales bajos (entre 0.0 y 0.2), el modelo alcanza un recall cercano al 100 %, lo cual es esperable porque prácticamente cualquier probabilidad es clasificada como positiva. A medida que el umbral aumenta, el recall disminuye de forma progresiva y estable, reflejando la pérdida de sensibilidad a cambio de decisiones más conservadoras. La caída se vuelve más pronunciada a partir de 0.6, hasta casi llegar a cero cuando el umbral supera 0.9. Esta curva confirma que el modelo permite ajustar el balance entre sensibilidad y precisión, lo cual es especialmente útil en problemas médicos donde la detección temprana (alto recall) es prioritaria.</p>
+</section>
+<section id="referencias">
+<h2><strong>Referencias</strong><a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<p><strong>[1] Zhang, Y. (2019).</strong><br />
+<em>CMBoost: Cost-sensitive margin-based boosting algorithm.</em><br />
+IOP Conference Series: Materials Science and Engineering, 533(1), 012047.<br />
+<a class="reference external" href="https://doi.org/10.1088/1757-899X/533/1/012047">doi:10.1088/1757-899X/533/1/012047</a></p>
+<p><strong>[2] Pes, L., &amp; Lai, C. (2021).</strong><br />
+<em>Cost-sensitive learning strategies for high-dimensional imbalanced data.</em><br />
+PeerJ Computer Science, 7:e832.<br />
+<a class="reference external" href="https://peerj.com/articles/cs-832/">https://peerj.com/articles/cs-832/</a></p>
+<p><strong>[3] Kadkhodaei, M., Minaei-Bidgoli, B., &amp; develops others (2021).</strong><br />
+<em>Big data classification using heterogeneous ensemble of deep learning and machine learning models.</em><br />
+Expert Systems with Applications, 183, 115351.<br />
+<a class="reference external" href="https://doi.org/10.1016/j.eswa.2021.115351">https://doi.org/10.1016/j.eswa.2021.115351</a></p>
 </section>
 </section>
 
@@ -2569,44 +2634,35 @@ weighted avg     0.8616    0.7309    0.7702     73804
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>10. Modelo original</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-y-contexto"><strong>1. Motivación y contexto</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-fundamentales-tomadas-de-los-papers"><strong>2. Ideas fundamentales tomadas de los papers</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-cmboost-zhang-2019"><strong>Desde CMBoost (Zhang, 2019)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-pes-lai-2021"><strong>Desde Pes &amp; Lai (2021)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desde-kadkhodaei-et-al-2021"><strong>Desde Kadkhodaei et al. (2021)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-del-problema-y-naturaleza-del-dataset"><strong>Contexto del problema y naturaleza del dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-central"><strong>Problema central</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-modelo-hibrido"><strong>3. Arquitectura del modelo híbrido</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-1-gradient-boosting-cost-sensitive"><strong>4. Bloque 1: Gradient Boosting Cost-Sensitive</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting"><strong>Boosting</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-sensitive"><strong>Cost-sensitive</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-de-los-modelos-existentes"><strong>Limitaciones de los modelos existentes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-surge-la-necesidad-de-un-modelo-hibrido"><strong>Por qué surge la necesidad de un modelo híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-teoricas-que-inspiran-el-modelo"><strong>Ideas teóricas que inspiran el modelo</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-cmboost-zhang-2019"><strong>Aporte tomado de CMBoost (Zhang, 2019)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-pes-lai-2021"><strong>Aporte tomado de Pes &amp; Lai (2021)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-kadkhodaei-et-al-2021"><strong>Aporte tomado de Kadkhodaei et al. (2021)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-balanced-random-forest"><strong>5. Bloque 2: Balanced Random Forest</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capa-de-fusion-ensamble-hibrido"><strong>6. Capa de fusión: ensamble híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-esta-construido-el-modelo-hibrido"><strong>Cómo está construido el modelo híbrido</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-cost-sensitive"><strong>Gradient Boosting Cost-Sensitive</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-random-forest"><strong>Balanced Random Forest</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-probabilistica-innovacion-propia-del-modelo"><strong>Fusión probabilística (innovación propia del modelo)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-text-hibrido-y-1-x">[
-p_{\text{Híbrido}}(y=1|x)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-un-modelo-original"><strong>7. ¿Por qué es un modelo original?</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-existe-como-algoritmo-estandar">✔️ <strong>No existe como algoritmo estándar</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integra-estrategias-complementarias">✔️ <strong>Integra estrategias complementarias</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#se-deriva-directamente-de-la-teoria-de-los-papers">✔️ <strong>Se deriva directamente de la teoría de los papers</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resuelve-el-problema-que-los-papers-dejan-abierto">✔️ <strong>Resuelve el problema que los papers dejan abierto</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalidades"><strong>8. Generalidades</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-resuelve-el-problema-del-dataset"><strong>Por qué este modelo resuelve el problema del dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-es-original"><strong>Por qué este modelo es original</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion"><strong>Implementación</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cmboost-classifier"><strong>CMBoost Classifier</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toma-de-submuestra"><strong>Toma de Submuestra</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-por-separado-de-modelos-complementarios"><strong>Aplicacion por separado de Modelos complementarios</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hybridcostsensitiveensemble"><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias"><strong>Referencias</strong></a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
