@@ -1,4 +1,5 @@
-# ** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**
+
+# **1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**
 
 El aumento de enfermedades crónicas como la diabetes representa uno de los desafíos más importantes en salud pública contemporánea. La detección temprana de esta condición permite intervenir oportunamente y reducir complicaciones asociadas, por lo que los sistemas automatizados de predicción adquieren un valor estratégico. En particular, el dataset Heart 2022 —un conjunto de datos amplio, heterogéneo y compuesto por indicadores clínicos, demográficos y de estilo de vida— ofrece una oportunidad relevante para evaluar y desarrollar modelos de aprendizaje supervisado orientados a la identificación de riesgo de diabetes.
 
