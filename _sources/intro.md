@@ -1,14 +1,10 @@
-# **1. Introducción**
+# ** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**
 
-**Integrantes:** Mariana Franco, Jerónimo Domínguez, Juan Andrés Ramos
+El aumento de enfermedades crónicas como la diabetes representa uno de los desafíos más importantes en salud pública contemporánea. La detección temprana de esta condición permite intervenir oportunamente y reducir complicaciones asociadas, por lo que los sistemas automatizados de predicción adquieren un valor estratégico. En particular, el dataset Heart 2022 —un conjunto de datos amplio, heterogéneo y compuesto por indicadores clínicos, demográficos y de estilo de vida— ofrece una oportunidad relevante para evaluar y desarrollar modelos de aprendizaje supervisado orientados a la identificación de riesgo de diabetes.
 
-El presente proyecto final de Machine Learning tiene como objetivo aplicar, comparar y evaluar distintos modelos de predicción utilizando la base de datos seleccionada. A través de este trabajo se busca no solo construir modelos con un adecuado rendimiento, sino también comprender el proceso completo de un proyecto de aprendizaje automático, desde la preparación de los datos hasta la interpretación de los resultados.
+Sin embargo, este tipo de datos presenta una dificultad central: el desbalance de clases. Solo alrededor del 13.7% de los registros corresponden a personas con diagnóstico de diabetes, lo que provoca que los modelos convencionales tiendan a privilegiar la clase mayoritaria y obtengan métricas aparentemente altas, pero con un desempeño deficiente al identificar casos positivos. En contextos clínicos, esta limitación es crítica, ya que omitir individuos en riesgo implica potenciales fallas en prevención y seguimiento.
 
-En primer lugar, se realizará un análisis exploratorio de datos (EDA) para conocer la estructura de la base, identificar patrones, valores atípicos y posibles problemas de calidad de datos que puedan afectar el desempeño de los modelos. Posteriormente, se aplicarán técnicas de preprocesamiento como imputación de valores faltantes, codificación de variables categóricas, escalamiento y selección de características.
-
-Con los datos preparados, se entrenarán diferentes algoritmos de predicción, entre los que se incluyen modelos de regresión (Ridge, Lasso, regresión logística) y modelos más orientados a la clasificación, según el problema planteado. Cada modelo será evaluado bajo métricas específicas (precisión, F1-score, ROC-AUC, error cuadrático medio, entre otras) con el fin de comparar su desempeño y determinar cuál ofrece mejores resultados en este contexto.
-
-Finalmente, se discutirán los hallazgos obtenidos y se plantearán conclusiones acerca de la utilidad de los modelos, las variables más relevantes para la predicción y posibles mejoras futuras. Este proyecto no solo tiene un carácter práctico, sino también formativo, al integrar los distintos componentes del ciclo de vida de un modelo de Machine Learning aplicado a datos reales.
+Frente a este panorama, el presente proyecto se propone explorar, comparar y desarrollar estrategias de Machine Learning que permitan mejorar la detección de diabetes, priorizando el recall de la clase minoritaria. Para ello, se recorre el ciclo completo de construcción de modelos: análisis exploratorio, preprocesamiento, manejo del desbalance, evaluación con métricas adecuadas y diseño de un modelo predictivo robusto. El objetivo final es presentar un enfoque original, fundamentado y computacionalmente viable que contribuya a superar las limitaciones de los métodos estándar en este tipo de problemas.
 
 ```{tableofcontents}
 ```

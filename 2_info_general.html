@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="3. Análisis Exploratorio" href="3_EDA.html" />
-    <link rel="prev" title="1. Introducción" href="intro.html" />
+    <link rel="prev" title="** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,19 +175,20 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    1. Introducción
+                    ** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado sin Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_balanceo.html"><strong>5. Balanceo</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_evaluacion.html"><strong>8. Evaluación</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_conclusion.html"><strong>9. Conclusiones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_documents.html"><strong>10. Modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusion.html"><strong>9. Conclusiones</strong></a></li>
 </ul>
 
     </div>
@@ -383,7 +384,24 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-del-problema"><strong>2.1. Definición del Problema</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-general"><strong>2.2. Objetivo General</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-especificos"><strong>2.3. Objetivos Específicos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion"><strong>2.4. Justificación</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-de-datos"><strong>2.5. Fuente de Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-general-del-dataset"><strong>2.6. Descripción General del Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia-del-proyecto"><strong>2.7. Metodología del Proyecto</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-eda"><strong>1. Análisis Exploratorio de Datos (EDA)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento"><strong>2. Preprocesamiento</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-baseline"><strong>3. Modelado Baseline</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion"><strong>4. Evaluación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion"><strong>5. Optimización</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-del-modelo-original"><strong>6. Propuesta del Modelo Original</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-final"><strong>7. Validación Final</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcance-del-proyecto"><strong>2.8. Alcance del Proyecto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables"><strong>3. Variables</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><strong>Variables numéricas (6)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoticas-34"><strong>Variables Categóticas (34)</strong></a></li>
 </ul>
@@ -401,23 +419,124 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022">
 <h1><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong><a class="headerlink" href="#estudio-de-predictores-de-diabetes-en-la-poblacion-estadounidense-2022" title="Link to this heading">#</a></h1>
-<p><strong>Descripción:</strong></p>
-<p>En este análisis exploratorio (EDA) utilizamos el dataset <code class="docutils literal notranslate"><span class="pre">heart_2022_no_nans.csv</span></code> para identificar y caracterizar los principales factores asociados a la aparición de diabetes en adultos de Estados Unidos durante 2022. El objetivo es comprender la distribución de las variables clave, detectar correlaciones relevantes y sentar las bases para la aplicación de distintos modelos predictivo.</p>
-<p><strong>Objetivos:</strong></p>
-<ol class="arabic simple">
-<li><p>Describir la distribución de variables demográficas y de salud relacionadas con la diabetes (BMI, actividad física, tabaquismo, etc.).</p></li>
-<li><p>Identificar correlaciones y patrones entre predictores potenciales y la presencia de diabetes.</p></li>
-<li><p>Detectar valores atípicos y evaluar la calidad de los datos.</p></li>
-<li><p>Proponer próximos pasos para un modelo predictivo.</p></li>
-</ol>
-<p><strong>Fuente de datos:</strong></p>
+<section id="definicion-del-problema">
+<h2><strong>2.1. Definición del Problema</strong><a class="headerlink" href="#definicion-del-problema" title="Link to this heading">#</a></h2>
+<p>La diabetes es una de las enfermedades crónicas más prevalentes en Estados Unidos y representa un riesgo significativo para la salud pública. Su detección temprana permite intervenir antes de que se desarrollen complicaciones graves. Sin embargo, la gran diversidad demográfica, conductual y clínica de la población dificulta construir modelos predictivos robustos, especialmente cuando los casos positivos son minoritarios.
+El reto principal es desarrollar un sistema predictivo que identifique de forma confiable a los individuos con mayor riesgo de presentar diabetes utilizando datos de salud poblacional.</p>
+</section>
+<section id="objetivo-general">
+<h2><strong>2.2. Objetivo General</strong><a class="headerlink" href="#objetivo-general" title="Link to this heading">#</a></h2>
+<p>Desarrollar un modelo de Machine Learning capaz de predecir la presencia de diabetes en adultos de Estados Unidos durante 2022, maximizando la sensibilidad hacia la clase positiva y utilizando un proceso metodológico completo que abarque desde la caracterización inicial de los datos hasta la validación del modelo final.</p>
+</section>
+<section id="objetivos-especificos">
+<h2><strong>2.3. Objetivos Específicos</strong><a class="headerlink" href="#objetivos-especificos" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>link: <a class="reference external" href="https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022">https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022</a></p></li>
-<li><p>Archivo: <code class="docutils literal notranslate"><span class="pre">heart_2022_no_nans.csv</span></code> (246 022 registros, 40 variables, sin valores nulos).</p></li>
+<li><p>Analizar la estructura, distribución y características de las variables incluidas en el dataset.</p></li>
+<li><p>Identificar factores demográficos, conductuales y clínicos asociados con la diabetes.</p></li>
+<li><p>Implementar técnicas de preprocesamiento adecuadas para datos mixtos (numéricos y categóricos).</p></li>
+<li><p>Entrenar y evaluar múltiples modelos tradicionales de clasificación para establecer líneas base.</p></li>
+<li><p>Abordar el desbalance significativo entre clases mediante técnicas estadísticas y algorítmicas.</p></li>
+<li><p>Diseñar y validar un modelo predictivo original que supere las limitaciones encontradas en los métodos estándar.</p></li>
 </ul>
-<hr class="docutils" />
-<section id="informacion-general-de-los-datos">
-<h2><strong>Información general de los Datos</strong><a class="headerlink" href="#informacion-general-de-los-datos" title="Link to this heading">#</a></h2>
+</section>
+<section id="justificacion">
+<h2><strong>2.4. Justificación</strong><a class="headerlink" href="#justificacion" title="Link to this heading">#</a></h2>
+<p>El dataset Heart 2022 contiene información detallada sobre el estado de salud y condiciones de vida de más de 246.000 adultos. Su variable objetivo, HadDiabetes, se encuentra altamente desbalanceada, lo que dificulta la construcción de modelos capaces de identificar casos positivos con precisión aceptable.
+Por ello, el proyecto es pertinente por tres razones:</p>
+<ul class="simple">
+<li><p>Relevancia social y sanitaria: detectar diabetes de forma temprana tiene impacto directo en la prevención de enfermedades crónicas, hospitalizaciones y costos en salud.</p></li>
+<li><p>Relevancia técnica: los datasets desbalanceados representan uno de los retos más comunes y complejos en clasificación binaria.</p></li>
+<li><p>Relevancia académica: permite aplicar el ciclo completo de Machine Learning, evaluar limitaciones reales y explorar modelos más allá de los algoritmos convencionales.</p></li>
+</ul>
+</section>
+<section id="fuente-de-datos">
+<h2><strong>2.5. Fuente de Datos</strong><a class="headerlink" href="#fuente-de-datos" title="Link to this heading">#</a></h2>
+<p><strong>Dataset:</strong> Personal Key Indicators of Heart Disease – 2022</p>
+<p><strong>Archivo utilizado:</strong> heart_2022_no_nans.csv</p>
+<p><strong>Registros:</strong> 246.022</p>
+<p><strong>Variables:</strong> 40</p>
+<p><strong>Valores faltantes:</strong> No contiene</p>
+<p><strong>Fuente:</strong>
+<a class="reference external" href="https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022">https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease?select=2022</a></p>
+</section>
+<section id="descripcion-general-del-dataset">
+<h2><strong>2.6. Descripción General del Dataset</strong><a class="headerlink" href="#descripcion-general-del-dataset" title="Link to this heading">#</a></h2>
+<p>El dataset incluye variables de tipo:</p>
+<p><strong>Numéricas (6):</strong> hábitos de sueño, estado físico y mental, medidas corporales, IMC.</p>
+<p><strong>Categóricas (34):</strong> antecedentes médicos, actividades diarias, factores socio-demográficos, discapacidades, estilo de vida, vacunación y más.</p>
+<p><strong>La variable objetivo es:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">HadDiabetes</span> <span class="pre">(0</span> <span class="pre">=</span> <span class="pre">No,</span> <span class="pre">1</span> <span class="pre">=</span> <span class="pre">Sí)</span></code></p>
+<p><strong>Clase positiva:</strong> ~13.7%, lo que genera un problema claro de desbalance.</p>
+</section>
+<section id="metodologia-del-proyecto">
+<h2><strong>2.7. Metodología del Proyecto</strong><a class="headerlink" href="#metodologia-del-proyecto" title="Link to this heading">#</a></h2>
+<p>El proyecto se desarrolló siguiendo un flujo metodológico estructurado:</p>
+<section id="analisis-exploratorio-de-datos-eda">
+<h3><strong>1. Análisis Exploratorio de Datos (EDA)</strong><a class="headerlink" href="#analisis-exploratorio-de-datos-eda" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Descripción estadística de variables.</p></li>
+<li><p>Visualización de distribuciones.</p></li>
+<li><p>Identificación de correlaciones y patrones relevantes.</p></li>
+<li><p>Detección de valores atípicos y evaluación de calidad del dato.</p></li>
+</ul>
+</section>
+<section id="preprocesamiento">
+<h3><strong>2. Preprocesamiento</strong><a class="headerlink" href="#preprocesamiento" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Codificación de variables categóricas.</p></li>
+<li><p>Estandarización de variables numéricas.</p></li>
+<li><p>Manejo de desbalance mediante distintas estrategias.</p></li>
+<li><p>Preparación de datasets limpio y sin atípicos.</p></li>
+</ul>
+</section>
+<section id="modelado-baseline">
+<h3><strong>3. Modelado Baseline</strong><a class="headerlink" href="#modelado-baseline" title="Link to this heading">#</a></h3>
+<p>Entrenamiento de modelos tradicionales para establecer un punto de comparación:</p>
+<ul class="simple">
+<li><p>Regresión Logística</p></li>
+<li><p>Random Forest</p></li>
+<li><p>Gradient Boosting</p></li>
+<li><p>Variantes con class_weight y técnicas como SMOTE/SMOTENC</p></li>
+</ul>
+</section>
+<section id="evaluacion">
+<h3><strong>4. Evaluación</strong><a class="headerlink" href="#evaluacion" title="Link to this heading">#</a></h3>
+<p>Se utilizaron métricas como:</p>
+<ul class="simple">
+<li><p>Recall (enfoque principal)</p></li>
+<li><p>F1-score</p></li>
+<li><p>Accuracy</p></li>
+<li><p>ROC–AUC</p></li>
+<li><p>Matriz de confusión</p></li>
+</ul>
+</section>
+<section id="optimizacion">
+<h3><strong>5. Optimización</strong><a class="headerlink" href="#optimizacion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Búsqueda de hiperparámetros.</p></li>
+<li><p>Ensayos con diferentes configuraciones para maximizar sensibilidad.</p></li>
+</ul>
+</section>
+<section id="propuesta-del-modelo-original">
+<h3><strong>6. Propuesta del Modelo Original</strong><a class="headerlink" href="#propuesta-del-modelo-original" title="Link to this heading">#</a></h3>
+<p>Se diseñó un modelo híbrido personalizado (HCSE model) para superar las limitaciones observadas en técnicas estándar, priorizando escalabilidad y sensibilidad. (Los detalles del modelo se presentan en secciones posteriores del informe.)</p>
+</section>
+<section id="validacion-final">
+<h3><strong>7. Validación Final</strong><a class="headerlink" href="#validacion-final" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Evaluación del rendimiento del modelo original.</p></li>
+<li><p>Comparación con líneas base.</p></li>
+<li><p>Discusión de resultados y análisis crítico.</p></li>
+</ul>
+</section>
+</section>
+<section id="alcance-del-proyecto">
+<h2><strong>2.8. Alcance del Proyecto</strong><a class="headerlink" href="#alcance-del-proyecto" title="Link to this heading">#</a></h2>
+<p>El proyecto se centra en predicción y diagnóstico preliminar, no en inferencia causal.
+No pretende reemplazar evaluaciones médicas, sino servir como herramienta analítica para apoyar sistemas de salud o estudios poblacionales.</p>
+</section>
+<section id="variables">
+<h2><strong>3. Variables</strong><a class="headerlink" href="#variables" title="Link to this heading">#</a></h2>
 <p>El dataset contiene 40 variables que se clasifican en dos grandes grupos:</p>
 <section id="variables-numericas-6">
 <h3><strong>Variables numéricas (6)</strong><a class="headerlink" href="#variables-numericas-6" title="Link to this heading">#</a></h3>
@@ -495,7 +614,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>1. Introducción</strong></p>
+        <p class="prev-next-title">** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**</p>
       </div>
     </a>
     <a class="right-next"
@@ -523,7 +642,24 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-general-de-los-datos"><strong>Información general de los Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-del-problema"><strong>2.1. Definición del Problema</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-general"><strong>2.2. Objetivo General</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-especificos"><strong>2.3. Objetivos Específicos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion"><strong>2.4. Justificación</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-de-datos"><strong>2.5. Fuente de Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-general-del-dataset"><strong>2.6. Descripción General del Dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia-del-proyecto"><strong>2.7. Metodología del Proyecto</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-eda"><strong>1. Análisis Exploratorio de Datos (EDA)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento"><strong>2. Preprocesamiento</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-baseline"><strong>3. Modelado Baseline</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion"><strong>4. Evaluación</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion"><strong>5. Optimización</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-del-modelo-original"><strong>6. Propuesta del Modelo Original</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-final"><strong>7. Validación Final</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcance-del-proyecto"><strong>2.8. Alcance del Proyecto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables"><strong>3. Variables</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas-6"><strong>Variables numéricas (6)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-categoticas-34"><strong>Variables Categóticas (34)</strong></a></li>
 </ul>

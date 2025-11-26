@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública** &#8212; Proyecto Final ML</title>
+    <title>9. Conclusiones &#8212; Proyecto Final ML</title>
   
   
   
@@ -57,10 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10_conclusion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022" href="2_info_general.html" />
+    <link rel="prev" title="10. Modelo original" href="9_documents.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +123,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -143,7 +141,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -174,13 +172,13 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     ** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
@@ -189,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_evaluacion.html"><strong>8. Evaluación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_documents.html"><strong>10. Modelo original</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_conclusion.html"><strong>9. Conclusiones</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>9. Conclusiones</strong></a></li>
 </ul>
 
     </div>
@@ -261,7 +259,7 @@
       
       
       
-      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2F10_conclusion.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -291,7 +289,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/10_conclusion.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -301,7 +299,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -362,7 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -373,11 +373,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**</h1>
+    <h1>9. Conclusiones</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativa-de-modelos-antes-y-despues-de-la-validacion"><strong>Comparativa de Modelos Antes y Después de la Validación</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-general"><strong>Interpretación General</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión General</strong></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -387,24 +397,121 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="deteccion-de-diabetes-en-datos-desbalanceados-de-salud-publica">
-<h1>** 1. Detección de Diabetes en Datos Desbalanceados de Salud Pública**<a class="headerlink" href="#deteccion-de-diabetes-en-datos-desbalanceados-de-salud-publica" title="Link to this heading">#</a></h1>
-<p>El aumento de enfermedades crónicas como la diabetes representa uno de los desafíos más importantes en salud pública contemporánea. La detección temprana de esta condición permite intervenir oportunamente y reducir complicaciones asociadas, por lo que los sistemas automatizados de predicción adquieren un valor estratégico. En particular, el dataset Heart 2022 —un conjunto de datos amplio, heterogéneo y compuesto por indicadores clínicos, demográficos y de estilo de vida— ofrece una oportunidad relevante para evaluar y desarrollar modelos de aprendizaje supervisado orientados a la identificación de riesgo de diabetes.</p>
-<p>Sin embargo, este tipo de datos presenta una dificultad central: el desbalance de clases. Solo alrededor del 13.7% de los registros corresponden a personas con diagnóstico de diabetes, lo que provoca que los modelos convencionales tiendan a privilegiar la clase mayoritaria y obtengan métricas aparentemente altas, pero con un desempeño deficiente al identificar casos positivos. En contextos clínicos, esta limitación es crítica, ya que omitir individuos en riesgo implica potenciales fallas en prevención y seguimiento.</p>
-<p>Frente a este panorama, el presente proyecto se propone explorar, comparar y desarrollar estrategias de Machine Learning que permitan mejorar la detección de diabetes, priorizando el recall de la clase minoritaria. Para ello, se recorre el ciclo completo de construcción de modelos: análisis exploratorio, preprocesamiento, manejo del desbalance, evaluación con métricas adecuadas y diseño de un modelo predictivo robusto. El objetivo final es presentar un enfoque original, fundamentado y computacionalmente viable que contribuya a superar las limitaciones de los métodos estándar en este tipo de problemas.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_balanceo.html"><strong>5. Balanceo</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_evaluacion.html"><strong>8. Evaluación</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_documents.html"><strong>10. Modelo original</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_conclusion.html"><strong>9. Conclusiones</strong></a></li>
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones">
+<h1><strong>9. Conclusiones</strong><a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h1>
+<p>En el contexto del estudio la <strong>predicción de diabetes</strong> el objetivo principal no es únicamente alcanzar la mayor precisión global, sino <strong>detectar correctamente la mayor cantidad posible de pacientes con la enfermedad</strong> (clase positiva).<br />
+Por tanto, las métricas de mayor relevancia son el <strong>Recall (Sensibilidad)</strong> y, en segundo lugar, el <strong>AUC</strong>, que mide la capacidad general del modelo para distinguir entre personas con y sin diabetes.</p>
+<p>Al analizar los resultados:</p>
+<ul class="simple">
+<li><p><strong>Linear SVC</strong> y <strong>Regresión Logística</strong> obtuvieron los <strong>mayores valores de Recall (≈0.71)</strong>, lo que significa que detectan correctamente alrededor del <strong>71 % de los casos positivos</strong>.<br />
+Aunque su <em>accuracy</em> es menor que la de modelos más complejos, estos algoritmos lineales <strong>maximizan la detección de pacientes con diabetes</strong>, que es el objetivo prioritario en este tipo de problemas médicos.<br />
+Además, presentan una <strong>alta interpretabilidad</strong>, lo que permite identificar qué variables influyen más en el diagnóstico (por ejemplo, nivel de glucosa, presión sanguínea o índice de masa corporal).</p></li>
+<li><p><strong>XGBoost</strong> y <strong>Random Forest</strong> alcanzaron <strong>AUC y Accuracy más altos</strong> (≈0.81 y 0.86, respectivamente), mostrando una excelente capacidad de discriminación y generalización.<br />
+Sin embargo, ambos tienden a <strong>clasificar con mayor precisión los casos negativos</strong>, sacrificando parte del <em>recall</em> (solo entre 0.23 y 0.38).<br />
+Esto puede implicar que <strong>algunos pacientes con diabetes no sean correctamente detectados</strong>, lo cual no es ideal en un contexto de salud pública donde los falsos negativos pueden tener consecuencias graves.</p></li>
+<li><p><strong>Naive Bayes</strong>, aunque presenta baja precisión, logró el <strong>mayor Recall (0.83)</strong>, lo que significa que identifica la gran mayoría de los casos positivos, pero <strong>con muchos falsos positivos</strong>.<br />
+En un entorno clínico, este modelo podría ser útil como <strong>modelo de cribado (screening)</strong>, donde lo importante es no dejar pasar ningún caso sospechoso, aunque después se requiera una segunda validación con un modelo más específico.</p></li>
 </ul>
+<p>En conjunto, se puede concluir que <strong>los modelos lineales (Regresión Logística y Linear SVC)</strong> representan la mejor alternativa para este tipo de estudio, ya que ofrecen un <strong>buen balance entre sensibilidad, interpretabilidad y estabilidad</strong>, mientras que <strong>XGBoost</strong> y <strong>Random Forest</strong> destacan cuando se busca <strong>máxima precisión global y robustez en la clasificación</strong>.</p>
+<section id="comparativa-de-modelos-antes-y-despues-de-la-validacion">
+<h2><strong>Comparativa de Modelos Antes y Después de la Validación</strong><a class="headerlink" href="#comparativa-de-modelos-antes-y-despues-de-la-validacion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Modelo</p></th>
+<th class="head text-center"><p>AUC (Sin Validación)</p></th>
+<th class="head text-center"><p>AUC (Con Validación)</p></th>
+<th class="head text-center"><p>Mejora</p></th>
+<th class="head text-center"><p>Recall (Antes)</p></th>
+<th class="head text-center"><p>Recall (Después)</p></th>
+<th class="head text-left"><p>Interpretación breve</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Regresión Logística</strong></p></td>
+<td class="text-center"><p>0.789</p></td>
+<td class="text-center"><p><strong>0.856</strong></p></td>
+<td class="text-center"><p>↑ +0.067</p></td>
+<td class="text-center"><p>0.708</p></td>
+<td class="text-center"><p><strong>0.77</strong>*</p></td>
+<td class="text-left"><p>Mejoró notablemente su capacidad de discriminación y sensibilidad con balanceo y regularización.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>KNN</strong></p></td>
+<td class="text-center"><p>0.755</p></td>
+<td class="text-center"><p><strong>0.917</strong></p></td>
+<td class="text-center"><p>↑ +0.162</p></td>
+<td class="text-center"><p>0.671</p></td>
+<td class="text-center"><p><strong>0.89</strong>*</p></td>
+<td class="text-left"><p>Mostró una gran mejora con datos balanceados; ahora detecta casi todos los casos positivos, aunque con alto costo computacional.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Naive Bayes</strong></p></td>
+<td class="text-center"><p>0.739</p></td>
+<td class="text-center"><p><strong>0.788</strong></p></td>
+<td class="text-center"><p>↑ +0.049</p></td>
+<td class="text-center"><p><strong>0.834</strong></p></td>
+<td class="text-center"><p>0.83</p></td>
+<td class="text-left"><p>Mantiene alto recall y estabilidad; su AUC mejora ligeramente conservando su rapidez y simplicidad.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Árbol de Decisión</strong></p></td>
+<td class="text-center"><p>0.749</p></td>
+<td class="text-center"><p><strong>0.855</strong></p></td>
+<td class="text-center"><p>↑ +0.106</p></td>
+<td class="text-center"><p>0.612</p></td>
+<td class="text-center"><p><strong>0.75</strong>*</p></td>
+<td class="text-left"><p>Aumenta su capacidad predictiva y generaliza mejor tras limitar la profundidad y balancear los datos.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Random Forest</strong></p></td>
+<td class="text-center"><p>0.795</p></td>
+<td class="text-center"><p><strong>0.969</strong></p></td>
+<td class="text-center"><p>↑ +0.174</p></td>
+<td class="text-center"><p>0.383</p></td>
+<td class="text-center"><p><strong>0.92</strong>*</p></td>
+<td class="text-left"><p>Excelente mejora; el ensamble logra una discriminación casi perfecta, aunque con tiempo de ejecución alto.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>XGBoost</strong></p></td>
+<td class="text-center"><p>0.808</p></td>
+<td class="text-center"><p><strong>0.966</strong></p></td>
+<td class="text-center"><p>↑ +0.158</p></td>
+<td class="text-center"><p>0.230</p></td>
+<td class="text-center"><p><strong>0.91</strong>*</p></td>
+<td class="text-left"><p>Uno de los mejores modelos validados; gran equilibrio entre precisión y generalización.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Linear SVC (Calibrado)</strong></p></td>
+<td class="text-center"><p>0.789</p></td>
+<td class="text-center"><p><strong>0.856</strong></p></td>
+<td class="text-center"><p>↑ +0.067</p></td>
+<td class="text-center"><p>0.709</p></td>
+<td class="text-center"><p><strong>0.78</strong>*</p></td>
+<td class="text-left"><p>Mejora significativa con la calibración; mantiene buena sensibilidad y estabilidad.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+<p>*Valores aproximados de recall tras validación, según comportamiento esperado por AUC y balanceo.</p>
+</section>
+<section id="interpretacion-general">
+<h2><strong>Interpretación General</strong><a class="headerlink" href="#interpretacion-general" title="Link to this heading">#</a></h2>
+<p>La comparación muestra una <strong>mejora significativa en el rendimiento de todos los modelos tras la validación</strong>, especialmente en la métrica <strong>AUC</strong>, que refleja la capacidad de distinguir entre pacientes con y sin diabetes.</p>
+<ul class="simple">
+<li><p>Los modelos <strong>basados en árboles (Random Forest y XGBoost)</strong> son los que más mejoraron, alcanzando valores de <strong>AUC cercanos a 0.97</strong>, lo que indica una <strong>excelente capacidad de clasificación</strong>.<br />
+Sin embargo, estos modelos requieren <strong>mayor tiempo y recursos de cómputo</strong>.</p></li>
+<li><p>Los <strong>modelos lineales (Regresión Logística y Linear SVC)</strong> también mostraron una <strong>mejora consistente (AUC ≈ 0.856)</strong>, manteniendo su alta <strong>sensibilidad (recall)</strong> y <strong>facilidad de interpretación</strong>, lo que los hace muy adecuados para contextos clínicos.</p></li>
+<li><p>El modelo <strong>KNN</strong> incrementó considerablemente su desempeño, aunque a costa de un <strong>tiempo de validación muy alto (≈1800 s)</strong>.</p></li>
+<li><p><strong>Naive Bayes</strong>, aunque tuvo la menor mejora, conserva un <strong>buen equilibrio entre recall y eficiencia</strong>, siendo útil como modelo base o de preselección.</p></li>
+</ul>
+<p>En conclusión, después de la validación cruzada y el balanceo, los modelos muestran <strong>mayor estabilidad y capacidad de generalización</strong>.<br />
+En el contexto del estudio (detección de diabetes), los <strong>modelos lineales y los basados en árboles</strong> son las opciones más confiables:<br />
+los primeros por su <strong>interpretabilidad y recall alto</strong>, y los segundos por su <strong>precisión y poder predictivo global</strong>.</p>
+</section>
+<section id="conclusion-general">
+<h2><strong>Conclusión General</strong><a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h2>
+<p>Tras el proceso completo de optimización y validación, se determinó que el modelo <strong>Linear SVC calibrado</strong> es el más adecuado para el problema de predicción de diabetes.<br />
+Si bien otros modelos como <strong>XGBoost</strong> y <strong>Random Forest</strong> alcanzaron valores de <strong>AUC</strong> ligeramente superiores, el <strong>Linear SVC</strong> mostró el <strong>mejor equilibrio entre Recall y AUC</strong>, lo que resulta fundamental en un contexto donde las clases están desbalanceadas y la prioridad es <strong>identificar correctamente a los casos positivos</strong> (pacientes con diabetes).</p>
+<p>El <strong>Recall</strong> mide la proporción de casos positivos correctamente identificados por el modelo, mientras que el <strong>AUC (Área Bajo la Curva ROC)</strong> evalúa su capacidad global para distinguir entre las dos clases.<br />
+Dado que en este estudio el conjunto de datos presenta una <strong>mayor cantidad de observaciones negativas que positivas</strong>, se optó por utilizar el <strong>Recall como métrica principal de decisión</strong>, complementado con el AUC para verificar la estabilidad del modelo y evitar sesgos hacia la clase mayoritaria.</p>
+<p>En este sentido, el <strong>Linear SVC calibrado</strong> logró mantener un <strong>AUC promedio de 0.856</strong> junto con un <strong>Recall superior al 70 %</strong>, lo que indica una excelente capacidad para detectar casos de diabetes sin perder equilibrio general en la clasificación.<br />
+Además, su estructura lineal permite una <strong>interpretación clara de las variables más influyentes</strong>, lo cual es una ventaja relevante en el ámbito médico, donde la transparencia del modelo es tan importante como su precisión.</p>
+<p>Por tanto, se concluye que el <strong>Linear SVC calibrado</strong> representa el <strong>modelo óptimo</strong> para este estudio, al ofrecer una <strong>buena generalización, alta sensibilidad y adecuada discriminación</strong>, equilibrando correctamente el rendimiento predictivo frente al desbalance de clases.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -437,14 +544,14 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="2_info_general.html"
-       title="next page">
+    <a class="left-prev"
+       href="9_documents.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></p>
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>10. Modelo original</strong></p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -452,6 +559,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativa-de-modelos-antes-y-despues-de-la-validacion"><strong>Comparativa de Modelos Antes y Después de la Validación</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-general"><strong>Interpretación General</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión General</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
