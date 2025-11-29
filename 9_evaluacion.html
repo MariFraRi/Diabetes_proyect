@@ -1,0 +1,1055 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8. Evaluación &#8212; Proyecto Final ML</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '9_evaluacion';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Conclusiones" href="10_conclusion.html" />
+    <link rel="prev" title="9. Modelo original" href="8_documents.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Proyecto Final ML - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Proyecto Final ML - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    1. Detección de Diabetes en Datos Desbalanceados de Salud Pública
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_balanceo.html"><strong>5. Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_documents.html"><strong>9. Modelo original</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>8. Evaluación</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusion.html"><strong>10. Conclusiones</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/MariFraRi/Diabetes_proyect" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2F9_evaluacion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/9_evaluacion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>8. Evaluación</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-l1-y-l2"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-knn-neighborsclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-naive-bayes"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-decisiontreeclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-randomforestclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-xgbclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-linearsvc"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hcse"><strong>Modelo original <code class="docutils literal notranslate"><span class="pre">HCSE</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-contextual-del-desempeno-de-los-modelos"><strong>Interpretación contextual del desempeño de los modelos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión general</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluacion">
+<h1><strong>8. Evaluación</strong><a class="headerlink" href="#evaluacion" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span>
+    <span class="n">roc_curve</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="p">)</span>
+
+<span class="c1"># Cargar tus datos de prueba</span>
+<span class="c1"># (deben ser los originales, sin balanceo)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;X_train_resampled.csv&quot;</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;y_train_resampled.csv&quot;</span><span class="p">)[</span><span class="s1">&#39;diabetes&#39;</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;X_test.csv&quot;</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;y_test.csv&quot;</span><span class="p">)[</span><span class="s1">&#39;diabetes&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaluar_modelo</span><span class="p">(</span><span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">ruta_pkl</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ruta_pkl</span><span class="p">)</span>
+    
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">train_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="n">train_score</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">test_score</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    
+    <span class="c1"># Predicciones</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">y_proba</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="c1"># Algunos modelos no tienen predict_proba (como LinearSVC)</span>
+        <span class="n">y_proba</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="c1"># Métricas</span>
+    <span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span> <span class="k">if</span> <span class="n">y_proba</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">recall</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔹 Modelo: </span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Train Score: </span><span class="si">{</span><span class="n">train_score</span><span class="si">}</span><span class="s2"> | Test Score: </span><span class="si">{</span><span class="n">test_score</span><span class="si">}</span><span class="s2"> | Train Time: </span><span class="si">{</span><span class="n">train_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Report:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+    
+    <span class="c1"># Matriz de confusión</span>
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matriz de Confusión - </span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicción&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Real&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="c1"># Curva ROC</span>
+    <span class="k">if</span> <span class="n">y_proba</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Curva ROC - </span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tasa de falsos positivos&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Tasa de verdaderos positivos&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="n">nombre_modelo</span><span class="p">,</span> <span class="s1">&#39;AUC&#39;</span><span class="p">:</span> <span class="n">auc</span><span class="p">,</span> <span class="s1">&#39;F1&#39;</span><span class="p">:</span> <span class="n">f1</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">acc</span><span class="p">,</span><span class="s1">&#39;Train Score&#39;</span><span class="p">:</span><span class="n">train_score</span><span class="p">,</span> <span class="s1">&#39;Test Score&#39;</span><span class="p">:</span> <span class="n">test_score</span><span class="p">,</span> <span class="s1">&#39;Train Time (s)&#39;</span><span class="p">:</span> <span class="n">train_time</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="modelo-de-regresion-logistica-l1-y-l2">
+<h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong><a class="headerlink" href="#modelo-de-regresion-logistica-l1-y-l2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Regresión Logística&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_logistica.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Regresión Logística
+AUC: 0.788 | F1: 0.409 | Recall: 0.708 | Accuracy: 0.719 | Train Score: 0.7801078490113841 | Test Score: 0.7185111918053222 | Train Time: 6.29 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.72      0.82     63661
+           1       0.29      0.71      0.41     10143
+
+    accuracy                           0.72     73804
+   macro avg       0.61      0.71      0.61     73804
+weighted avg       0.85      0.72      0.76     73804
+</pre></div>
+</div>
+<img alt="_images/79ba4d18912ffe892bd5ea4b6b8f957c433868cf57afc53d0e87098c8e6fb207.png" src="_images/79ba4d18912ffe892bd5ea4b6b8f957c433868cf57afc53d0e87098c8e6fb207.png" />
+<img alt="_images/c42548d4d9c29688a9607a80c0fb6f13c294792202e5dd240fa76484be852e9f.png" src="_images/c42548d4d9c29688a9607a80c0fb6f13c294792202e5dd240fa76484be852e9f.png" />
+</div>
+</div>
+</section>
+<section id="modelo-de-knn-neighborsclassifier">
+<h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong><a class="headerlink" href="#modelo-de-knn-neighborsclassifier" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;KNN&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_knn.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: KNN
+AUC: 0.748 | F1: 0.374 | Recall: 0.697 | Accuracy: 0.680 | Train Score: 0.9996903211907824 | Test Score: 0.6799089480244973 | Train Time: 1.69 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.93      0.68      0.78     63661
+           1       0.26      0.70      0.37     10143
+
+    accuracy                           0.68     73804
+   macro avg       0.59      0.69      0.58     73804
+weighted avg       0.84      0.68      0.73     73804
+</pre></div>
+</div>
+<img alt="_images/96432a8909958a53c1dbd012ecdd5ce7048eab6176d8c89f541fb2abcf253461.png" src="_images/96432a8909958a53c1dbd012ecdd5ce7048eab6176d8c89f541fb2abcf253461.png" />
+<img alt="_images/9fcbde9700f2e0fcdcb9439c70c60043d65ab47a67251ddacf5e3ff77ec3bbec.png" src="_images/9fcbde9700f2e0fcdcb9439c70c60043d65ab47a67251ddacf5e3ff77ec3bbec.png" />
+</div>
+</div>
+</section>
+<section id="modelo-de-naive-bayes">
+<h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong><a class="headerlink" href="#modelo-de-naive-bayes" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Naive Bayes&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_nb.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Naive Bayes
+AUC: 0.739 | F1: 0.315 | Recall: 0.834 | Accuracy: 0.502 | Train Score: 0.6922297547478474 | Test Score: 0.5020595089697035 | Train Time: 1.80 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.45      0.61     63661
+           1       0.19      0.83      0.32     10143
+
+    accuracy                           0.50     73804
+   macro avg       0.57      0.64      0.46     73804
+weighted avg       0.84      0.50      0.57     73804
+</pre></div>
+</div>
+<img alt="_images/5bf3a1b34f66a6f12513fd03953c2d8f4d9b3c87306b8e5374d550c64c3bbead.png" src="_images/5bf3a1b34f66a6f12513fd03953c2d8f4d9b3c87306b8e5374d550c64c3bbead.png" />
+<img alt="_images/70344bce65feaad4e8df817664229c638b7119dad81e4558b3b8043ba91d455a.png" src="_images/70344bce65feaad4e8df817664229c638b7119dad81e4558b3b8043ba91d455a.png" />
+</div>
+</div>
+</section>
+<section id="modelo-de-decisiontreeclassifier">
+<h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></strong><a class="headerlink" href="#modelo-de-decisiontreeclassifier" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Árbol de Decisión&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_tree.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Árbol de Decisión
+AUC: 0.751 | F1: 0.377 | Recall: 0.630 | Accuracy: 0.713 | Train Score: 0.7793269198403134 | Test Score: 0.7134166169855293 | Train Time: 4.29 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.93      0.73      0.81     63661
+           1       0.27      0.63      0.38     10143
+
+    accuracy                           0.71     73804
+   macro avg       0.60      0.68      0.60     73804
+weighted avg       0.83      0.71      0.75     73804
+</pre></div>
+</div>
+<img alt="_images/bf33babec2f7686ad92503371ce1aaa369bb47edecc3f4b83e6d15d86fa0de64.png" src="_images/bf33babec2f7686ad92503371ce1aaa369bb47edecc3f4b83e6d15d86fa0de64.png" />
+<img alt="_images/534b4d157b72fedbc299b0f7b1fa40b447bd80a3f5c586e992edfe056fb4ac4c.png" src="_images/534b4d157b72fedbc299b0f7b1fa40b447bd80a3f5c586e992edfe056fb4ac4c.png" />
+</div>
+</div>
+</section>
+<section id="modelo-de-randomforestclassifier">
+<h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong><a class="headerlink" href="#modelo-de-randomforestclassifier" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_rf.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Random Forest
+AUC: 0.794 | F1: 0.380 | Recall: 0.381 | Accuracy: 0.829 | Train Score: 0.9996903211907824 | Test Score: 0.8292910953335862 | Train Time: 165.26 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.90      0.90      0.90     63661
+           1       0.38      0.38      0.38     10143
+
+    accuracy                           0.83     73804
+   macro avg       0.64      0.64      0.64     73804
+weighted avg       0.83      0.83      0.83     73804
+</pre></div>
+</div>
+<img alt="_images/01e15b65045f03b9841e552a6a7afe4d6cfa973db9aea8ddd4603e2898775536.png" src="_images/01e15b65045f03b9841e552a6a7afe4d6cfa973db9aea8ddd4603e2898775536.png" />
+<img alt="_images/47adf1ac47bb309cea9ecf548c871ef61de36df9fe80196de6b1417dca2ffb20.png" src="_images/47adf1ac47bb309cea9ecf548c871ef61de36df9fe80196de6b1417dca2ffb20.png" />
+</div>
+</div>
+</section>
+<section id="modelo-de-xgbclassifier">
+<h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong><a class="headerlink" href="#modelo-de-xgbclassifier" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;XGBoost&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_xgb.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: XGBoost
+AUC: 0.808 | F1: 0.308 | Recall: 0.230 | Accuracy: 0.858 | Train Score: 0.9284372664786154 | Test Score: 0.85807002330497 | Train Time: 5.38 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.89      0.96      0.92     63661
+           1       0.47      0.23      0.31     10143
+
+    accuracy                           0.86     73804
+   macro avg       0.68      0.59      0.61     73804
+weighted avg       0.83      0.86      0.84     73804
+</pre></div>
+</div>
+<img alt="_images/4818b243a6d01ab787744db91f121c2a343afaf8055edfc2e7f2b6a7f3fbc48c.png" src="_images/4818b243a6d01ab787744db91f121c2a343afaf8055edfc2e7f2b6a7f3fbc48c.png" />
+<img alt="_images/895e838d9e56bd3a2ecd781e61b66f0537a6cbe99370a8e6680528f8948a7ba0.png" src="_images/895e838d9e56bd3a2ecd781e61b66f0537a6cbe99370a8e6680528f8948a7ba0.png" />
+</div>
+</div>
+</section>
+<section id="modelo-de-linearsvc">
+<h2><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong><a class="headerlink" href="#modelo-de-linearsvc" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;Linear SVC&quot;</span><span class="p">,</span> <span class="s2">&quot;modelo_svm.pkl&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: Linear SVC
+AUC: 0.789 | F1: 0.411 | Recall: 0.709 | Accuracy: 0.721 | Train Score: 0.7792764287301149 | Test Score: 0.7208145899951223 | Train Time: 8.97 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.72      0.82     63661
+           1       0.29      0.71      0.41     10143
+
+    accuracy                           0.72     73804
+   macro avg       0.61      0.72      0.61     73804
+weighted avg       0.85      0.72      0.76     73804
+</pre></div>
+</div>
+<img alt="_images/9c16c5a1ab6de048de6669aec0ea9a7e062791aba9cf1149936a63579db27e9e.png" src="_images/9c16c5a1ab6de048de6669aec0ea9a7e062791aba9cf1149936a63579db27e9e.png" />
+<img alt="_images/b81e05a953dd1bc73107dfeaddad26c850268f1bb9bd15dfdabb7ccbea9e953a.png" src="_images/b81e05a953dd1bc73107dfeaddad26c850268f1bb9bd15dfdabb7ccbea9e953a.png" />
+</div>
+</div>
+</section>
+<section id="modelo-original-hcse">
+<h2><strong>Modelo original <code class="docutils literal notranslate"><span class="pre">HCSE</span></code></strong><a class="headerlink" href="#modelo-original-hcse" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hcse_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">HybridCostSensitiveEnsemble</span>
+<span class="n">X_train_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;X_train.csv&#39;</span><span class="p">)</span>
+<span class="n">X_test_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;X_test.csv&#39;</span><span class="p">)</span>
+<span class="n">y_train_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;y_train.csv&#39;</span><span class="p">)[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span>
+<span class="n">y_test_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;y_test.csv&#39;</span><span class="p">)[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span>
+<span class="n">resultados_finales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluar_modelo</span><span class="p">(</span><span class="s2">&quot;HCSE model&quot;</span><span class="p">,</span> <span class="s2">&quot;model_hcse.pkl&quot;</span><span class="p">,</span> <span class="n">X_test_</span><span class="p">,</span> <span class="n">y_test_</span><span class="p">,</span> <span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔹 Modelo: HCSE model
+AUC: 0.823 | F1: 0.437 | Recall: 0.760 | Accuracy: 0.731 | Train Score: 0.7488632998275352 | Test Score: 0.7309359926291258 | Train Time: 144.17 s
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.95      0.73      0.82     63661
+           1       0.31      0.76      0.44     10143
+
+    accuracy                           0.73     73804
+   macro avg       0.63      0.74      0.63     73804
+weighted avg       0.86      0.73      0.77     73804
+</pre></div>
+</div>
+<img alt="_images/4da210a8893dd5ceaa9510746f90f5d88148b3898e1b8f8093fe3f33a231f8e3.png" src="_images/4da210a8893dd5ceaa9510746f90f5d88148b3898e1b8f8093fe3f33a231f8e3.png" />
+<img alt="_images/ca71ffa2b1afd40c37252a9ac6b387300fc1345d217ca1e0ddc66a9522262612.png" src="_images/ca71ffa2b1afd40c37252a9ac6b387300fc1345d217ca1e0ddc66a9522262612.png" />
+</div>
+</div>
+</section>
+<section id="tabla-comparativa-modelos-validados">
+<h2><strong>Tabla Comparativa modelos validados</strong><a class="headerlink" href="#tabla-comparativa-modelos-validados" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_comparativa</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados_finales</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+          <span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AUC&quot;</span><span class="p">,</span> <span class="s2">&quot;Recall&quot;</span><span class="p">],</span> 
+          <span class="n">ascending</span><span class="o">=</span><span class="p">[</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+      <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_comparativa</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>AUC</th>
+      <th>F1</th>
+      <th>Recall</th>
+      <th>Accuracy</th>
+      <th>Train Score</th>
+      <th>Test Score</th>
+      <th>Train Time (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Naive Bayes</td>
+      <td>0.738945</td>
+      <td>0.315209</td>
+      <td>0.833876</td>
+      <td>0.502060</td>
+      <td>0.692230</td>
+      <td>0.502060</td>
+      <td>1.795519</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>HCSE model</td>
+      <td>0.823403</td>
+      <td>0.437068</td>
+      <td>0.760032</td>
+      <td>0.730936</td>
+      <td>0.748863</td>
+      <td>0.730936</td>
+      <td>144.165682</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Linear SVC</td>
+      <td>0.788576</td>
+      <td>0.411067</td>
+      <td>0.708962</td>
+      <td>0.720815</td>
+      <td>0.779276</td>
+      <td>0.720815</td>
+      <td>8.966398</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Regresión Logística</td>
+      <td>0.788125</td>
+      <td>0.408844</td>
+      <td>0.708272</td>
+      <td>0.718511</td>
+      <td>0.780108</td>
+      <td>0.718511</td>
+      <td>6.292076</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>KNN</td>
+      <td>0.748408</td>
+      <td>0.374464</td>
+      <td>0.697131</td>
+      <td>0.679909</td>
+      <td>0.999690</td>
+      <td>0.679909</td>
+      <td>1.694877</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Árbol de Decisión</td>
+      <td>0.751294</td>
+      <td>0.376830</td>
+      <td>0.630484</td>
+      <td>0.713417</td>
+      <td>0.779327</td>
+      <td>0.713417</td>
+      <td>4.286781</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Random Forest</td>
+      <td>0.794302</td>
+      <td>0.380123</td>
+      <td>0.380854</td>
+      <td>0.829291</td>
+      <td>0.999690</td>
+      <td>0.829291</td>
+      <td>165.257268</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>XGBoost</td>
+      <td>0.807580</td>
+      <td>0.308353</td>
+      <td>0.230208</td>
+      <td>0.858070</td>
+      <td>0.928437</td>
+      <td>0.858070</td>
+      <td>5.383931</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Las siguientes conclusiones se darán sin tener en cuenta el modelo original, en la siguiente seccion se hablará a fondo sobre este.</p>
+<p><strong>XGBoost</strong> se posiciona como el <strong>modelo con mejor desempeño global</strong>, alcanzando el <strong>mayor AUC (0.808)</strong> y la <strong>mayor exactitud (85.8%)</strong>, además de un tiempo de entrenamiento razonable (7 s).<br />
+Su equilibrio entre precisión y capacidad de generalización lo convierte en la mejor opción para este conjunto de datos, aunque su <em>recall</em> (0.23) indica que tiende a ser conservador al detectar casos positivos.</p>
+<ul class="simple">
+<li><p><strong>Random Forest</strong> obtuvo un AUC cercano (0.794) y un desempeño general robusto, pero con un <strong>tiempo de entrenamiento considerablemente mayor (205 s)</strong>.<br />
+Su <em>recall</em> moderado (0.38) y su alta precisión lo hacen ideal cuando se busca un modelo estable, aunque con alto costo computacional.</p></li>
+<li><p><strong>Linear SVC</strong> y <strong>Regresión Logística</strong> presentaron resultados muy similares, con AUC ≈ 0.789 y <em>recall</em> ≈ 0.71, lo que evidencia su <strong>alta sensibilidad hacia la clase positiva</strong>.<br />
+Estos modelos lineales son más simples, rápidos y con buena capacidad de generalización, siendo ideales cuando se prioriza interpretabilidad y eficiencia.</p></li>
+<li><p><strong>Árbol de Decisión</strong> alcanzó un rendimiento intermedio (AUC 0.75), mostrando un buen equilibrio entre sensibilidad (0.63) y precisión, aunque con menor estabilidad frente a otros métodos de ensamblado.</p></li>
+<li><p><strong>KNN</strong> obtuvo un desempeño aceptable (AUC 0.75), con buen <em>recall</em> (0.70), pero sufre de <strong>sobreajuste (train_score ≈ 1)</strong> y una caída en generalización, lo que reduce su confiabilidad frente a nuevos datos.</p></li>
+<li><p><strong>Naive Bayes</strong>, aunque logra el <strong>mayor recall (0.83)</strong> —detectando la mayoría de los casos positivos—, presenta <strong>baja precisión y exactitud (0.50)</strong>, lo que indica una alta tasa de falsos positivos.<br />
+No obstante, su <strong>bajo tiempo de entrenamiento</strong> lo hace útil como modelo base o de referencia rápida.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_comparativa</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Modelo&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparativa de AUC - Modelos Finales&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;AUC&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ef5ded1b0f8ea1cc53d398e3535147ace38f7aba91c0c49991b3f7d87659292b.png" src="_images/ef5ded1b0f8ea1cc53d398e3535147ace38f7aba91c0c49991b3f7d87659292b.png" />
+</div>
+</div>
+<p>El análisis comparativo demuestra que los modelos basados en <strong>árboles de ensamblado (XGBoost y Random Forest)</strong> son los más eficaces para este conjunto de datos, destacando por su capacidad predictiva y estabilidad.<br />
+Por su parte, los modelos <strong>lineales (Linear SVC y Regresión Logística)</strong> mantienen un excelente equilibrio entre desempeño y eficiencia, siendo adecuados para contextos donde la interpretabilidad y el costo computacional son factores clave.<br />
+En cambio, <strong>Naive Bayes</strong> y <strong>KNN</strong> se destacan por su simplicidad y rapidez, pero su rendimiento es menor en términos de precisión y generalización.</p>
+<section id="interpretacion-contextual-del-desempeno-de-los-modelos">
+<h3><strong>Interpretación contextual del desempeño de los modelos</strong><a class="headerlink" href="#interpretacion-contextual-del-desempeno-de-los-modelos" title="Link to this heading">#</a></h3>
+<p>En el contexto del estudio —la <strong>predicción de diabetes</strong>— el objetivo principal no es únicamente alcanzar la mayor precisión global, sino <strong>detectar correctamente la mayor cantidad posible de pacientes con la enfermedad</strong> (clase positiva).<br />
+Por tanto, las métricas de mayor relevancia son el <strong>Recall (Sensibilidad)</strong> y, en segundo lugar, el <strong>AUC</strong>, que mide la capacidad general del modelo para distinguir entre personas con y sin diabetes.</p>
+<p>Al analizar los resultados:</p>
+<ul class="simple">
+<li><p><strong>Linear SVC</strong> y <strong>Regresión Logística</strong> obtuvieron los <strong>mayores valores de Recall (≈0.71)</strong>, lo que significa que detectan correctamente alrededor del <strong>71 % de los casos positivos</strong>.<br />
+Aunque su <em>accuracy</em> es menor que la de modelos más complejos, estos algoritmos lineales <strong>maximizan la detección de pacientes con diabetes</strong>, que es el objetivo prioritario en este tipo de problemas médicos.<br />
+Además, presentan una <strong>alta interpretabilidad</strong>, lo que permite identificar qué variables influyen más en el diagnóstico (por ejemplo, nivel de glucosa, presión sanguínea o índice de masa corporal).</p></li>
+<li><p><strong>XGBoost</strong> y <strong>Random Forest</strong> alcanzaron <strong>AUC y Accuracy más altos</strong> (≈0.81 y 0.86, respectivamente), mostrando una excelente capacidad de discriminación y generalización.<br />
+Sin embargo, ambos tienden a <strong>clasificar con mayor precisión los casos negativos</strong>, sacrificando parte del <em>recall</em> (solo entre 0.23 y 0.38).<br />
+Esto puede implicar que <strong>algunos pacientes con diabetes no sean correctamente detectados</strong>, lo cual no es ideal en un contexto de salud pública donde los falsos negativos pueden tener consecuencias graves.</p></li>
+<li><p><strong>Naive Bayes</strong>, aunque presenta baja precisión, logró el <strong>mayor Recall (0.83)</strong>, lo que significa que identifica la gran mayoría de los casos positivos, pero <strong>con muchos falsos positivos</strong>.<br />
+En un entorno clínico, este modelo podría ser útil como <strong>modelo de cribado (screening)</strong>, donde lo importante es no dejar pasar ningún caso sospechoso, aunque después se requiera una segunda validación con un modelo más específico.</p></li>
+</ul>
+<p>En conjunto, se puede concluir que <strong>los modelos lineales (Regresión Logística y Linear SVC)</strong> representan la mejor alternativa para este tipo de estudio, ya que ofrecen un <strong>buen balance entre sensibilidad, interpretabilidad y estabilidad</strong>, mientras que <strong>XGBoost</strong> y <strong>Random Forest</strong> destacan cuando se busca <strong>máxima precisión global y robustez en la clasificación</strong>.</p>
+</section>
+<section id="conclusion-general">
+<h3><strong>Conclusión general</strong><a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Si el objetivo es <strong>detectar el mayor número de pacientes con diabetes (minimizar falsos negativos)</strong> → <strong>Regresión Logística o Linear SVC</strong> son las mejores opciones.</p></li>
+<li><p>Si se busca <strong>mayor exactitud global y robustez predictiva</strong> → <strong>XGBoost</strong> es el modelo más fuerte.</p></li>
+<li><p>Si se requiere <strong>una herramienta rápida de detección preliminar</strong> → <strong>Naive Bayes</strong> podría emplearse como filtro inicial.</p></li>
+</ul>
+<p>En resumen, para el problema analizado, los resultados son <strong>coherentes y adecuados</strong>, ya que los modelos alcanzan niveles de desempeño esperables en datos médicos reales: <strong>recall alto (~0.7–0.8), AUC sólido (~0.8) y generalización estable</strong>, cumpliendo con los objetivos del proyecto.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="8_documents.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>9. Modelo original</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="10_conclusion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>10. Conclusiones</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-l1-y-l2"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Regresión</span> <span class="pre">Logística</span> <span class="pre">L1</span> <span class="pre">y</span> <span class="pre">L2</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-knn-neighborsclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">KNN_NeighborsClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-naive-bayes"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-decisiontreeclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-randomforestclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-xgbclassifier"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-linearsvc"><strong>Modelo de <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hcse"><strong>Modelo original <code class="docutils literal notranslate"><span class="pre">HCSE</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelos-validados"><strong>Tabla Comparativa modelos validados</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-contextual-del-desempeno-de-los-modelos"><strong>Interpretación contextual del desempeño de los modelos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general"><strong>Conclusión general</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mariana Franco, Jeronimo Dominguez, Juan Andres Ramos
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

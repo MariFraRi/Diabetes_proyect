@@ -1,0 +1,2740 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. Modelo original &#8212; Proyecto Final ML</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '8_documents';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. Evaluación" href="9_evaluacion.html" />
+    <link rel="prev" title="7. Validación" href="7_validacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Proyecto Final ML - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Proyecto Final ML - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    1. Detección de Diabetes en Datos Desbalanceados de Salud Pública
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_info_general.html"><strong>2. Estudio de Predictores de Diabetes en la Población Estadounidense 2022</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_EDA.html"><strong>3. Análisis Exploratorio</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_modelado.html"><strong>4. Modelado Benchmark</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_balanceo.html"><strong>5. Balanceo</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_optimizacion.html"><strong>6. Optimización</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_validacion.html"><strong>7. Validación</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>9. Modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_evaluacion.html"><strong>8. Evaluación</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusion.html"><strong>10. Conclusiones</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/MariFraRi/Diabetes_proyect" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/MariFraRi/Diabetes_proyect/issues/new?title=Issue%20on%20page%20%2F8_documents.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/8_documents.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>9. Modelo original</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-del-problema-y-naturaleza-del-dataset"><strong>Contexto del problema y naturaleza del dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-central"><strong>Problema central</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-de-los-modelos-existentes"><strong>Limitaciones de los modelos existentes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-surge-la-necesidad-de-un-modelo-hibrido"><strong>Por qué surge la necesidad de un modelo híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-teoricas-que-inspiran-el-modelo"><strong>Ideas teóricas que inspiran el modelo</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-cmboost-zhang-2019"><strong>Aporte tomado de CMBoost (Zhang, 2019)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-pes-lai-2021"><strong>Aporte tomado de Pes &amp; Lai (2021)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-kadkhodaei-et-al-2021"><strong>Aporte tomado de Kadkhodaei et al. (2021)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-esta-construido-el-modelo-hibrido"><strong>Cómo está construido el modelo híbrido</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-cost-sensitive"><strong>Gradient Boosting Cost-Sensitive</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-random-forest"><strong>Balanced Random Forest</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-probabilistica-innovacion-propia-del-modelo"><strong>Fusión probabilística (innovación propia del modelo)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-resuelve-el-problema-del-dataset"><strong>Por qué este modelo resuelve el problema del dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-es-original"><strong>Por qué este modelo es original</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion"><strong>Implementación</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cmboost-classifier"><strong>CMBoost Classifier</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toma-de-submuestra"><strong>Toma de Submuestra</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-por-separado-de-modelos-complementarios"><strong>Aplicacion por separado de Modelos complementarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hybridcostsensitiveensemble"><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias"><strong>Referencias</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelo-original">
+<h1><strong>9. Modelo original</strong><a class="headerlink" href="#modelo-original" title="Link to this heading">#</a></h1>
+<section id="contexto-del-problema-y-naturaleza-del-dataset">
+<h2><strong>Contexto del problema y naturaleza del dataset</strong><a class="headerlink" href="#contexto-del-problema-y-naturaleza-del-dataset" title="Link to this heading">#</a></h2>
+<p>El dataset Heart 2022 contiene 246.022 registros y 40 variables. La variable objetivo es:</p>
+<p>HadDiabetes (0 = no, 1 = sí)</p>
+<p>Distribución observada:</p>
+<ul class="simple">
+<li><p>Clase 0 (No diabetes): ~212.202 casos</p></li>
+<li><p>Clase 1 (Con diabetes): ~33.811 casos</p></li>
+</ul>
+<p>La clase positiva solo representa ~13.7%.</p>
+<section id="problema-central">
+<h3><strong>Problema central</strong><a class="headerlink" href="#problema-central" title="Link to this heading">#</a></h3>
+<p>Los modelos tradicionales:</p>
+<ul class="simple">
+<li><p>predicen casi siempre la clase 0,</p></li>
+<li><p>muestran accuracy alto pero recall muy bajo para la clase 1,</p></li>
+<li><p>no detectan adecuadamente casos de diabetes.</p></li>
+</ul>
+<p>Como en salud pública es más grave perder un caso positivo que generar un falso positivo, el objetivo del proyecto es maximizar la sensibilidad (recall) de la clase 1.</p>
+</section>
+</section>
+<section id="limitaciones-de-los-modelos-existentes">
+<h2><strong>Limitaciones de los modelos existentes</strong><a class="headerlink" href="#limitaciones-de-los-modelos-existentes" title="Link to this heading">#</a></h2>
+<p>Se probaron modelos como:</p>
+<ul class="simple">
+<li><p>Regresión Logística</p></li>
+<li><p>Random Forest estándar</p></li>
+<li><p>Gradient Boosting estándar</p></li>
+<li><p>Modelos con class_weight</p></li>
+<li><p>Técnicas como SMOTENC</p></li>
+</ul>
+<p>Incluso así, el comportamiento fue:</p>
+<ul class="simple">
+<li><p>Bajo recall de la clase minoritaria</p></li>
+<li><p>Predicciones dominadas por la clase 0</p></li>
+<li><p>Incapacidad para modelar relaciones complejas entre variables clínicas, demográficas y de estilo de vida</p></li>
+</ul>
+<p>También se intentó implementar el algoritmo CMBoost (Zhang, 2019), que teóricamente es ideal para datos desbalanceados.<br />
+Sin embargo, CMBoost requiere construir matrices cuadradas del tamaño:</p>
+<p>N x N, donde N = número de registros (en este caso 246.022)</p>
+<p>Esto implica más de 600 GB de memoria, lo cual es inviable.</p>
+</section>
+<section id="por-que-surge-la-necesidad-de-un-modelo-hibrido">
+<h2><strong>Por qué surge la necesidad de un modelo híbrido</strong><a class="headerlink" href="#por-que-surge-la-necesidad-de-un-modelo-hibrido" title="Link to this heading">#</a></h2>
+<p>Se necesitaba un modelo que:</p>
+<ol class="arabic simple">
+<li><p>Mantuviera la filosofía cost-sensitive de CMBoost.</p></li>
+<li><p>Fuera escalable y no dependiera de matrices gigantes.</p></li>
+<li><p>Funcionara con 246k muestras.</p></li>
+<li><p>Maximizara el recall de la clase minoritaria.</p></li>
+<li><p>Capturara relaciones no lineales y múltiples interacciones entre variables de salud.</p></li>
+</ol>
+<p>Dado que ningún modelo estándar cumplía con todo, se construyó un modelo nuevo:<br />
+<strong>El Modelo Híbrido Cost-Sensitive.</strong></p>
+</section>
+<section id="ideas-teoricas-que-inspiran-el-modelo">
+<h2><strong>Ideas teóricas que inspiran el modelo</strong><a class="headerlink" href="#ideas-teoricas-que-inspiran-el-modelo" title="Link to this heading">#</a></h2>
+<section id="aporte-tomado-de-cmboost-zhang-2019">
+<h3><strong>Aporte tomado de CMBoost (Zhang, 2019)</strong><a class="headerlink" href="#aporte-tomado-de-cmboost-zhang-2019" title="Link to this heading">#</a></h3>
+<p>CMBoost introduce dos conceptos principales:</p>
+<ul class="simple">
+<li><p>usar pesos mayores para la clase minoritaria,</p></li>
+<li><p>aumentar el margen medio y disminuir la varianza del margen para mejorar la generalización.</p></li>
+</ul>
+<p>Como no podemos calcular los márgenes globales por el tamaño del dataset, se toma la idea esencial:</p>
+<p>“Los ejemplos de la clase minoritaria deben tener un peso mayor en la función de pérdida.”</p>
+<p>Esto se implementa con un Gradient Boosting cost-sensitive usando sample_weight.</p>
+</section>
+<section id="aporte-tomado-de-pes-lai-2021">
+<h3><strong>Aporte tomado de Pes &amp; Lai (2021)</strong><a class="headerlink" href="#aporte-tomado-de-pes-lai-2021" title="Link to this heading">#</a></h3>
+<p>Este paper muestra que se puede imitar el comportamiento de modelos cost-sensitive complejos utilizando:</p>
+<ul class="simple">
+<li><p>sample weighting,</p></li>
+<li><p>penalizaciones proporcionales al desbalance,</p></li>
+<li><p>ajustes directos en la función de pérdida.</p></li>
+</ul>
+<p>Esto permite adoptar la esencia teórica de CMBoost pero manteniendo una implementación eficiente.</p>
+</section>
+<section id="aporte-tomado-de-kadkhodaei-et-al-2021">
+<h3><strong>Aporte tomado de Kadkhodaei et al. (2021)</strong><a class="headerlink" href="#aporte-tomado-de-kadkhodaei-et-al-2021" title="Link to this heading">#</a></h3>
+<p>Este trabajo demuestra que:</p>
+<ul class="simple">
+<li><p>combinar modelos diferentes,</p></li>
+<li><p>con distintos sesgos inductivos,</p></li>
+<li><p>mejora el rendimiento en Big Data,</p></li>
+<li><p>y especialmente en datasets desbalanceados.</p></li>
+</ul>
+<p>Por eso se incorpora un segundo bloque: Balanced Random Forest.</p>
+<p>Este modelo:</p>
+<ul class="simple">
+<li><p>hace bootstrap balanceado dentro del árbol,</p></li>
+<li><p>maneja naturalmente variables categóricas,</p></li>
+<li><p>aporta robustez y estabilidad.</p></li>
+</ul>
+</section>
+</section>
+<section id="como-esta-construido-el-modelo-hibrido">
+<h2><strong>Cómo está construido el modelo híbrido</strong><a class="headerlink" href="#como-esta-construido-el-modelo-hibrido" title="Link to this heading">#</a></h2>
+<p>El modelo final combina dos módulos:</p>
+<section id="gradient-boosting-cost-sensitive">
+<h3><strong>Gradient Boosting Cost-Sensitive</strong><a class="headerlink" href="#gradient-boosting-cost-sensitive" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Utiliza sample_weight para penalizar más los errores en la clase 1.</p></li>
+<li><p>Optimiza una pérdida donde los casos positivos tienen mayor impacto.</p></li>
+<li><p>Captura patrones suaves, continuos y no lineales.</p></li>
+</ul>
+</section>
+<section id="balanced-random-forest">
+<h3><strong>Balanced Random Forest</strong><a class="headerlink" href="#balanced-random-forest" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Re-muestrea internamente para tener igual cantidad de positivos y negativos en cada árbol.</p></li>
+<li><p>Captura relaciones fuertes, abruptas y basadas en interacciones entre variables.</p></li>
+</ul>
+</section>
+<section id="fusion-probabilistica-innovacion-propia-del-modelo">
+<h3><strong>Fusión probabilística (innovación propia del modelo)</strong><a class="headerlink" href="#fusion-probabilistica-innovacion-propia-del-modelo" title="Link to this heading">#</a></h3>
+<p>Las probabilidades de ambos modelos se combinan:</p>
+<p>prob_final = (prob_GB + prob_RF) / 2</p>
+<p>Esto aporta:</p>
+<ul class="simple">
+<li><p>estabilidad,</p></li>
+<li><p>reducción de sesgo hacia la clase mayoritaria,</p></li>
+<li><p>mejor sensibilidad,</p></li>
+<li><p>y aprovechamiento simultáneo de dos enfoques diferentes.</p></li>
+</ul>
+<p>Esta capa final <strong>no existe en CMBoost, ni en los otros papers, ni en sklearn</strong>.<br />
+Es el componente completamente original del modelo.</p>
+</section>
+</section>
+<section id="por-que-este-modelo-resuelve-el-problema-del-dataset">
+<h2><strong>Por qué este modelo resuelve el problema del dataset</strong><a class="headerlink" href="#por-que-este-modelo-resuelve-el-problema-del-dataset" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Maneja el desbalance desde dos frentes:</p>
+<ul class="simple">
+<li><p>cost-sensitive boosting,</p></li>
+<li><p>bootstrap balanceado en Random Forest.</p></li>
+</ul>
+</li>
+<li><p>Captura relaciones complejas entre 40 variables variadas.</p></li>
+<li><p>Es escalable:</p>
+<ul class="simple">
+<li><p>no usa matrices cuadradas,</p></li>
+<li><p>no genera MemoryError,</p></li>
+<li><p>se puede entrenar con 246k registros.</p></li>
+</ul>
+</li>
+<li><p>Maximiza el recall de la clase con diabetes, que es el objetivo fundamental.</p></li>
+<li><p>Equilibra precisión y sensibilidad mediante la capa de fusión.</p></li>
+<li><p>Nace directamente de las necesidades del proyecto y de las limitaciones reales encontradas en la práctica.</p></li>
+</ol>
+</section>
+<section id="por-que-este-modelo-es-original">
+<h2><strong>Por qué este modelo es original</strong><a class="headerlink" href="#por-que-este-modelo-es-original" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>No existe en sklearn ni en imbalanced-learn.</p></li>
+<li><p>No es CMBoost, pero está inspirado en su marco teórico.</p></li>
+<li><p>No es ningún modelo de los papers revisados, pero combina ideas de los tres.</p></li>
+<li><p>Es una arquitectura híbrida diseñada específicamente para datos de salud desbalanceados.</p></li>
+<li><p>Su capa de fusión probabilística es una contribución original.</p></li>
+</ul>
+<p>El modelo surge como una solución práctica, teóricamente fundamentada y computacionalmente viable para el dataset de 2022.</p>
+</section>
+<section id="implementacion">
+<h2><strong>Implementación</strong><a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
+<p>Se importan las librerías.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">,</span> <span class="n">clone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cvxpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.compose</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTENC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">,</span> <span class="n">clone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingClassifier</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.class_weight</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_class_weight</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_X_y</span><span class="p">,</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_is_fitted</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span><span class="p">,</span> <span class="n">recall_score</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se importan las bases necesarias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;df_limpio.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;df_limpio.csv&#39;</span><span class="p">)[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;X_train.csv&#39;</span><span class="p">)</span>
+<span class="n">X_test_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;X_test.csv&#39;</span><span class="p">)</span>
+<span class="n">y_train_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;y_train.csv&#39;</span><span class="p">)[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span>
+<span class="n">y_test_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;y_test.csv&#39;</span><span class="p">)[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cmboost-classifier">
+<h2><strong>CMBoost Classifier</strong><a class="headerlink" href="#cmboost-classifier" title="Link to this heading">#</a></h2>
+<p>El algoritmo <strong>CMBoost</strong> (Zhang, 2019) propone una optimización del margen ponderado por costo para abordar problemas de clasificación desbalanceada. Sin embargo, su implementación exacta requiere manipular una matriz (N \times N), lo cual implica:</p>
+<ul class="simple">
+<li><p>complejidad espacial (O(N^2)),</p></li>
+<li><p>complejidad temporal elevada,</p></li>
+<li><p>consumo de memoria que crece cuadráticamente.</p></li>
+</ul>
+<p>En el dataset utilizado en este proyecto (≈ 300k observaciones), la implementación exacta genera errores del tipo:</p>
+<p><code class="docutils literal notranslate"><span class="pre">MemoryError:</span> <span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">allocate</span> <span class="pre">&gt;600</span> <span class="pre">GiB</span></code></p>
+<p>Por tanto, se vuelve <strong>inviable</strong> aplicar CMBoost exactamente sobre el conjunto completo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CMBoostClassifier</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implementación del algoritmo CMBoost de Zhang (2019).</span>
+
+<span class="sd">    - f(x) = sum_j alpha_j h_j(x)</span>
+<span class="sd">    - y en {-1, +1}</span>
+<span class="sd">    - h_j(x) en {-1, +1}</span>
+<span class="sd">    - Problema principal (ec. 28):</span>
+<span class="sd">        min_{alpha, rho}  1/2 rho^T B rho + lambda_g^T rho</span>
+<span class="sd">        s.t. alpha &gt;= 0, 1^T alpha = D</span>
+<span class="sd">             rho_i = y_i h_i^T alpha</span>
+
+<span class="sd">    Parámetros</span>
+<span class="sd">    ----------</span>
+<span class="sd">    base_estimator : clf sklearn, opcional</span>
+<span class="sd">        Clasificador débil. Por defecto: árbol de decisión profundidad 1.</span>
+<span class="sd">    n_estimators : int</span>
+<span class="sd">        Número máximo de iteraciones (column generation / boosting rounds).</span>
+<span class="sd">    lambda1 : float</span>
+<span class="sd">        λ1 en el paper.</span>
+<span class="sd">    lambda2 : float</span>
+<span class="sd">        λ2 en el paper.</span>
+<span class="sd">    c_cost : float</span>
+<span class="sd">        Parámetro de costo c de las ec. (18)–(19).</span>
+<span class="sd">    D : float</span>
+<span class="sd">        Constante D de la restricción 1^T alpha = D (en el paper es una constante positiva).</span>
+<span class="sd">    solver : str</span>
+<span class="sd">        Solver de cvxpy (&#39;SCS&#39;, &#39;OSQP&#39;, &#39;ECOS&#39;, etc.)</span>
+<span class="sd">    verbose : bool</span>
+<span class="sd">        Si True, imprime info de cada iteración.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">base_estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">lambda1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">lambda2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">c_cost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">D</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;SCS&quot;</span><span class="p">,</span>
+                 <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">base_estimator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">base_estimator</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_estimator</span> <span class="o">=</span> <span class="n">base_estimator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="n">n_estimators</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lambda1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lambda1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lambda2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lambda2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">c_cost</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="n">solver</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="c1"># ---------- Utilidades internas ----------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_encode_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mapea etiquetas originales a {-1, +1}</span>
+<span class="sd">        y guarda la info para deshacer el mapeo en predict().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">classes</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CMBoost solo soporta clasificación binaria.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Tomamos classes[0] = -1, classes[1] = +1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span> <span class="o">=</span> <span class="n">classes</span>
+        <span class="n">y_signed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">classes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">y_signed</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_cost_sensitive_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_signed</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construye A, d_i, k_i, K, B, lambda_g siguiendo</span>
+<span class="sd">        las ecuaciones (11), (18)-(19), (23)-(26) del paper.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">y_signed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_signed</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">y_signed</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># --- (11) Matriz A ---</span>
+        <span class="n">c_A</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">c_A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="c1"># --- desequilibrio ru = n_- / n_+ ---</span>
+        <span class="n">idx_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_signed</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">idx_neg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_signed</span> <span class="o">==</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_plus</span> <span class="o">=</span> <span class="n">idx_pos</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">n_minus</span> <span class="o">=</span> <span class="n">idx_neg</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="k">if</span> <span class="n">n_plus</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n_minus</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Todas las etiquetas son iguales; CMBoost necesita clases  +1  y  -1.&quot;</span><span class="p">)</span>
+
+        <span class="n">r_u</span> <span class="o">=</span> <span class="n">n_minus</span> <span class="o">/</span> <span class="n">n_plus</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_cost</span>
+
+        <span class="c1"># --- (18) pesos d_i ---</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">term_pos</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">r_u</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">r_u</span><span class="p">))</span>
+        <span class="n">term_neg</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">r_u</span><span class="p">)</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">r_u</span><span class="p">))</span>
+
+        <span class="n">d</span><span class="p">[</span><span class="n">idx_pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">term_pos</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">idx_neg</span><span class="p">]</span> <span class="o">=</span> <span class="n">term_neg</span>
+
+        <span class="c1"># --- (19) pesos k_i ---</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">k</span><span class="p">[</span><span class="n">idx_pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">term_neg</span>      <span class="c1"># fíjate en el cambio cruzado</span>
+        <span class="n">k</span><span class="p">[</span><span class="n">idx_neg</span><span class="p">]</span> <span class="o">=</span> <span class="n">term_pos</span>
+
+        <span class="c1"># --- (23) K = diag(k1,...,kN) ---</span>
+        <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="c1"># --- (24) B = K^T A K (como K es diagonal, K^T = K) ---</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">K</span> <span class="o">@</span> <span class="n">A</span> <span class="o">@</span> <span class="n">K</span>
+
+        <span class="c1"># --- (25) vector d (ya lo tenemos) ---</span>
+        <span class="c1"># d = [d1,...,dN]</span>
+
+        <span class="c1"># --- (26) lambda_g = - lambda2 / (2 N lambda1) * d ---</span>
+        <span class="n">lambda_g</span> <span class="o">=</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">N</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda1</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span>
+
+        <span class="k">return</span> <span class="n">B</span><span class="p">,</span> <span class="n">lambda_g</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">r_u</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_H_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Devuelve h(x_i) en {-1, +1} para todos los i.</span>
+
+<span class="sd">        Si el estimador predice 0/1, lo mapeamos a -1/+1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="c1"># Intentamos usar predict_proba si existe</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="s2">&quot;predict_proba&quot;</span><span class="p">):</span>
+            <span class="n">proba</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">proba</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="c1"># Mapear a -1/+1 usando las clases originales</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">pred</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">h</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="c1"># ---------- API principal ----------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Entrena CMBoost sobre (X, y).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">y_signed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encode_labels</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Construir matrices costo-sensibles</span>
+        <span class="n">B</span><span class="p">,</span> <span class="n">lambda_g</span><span class="p">,</span> <span class="n">d_vec</span><span class="p">,</span> <span class="n">k_vec</span><span class="p">,</span> <span class="n">r_u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_cost_sensitive_matrices</span><span class="p">(</span><span class="n">y_signed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B_</span> <span class="o">=</span> <span class="n">B</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lambda_g_</span> <span class="o">=</span> <span class="n">lambda_g</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d_vec_</span> <span class="o">=</span> <span class="n">d_vec</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k_vec_</span> <span class="o">=</span> <span class="n">k_vec</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r_u_</span> <span class="o">=</span> <span class="n">r_u</span>
+
+        <span class="c1"># Lista de clasificadores débiles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">H_cols</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Inicializar &quot;u&quot; (dual) con algo razonable: uniforme</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_estimators</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Iteración </span><span class="si">{</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_estimators</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+
+            <span class="c1"># 1) Entrenamos un nuevo clasificador base usando pesos ~ |u_i|</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_estimator</span><span class="p">)</span>
+            <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sample_weight</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sample_weight</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># Para el estimador base, usamos y en {0,1}</span>
+            <span class="n">y_binary</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_signed</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+            <span class="n">base</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_binary</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+
+            <span class="c1"># 2) Calculamos su columna h(x_i)</span>
+            <span class="n">h_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_H_column</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>  <span class="c1"># N vector en {-1,+1}</span>
+            <span class="n">H_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h_col</span><span class="p">)</span>
+
+            <span class="c1"># Matriz H (N x M)</span>
+            <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(</span><span class="n">H_cols</span><span class="p">)</span>
+            <span class="n">M</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># 3) Definimos variables del QP (28)</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+            <span class="n">rho</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+            <span class="c1"># Objetivo: 1/2 rho^T B rho + lambda_g^T rho</span>
+            <span class="n">objective</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="o">+</span> <span class="n">lambda_g</span> <span class="o">@</span> <span class="n">rho</span>
+
+            <span class="c1"># Restricciones:</span>
+            <span class="c1"># - alpha &gt;= 0</span>
+            <span class="c1"># - 1^T alpha = D</span>
+            <span class="c1"># - rho = y .* (H alpha)</span>
+            <span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">alpha</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">,</span>
+                <span class="n">rho</span> <span class="o">==</span> <span class="n">cp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">y_signed</span><span class="p">,</span> <span class="n">H</span> <span class="o">@</span> <span class="n">alpha</span><span class="p">)</span>
+            <span class="p">]</span>
+
+            <span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">),</span> <span class="n">constraints</span><span class="p">)</span>
+            <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">prob</span><span class="o">.</span><span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;optimal&quot;</span><span class="p">,</span> <span class="s2">&quot;optimal_inaccurate&quot;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El QP no convergió (status: </span><span class="si">{</span><span class="n">prob</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+            <span class="n">alpha_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">alpha</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">rho_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">alpha_</span> <span class="o">=</span> <span class="n">alpha_val</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rho_</span> <span class="o">=</span> <span class="n">rho_val</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">H_</span> <span class="o">=</span> <span class="n">H</span>
+
+            <span class="c1"># 4) Recuperamos el dual de la restricción rho == y .* (H alpha)</span>
+            <span class="c1">#    Esto corresponde al vector u del paper.</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">constraints</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">dual_value</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="n">obj_val</span> <span class="o">=</span> <span class="n">objective</span><span class="o">.</span><span class="n">value</span>
+                <span class="n">margin_mean</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_val</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Objetivo QP (28): </span><span class="si">{</span><span class="n">obj_val</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ||alpha||_1 = </span><span class="si">{</span><span class="n">alpha_val</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Media de márgenes (aprox): </span><span class="si">{</span><span class="n">margin_mean</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_decision_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        f(x) = sum_j alpha_j h_j(x)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;alpha_&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Debes entrenar el modelo con fit() primero.&quot;</span><span class="p">)</span>
+
+        <span class="n">H_new</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">est</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span><span class="p">:</span>
+            <span class="n">h_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_H_column</span><span class="p">(</span><span class="n">est</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+            <span class="n">H_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h_col</span><span class="p">)</span>
+        <span class="n">H_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(</span><span class="n">H_new</span><span class="p">)</span>  <span class="c1"># (n_samples, M)</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="n">H_new</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_</span>
+        <span class="k">return</span> <span class="n">f</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Predicción de etiquetas originales (las mismas que en y de fit).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decision_function</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">y_signed_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">f</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="c1"># Deshacer el mapeo</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_signed_pred</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">,</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">y_pred</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Probabilidades aproximadas usando función sigmoide sobre f(x).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decision_function</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="c1"># Sigmoide</span>
+        <span class="n">p_pos</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">))</span>
+        <span class="n">p_neg</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">p_pos</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">p_neg</span><span class="p">,</span> <span class="n">p_pos</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_features</span> <span class="o">=</span> <span class="n">X_train_</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">categorical_features</span> <span class="o">=</span> <span class="n">X_train_</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">numeric_features</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">),</span> <span class="n">categorical_features</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="c1"># (&#39;balanceo&#39;, smote),  # &lt;-- solo si lo necesitas</span>
+    <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">CMBoostClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>    <span class="c1"># empieza con algo pequeño</span>
+    <span class="n">lambda1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">lambda2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">c_cost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">D</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;SCS&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>       <span class="c1"># pon False si no quieres logs</span>
+    <span class="p">))</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="toma-de-submuestra">
+<h3><strong>Toma de Submuestra</strong><a class="headerlink" href="#toma-de-submuestra" title="Link to this heading">#</a></h3>
+<p>El algoritmo CMBoost no puede aplicarse al dataset completo porque requiere construir matrices internas de tamaño N x N. Con 246.000 registros, esto supera ampliamente la memoria disponible (más de 600 GB), haciendo imposible su ejecución total.</p>
+<p>Para poder evaluar su comportamiento y rescatar sus ideas principales, se toma una submuestra del dataset. Esta submuestra permite:</p>
+<ul class="simple">
+<li><p>Probar el funcionamiento del algoritmo en un entorno controlado.</p></li>
+<li><p>Analizar si realmente mejora la detección de la clase minoritaria.</p></li>
+<li><p>Revisar cómo se comporta frente a modelos tradicionales.</p></li>
+</ul>
+<p>El objetivo de esta submuestra no es entrenar el modelo final, sino entender qué elementos teóricos de CMBoost pueden incorporarse posteriormente al Modelo Híbrido Cost-Sensitive, que sí es escalable al dataset completo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># Suponiendo que ya tienes X y y (pandas o numpy)</span>
+<span class="n">X_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">y_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Etiqueta positiva (ajusta si tu positiva NO es 1)</span>
+
+<span class="n">pos_label</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">pos_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">pos_label</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">neg_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">!=</span> <span class="n">pos_label</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">max_total</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">max_pos</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos_idx</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_total</span> <span class="o">*</span> <span class="mf">0.6</span><span class="p">))</span>
+<span class="n">max_neg</span> <span class="o">=</span> <span class="n">max_total</span> <span class="o">-</span> <span class="n">max_pos</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">pos_sample</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pos_idx</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">max_pos</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">neg_sample</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">neg_idx</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">max_neg</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">sub_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">pos_sample</span><span class="p">,</span> <span class="n">neg_sample</span><span class="p">])</span>
+<span class="n">rng</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">sub_idx</span><span class="p">)</span>
+
+<span class="c1"># IMPORTANTÍSIMO: usamos iloc para mantener DataFrame/Serie</span>
+<span class="n">X_sub</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sub_idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y_sub</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sub_idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X_sub</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_sub</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5000, 39)
+diabetes
+1    3000
+0    2000
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>En esta submuestra se cuenta con un total de 5.000 observaciones y 39 variables predictoras. La variable objetivo <code class="docutils literal notranslate"><span class="pre">diabetes</span></code> presenta la siguiente distribución de clases:</p>
+<ul class="simple">
+<li><p>Clase 1 (con diabetes): 3.000 registros</p></li>
+<li><p>Clase 0 (sin diabetes): 2.000 registros</p></li>
+</ul>
+<p>Esto significa que, a diferencia del dataset completo, la submuestra está moderadamente balanceada a favor de la clase positiva. Esta configuración es útil para probar el CMBoost y otros modelos cost-sensitive en un entorno donde la clase minoritaria del problema original (personas con diabetes) está mejor representada, facilitando la evaluación de su capacidad de detección.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_sub</span><span class="p">,</span> <span class="n">y_sub</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">stratify</span><span class="o">=</span><span class="n">y_sub</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tamaño train:&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tamaño test :&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tamaño train: 3500
+Tamaño test : 1500
+</pre></div>
+</div>
+</div>
+</div>
+<p>La submuestra se dividió en dos conjuntos:</p>
+<ul class="simple">
+<li><p><strong>Train:</strong> 3.500 observaciones</p></li>
+<li><p><strong>Test:</strong> 1.500 observaciones</p></li>
+</ul>
+<p>Esta partición permite entrenar los modelos en un conjunto suficientemente amplio para aprender los patrones principales, mientras que el conjunto de prueba mantiene una proporción adecuada para evaluar el desempeño general y la capacidad de generalización del modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{np.int64(0): np.int64(212202), np.int64(1): np.int64(33811)}
+</pre></div>
+</div>
+</div>
+</div>
+<p>En el dataset completo se observa un fuerte desbalance en la variable objetivo:</p>
+<ul class="simple">
+<li><p>Clase 0 (sin diabetes): 212.202 registros</p></li>
+<li><p>Clase 1 (con diabetes): 33.811 registros</p></li>
+</ul>
+<p>Esto significa que la clase positiva representa aproximadamente solo el 13.7% del total.<br />
+Este desbalance severo es uno de los principales desafíos del problema, ya que los modelos tradicionales tienden a favorecer la clase mayoritaria y fallan en detectar casos positivos, lo que afecta directamente el objetivo de maximizar el recall en la predicción de diabetes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{np.int64(0): np.int64(1400), np.int64(1): np.int64(2100)}
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la submuestra utilizada para probar CMBoost y otros métodos, la distribución de clases es la siguiente:</p>
+<ul class="simple">
+<li><p>Clase 0 (sin diabetes): 1.400 registros</p></li>
+<li><p>Clase 1 (con diabetes): 2.100 registros</p></li>
+</ul>
+<p>A diferencia del dataset completo, esta submuestra presenta un desbalance moderado a favor de la clase positiva. Esto facilita la evaluación de modelos cost-sensitive y permite analizar su comportamiento sin las limitaciones extremas del desbalance original.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Iteración 1/10 ===
+   Objetivo QP (28): 3247.521472
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.312000
+
+=== Iteración 2/10 ===
+   Objetivo QP (28): 2105.332181
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.286969
+
+=== Iteración 3/10 ===
+   Objetivo QP (28): 1552.677865
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.285183
+
+=== Iteración 4/10 ===
+   Objetivo QP (28): 1497.962481
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.286801
+
+=== Iteración 5/10 ===
+   Objetivo QP (28): 1497.962179
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.286801
+
+=== Iteración 6/10 ===
+   Objetivo QP (28): 1497.960032
+   ||alpha||_1 = 0.999999
+   Media de márgenes (aprox): 0.286801
+
+=== Iteración 7/10 ===
+   Objetivo QP (28): 1497.984382
+   ||alpha||_1 = 1.000007
+   Media de márgenes (aprox): 0.286803
+
+=== Iteración 8/10 ===
+   Objetivo QP (28): 1497.962447
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.286801
+
+=== Iteración 9/10 ===
+   Objetivo QP (28): 1497.962447
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.286801
+
+=== Iteración 10/10 ===
+   Objetivo QP (28): 1497.962447
+   ||alpha||_1 = 1.000000
+   Media de márgenes (aprox): 0.286801
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  display: none;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.estimator-table summary {
+    padding: .5rem;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.estimator-table details[open] {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.estimator-table .parameters-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.estimator-table .parameters-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.estimator-table .parameters-table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+.estimator-table .parameters-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.estimator-table table td {
+    border: 1px solid rgba(106, 105, 104, 0.232);
+}
+
+.user-set td {
+    color:rgb(255, 94, 0);
+    text-align: left;
+}
+
+.user-set td.value pre {
+    color:rgb(255, 94, 0) !important;
+    background-color: transparent !important;
+}
+
+.default td {
+    color: black;
+    text-align: left;
+}
+
+.user-set td i,
+.default td i {
+    color: black;
+}
+
+.copy-paste-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+</style><body><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;preprocessing&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;, StandardScaler(),
+                                                  Index([&#x27;dias_salud_fisica&#x27;, &#x27;dias_salud_mental&#x27;, &#x27;horas_sueño&#x27;,
+       &#x27;altura_metros&#x27;, &#x27;peso_kilos&#x27;, &#x27;bmi&#x27;],
+      dtype=&#x27;object&#x27;)),
+                                                 (&#x27;cat&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;),
+                                                  Index([&#x27;salud_general&#x27;, &#x27;ultimo_chequeo&#x27;, &#x27;actividades_fisicas&#x27;,
+       &#x27;dientes_removidos&#x27;, &#x27;ataque_cardiaco&#x27;, &#x27;angina&#x27;, &#x27;ACV&#x27;, &#x27;asma&#x27;, &#x27;EPOC&#x27;,
+       &#x27;trastorno_depre&#x27;, &#x27;enfermedad_riñon&#x27;, &#x27;artritis&#x27;, &#x27;estado_fumador&#x27;,
+       &#x27;uso_cigarroelect&#x27;, &#x27;categoria_etnica&#x27;, &#x27;categoria_edad&#x27;,
+       &#x27;bebedor_alcohol&#x27;, &#x27;alto_riesgo_ap&#x27;],
+      dtype=&#x27;object&#x27;))])),
+                (&#x27;model&#x27;,
+                 CMBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=1),
+                                   verbose=True))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('steps',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">steps&nbsp;</td>
+            <td class="value">[(&#x27;preprocessing&#x27;, ...), (&#x27;model&#x27;, ...)]</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('transform_input',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">transform_input&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('memory',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">memory&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">verbose&nbsp;</td>
+            <td class="value">False</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>preprocessing: ColumnTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.compose.ColumnTransformer.html">?<span>Documentation for preprocessing: ColumnTransformer</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="preprocessing__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('transformers',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">transformers&nbsp;</td>
+            <td class="value">[(&#x27;num&#x27;, ...), (&#x27;cat&#x27;, ...)]</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('remainder',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">remainder&nbsp;</td>
+            <td class="value">&#x27;drop&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('sparse_threshold',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">sparse_threshold&nbsp;</td>
+            <td class="value">0.3</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('n_jobs',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">n_jobs&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('transformer_weights',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">transformer_weights&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">verbose&nbsp;</td>
+            <td class="value">False</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('verbose_feature_names_out',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">verbose_feature_names_out&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('force_int_remainder_cols',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">force_int_remainder_cols&nbsp;</td>
+            <td class="value">&#x27;deprecated&#x27;</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>num</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="preprocessing__num__"><pre>Index([&#x27;dias_salud_fisica&#x27;, &#x27;dias_salud_mental&#x27;, &#x27;horas_sueño&#x27;,
+       &#x27;altura_metros&#x27;, &#x27;peso_kilos&#x27;, &#x27;bmi&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="preprocessing__num__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('copy',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">copy&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('with_mean',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">with_mean&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('with_std',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">with_std&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="preprocessing__cat__"><pre>Index([&#x27;salud_general&#x27;, &#x27;ultimo_chequeo&#x27;, &#x27;actividades_fisicas&#x27;,
+       &#x27;dientes_removidos&#x27;, &#x27;ataque_cardiaco&#x27;, &#x27;angina&#x27;, &#x27;ACV&#x27;, &#x27;asma&#x27;, &#x27;EPOC&#x27;,
+       &#x27;trastorno_depre&#x27;, &#x27;enfermedad_riñon&#x27;, &#x27;artritis&#x27;, &#x27;estado_fumador&#x27;,
+       &#x27;uso_cigarroelect&#x27;, &#x27;categoria_etnica&#x27;, &#x27;categoria_edad&#x27;,
+       &#x27;bebedor_alcohol&#x27;, &#x27;alto_riesgo_ap&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="preprocessing__cat__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('categories',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">categories&nbsp;</td>
+            <td class="value">&#x27;auto&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('drop',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">drop&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('sparse_output',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">sparse_output&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('dtype',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">dtype&nbsp;</td>
+            <td class="value">&lt;class &#x27;numpy.float64&#x27;&gt;</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('handle_unknown',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">handle_unknown&nbsp;</td>
+            <td class="value">&#x27;ignore&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_frequency',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_frequency&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('max_categories',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">max_categories&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('feature_name_combiner',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">feature_name_combiner&nbsp;</td>
+            <td class="value">&#x27;concat&#x27;</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: CMBoostClassifier</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('base_estimator',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">base_estimator&nbsp;</td>
+            <td class="value">DecisionTreeC...r(max_depth=1)</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('n_estimators',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">n_estimators&nbsp;</td>
+            <td class="value">10</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('lambda1',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">lambda1&nbsp;</td>
+            <td class="value">1.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('lambda2',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">lambda2&nbsp;</td>
+            <td class="value">1.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('c_cost',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">c_cost&nbsp;</td>
+            <td class="value">1.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('D',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">D&nbsp;</td>
+            <td class="value">1.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('solver',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">solver&nbsp;</td>
+            <td class="value">&#x27;SCS&#x27;</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">verbose&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>base_estimator: DecisionTreeClassifier</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__base_estimator__"><pre>DecisionTreeClassifier(max_depth=1)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DecisionTreeClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.tree.DecisionTreeClassifier.html">?<span>Documentation for DecisionTreeClassifier</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__base_estimator__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('criterion',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">criterion&nbsp;</td>
+            <td class="value">&#x27;gini&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('splitter',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">splitter&nbsp;</td>
+            <td class="value">&#x27;best&#x27;</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('max_depth',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">max_depth&nbsp;</td>
+            <td class="value">1</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_samples_split',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_samples_split&nbsp;</td>
+            <td class="value">2</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_samples_leaf',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_samples_leaf&nbsp;</td>
+            <td class="value">1</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_weight_fraction_leaf',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_weight_fraction_leaf&nbsp;</td>
+            <td class="value">0.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('max_features',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">max_features&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('random_state',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">random_state&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('max_leaf_nodes',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">max_leaf_nodes&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_impurity_decrease',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_impurity_decrease&nbsp;</td>
+            <td class="value">0.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('class_weight',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">class_weight&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('ccp_alpha',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">ccp_alpha&nbsp;</td>
+            <td class="value">0.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('monotonic_cst',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">monotonic_cst&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div></div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
+    // Get the parameter prefix from the closest toggleable content
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
+
+    const originalStyle = element.style;
+    const computedStyle = window.getComputedStyle(element);
+    const originalWidth = computedStyle.width;
+    const originalHTML = element.innerHTML.replace('Copied!', '');
+
+    navigator.clipboard.writeText(fullParamName)
+        .then(() => {
+            element.style.width = originalWidth;
+            element.style.color = 'green';
+            element.innerHTML = "Copied!";
+
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'red';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        });
+    return false;
+}
+
+document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const paramName = element.parentElement.nextElementSibling.textContent.trim();
+    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
+
+    element.setAttribute('title', fullParamName);
+});
+</script></body></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[244 356]
+ [109 791]]
+              precision    recall  f1-score   support
+
+           0     0.6912    0.4067    0.5121       600
+           1     0.6896    0.8789    0.7728       900
+
+    accuracy                         0.6900      1500
+   macro avg     0.6904    0.6428    0.6425      1500
+weighted avg     0.6903    0.6900    0.6685      1500
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la submuestra de prueba (1.500 registros), el modelo obtuvo una accuracy global de 0.69, con un desempeño claramente orientado a la detección de la clase positiva. La matriz de confusión muestra que se identificaron correctamente 791 de los 900 casos de diabetes (clase 1), lo que se refleja en un recall muy alto de 0.8789 y un F1-score de 0.7728 para esta clase, a costa de una menor sensibilidad en la clase 0 (recall de 0.4067 y F1-score de 0.5121). En conjunto, estos resultados indican que el modelo aplicado sobre la submuestra cumple el objetivo de priorizar la identificación de personas con diabetes, aun sacrificando parte del rendimiento en la clase negativa, lo cual es coherente con la naturaleza del problema y la importancia de minimizar falsos negativos en un contexto de salud.</p>
+</section>
+</section>
+<section id="aplicacion-por-separado-de-modelos-complementarios">
+<h2><strong>Aplicacion por separado de Modelos complementarios</strong><a class="headerlink" href="#aplicacion-por-separado-de-modelos-complementarios" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.class_weight</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_class_weight</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># 1) Pesos de clase automáticos (tipo cost-sensitive)</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train_</span><span class="p">)</span>
+<span class="n">class_weights</span> <span class="o">=</span> <span class="n">compute_class_weight</span><span class="p">(</span>
+    <span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+    <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y_train_</span>
+<span class="p">)</span>
+<span class="n">w_dict</span> <span class="o">=</span> <span class="p">{</span><span class="bp">cls</span><span class="p">:</span> <span class="n">w</span> <span class="k">for</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">class_weights</span><span class="p">)}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pesos por clase:&quot;</span><span class="p">,</span> <span class="n">w_dict</span><span class="p">)</span>
+
+<span class="c1"># Vector de pesos para cada muestra del train</span>
+<span class="n">sample_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">w_dict</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">y_train_</span><span class="p">])</span>
+
+<span class="c1"># 2) Modelo Gradient Boosting (más estable que nuestro boost casero)</span>
+<span class="n">gb_cs</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># 3) Pipeline completo con tu preprocesador</span>
+<span class="n">pipeline_gb</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;prep&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>   <span class="c1"># tu ColumnTransformer(num, cat)</span>
+    <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">gb_cs</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># 4) Entrenar con pesos</span>
+<span class="n">pipeline_gb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">,</span> <span class="n">model__sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
+
+<span class="c1"># 5) Evaluar</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline_gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MATRIZ DE CONFUSIÓN - GradientBoosting cost-sensitive&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pesos por clase: {np.int64(0): np.float64(0.5796682397452555), np.int64(1): np.float64(3.638013351360487)}
+MATRIZ DE CONFUSIÓN - GradientBoosting cost-sensitive
+[[45260 18401]
+ [ 2260  7883]]
+              precision    recall  f1-score   support
+
+           0     0.9524    0.7110    0.8142     63661
+           1     0.2999    0.7772    0.4328     10143
+
+    accuracy                         0.7201     73804
+   macro avg     0.6262    0.7441    0.6235     73804
+weighted avg     0.8628    0.7201    0.7618     73804
+</pre></div>
+</div>
+</div>
+</div>
+<p>El modelo Gradient Boosting cost-sensitive, entrenado con pesos calculados por clase ({0: 0.5797, 1: 3.6380}), muestra un rendimiento claramente orientado a mejorar la detección de la clase minoritaria. En el conjunto completo de prueba (73.804 registros), la matriz de confusión refleja que el modelo identifica correctamente 7.883 de los 10.143 casos positivos, logrando un recall de 0.7772 para la clase 1, muy superior al que ofrecen modelos tradicionales sin ajuste de costos. Aunque la precisión de esta clase es baja (0.2999), el comportamiento es coherente con la estrategia cost-sensitive: se privilegia reducir los falsos negativos (es decir, no dejar pasar casos reales de diabetes) aun a costa de aumentar falsos positivos. Para la clase 0, el modelo mantiene buena precisión (0.9524), pero su recall desciende a 0.7110 debido al énfasis en detectar la clase minoritaria. En conjunto, los resultados muestran que el Gradient Boosting ponderado cumple su propósito: mejorar significativamente la identificación de personas con diabetes en un dataset altamente desbalanceado, logrando un balance adecuado entre sensibilidad y rendimiento general.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">BalancedRandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+
+<span class="n">brf</span> <span class="o">=</span> <span class="n">BalancedRandomForestClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="n">pipeline_brf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;prep&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">brf</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">pipeline_brf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">)</span>
+
+<span class="n">y_pred_brf</span> <span class="o">=</span> <span class="n">pipeline_brf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MATRIZ DE CONFUSIÓN - BalancedRandomForest&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_pred_brf</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_pred_brf</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MATRIZ DE CONFUSIÓN - BalancedRandomForest
+[[47141 16520]
+ [ 2667  7476]]
+              precision    recall  f1-score   support
+
+           0     0.9465    0.7405    0.8309     63661
+           1     0.3116    0.7371    0.4380     10143
+
+    accuracy                         0.7400     73804
+   macro avg     0.6290    0.7388    0.6344     73804
+weighted avg     0.8592    0.7400    0.7769     73804
+</pre></div>
+</div>
+</div>
+</div>
+<p>El modelo Balanced Random Forest muestra un desempeño sólido en el dataset completo, con una accuracy global de 0.74 y un comportamiento equilibrado entre ambas clases dentro de un contexto de desbalance severo. La matriz de confusión indica que se identifican correctamente 7.476 de los 10.143 casos de diabetes (clase 1), alcanzando un recall de 0.7371 y un F1-score de 0.4380 para esta clase, lo que confirma su capacidad para recuperar una proporción importante de positivos. Al mismo tiempo, la clase 0 mantiene una precisión alta (0.9465) y un recall de 0.7405, con un F1-score de 0.8309, lo que refleja que el modelo sigue siendo fuerte en la clase mayoritaria. En conjunto, estos resultados muestran que Balanced Random Forest es especialmente útil para manejar el desbalance del problema, ya que logra una buena sensibilidad para la clase con diabetes sin deteriorar de forma extrema el rendimiento en la clase negativa, mejorando así el equilibrio entre detección de casos positivos y estabilidad general del modelo.</p>
+</section>
+<section id="modelo-original-hybridcostsensitiveensemble">
+<h2><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong><a class="headerlink" href="#modelo-original-hybridcostsensitiveensemble" title="Link to this heading">#</a></h2>
+<p>El modelo original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code> combina dos enfoques complementarios para manejar el fuerte desbalance del dataset: un Gradient Boosting cost-sensitive, que asigna mayor peso a los casos positivos para mejorar su detección, y un Balanced Random Forest, que utiliza muestreo balanceado en cada árbol para reducir el sesgo hacia la clase mayoritaria. Las probabilidades de ambos modelos se fusionan mediante un promedio simple, creando un ensamble híbrido capaz de incrementar significativamente el recall de la clase minoritaria sin perder estabilidad en la clase mayoritaria.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">BalancedRandomForestClassifier</span>
+    <span class="n">HAS_IMB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HAS_IMB</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HybridCostSensitiveEnsemble</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Modelo híbrido cost-sensitive y escalable.</span>
+
+<span class="sd">    Combina:</span>
+<span class="sd">      - GradientBoostingClassifier con sample_weight (cost-sensitive)</span>
+<span class="sd">      - BalancedRandomForestClassifier (o RandomForest con class_weight=&quot;balanced_subsample&quot;)</span>
+
+<span class="sd">    En predicción:</span>
+<span class="sd">      p_hibrido = (p_gb + p_rf) / 2</span>
+
+<span class="sd">    Parámetros</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gb_params : dict</span>
+<span class="sd">        Hiperparámetros para GradientBoostingClassifier.</span>
+<span class="sd">    rf_params : dict</span>
+<span class="sd">        Hiperparámetros para (Balanced)RandomForest.</span>
+<span class="sd">    use_balanced_rf : bool</span>
+<span class="sd">        Si True y está imbalanced-learn instalado, usa BalancedRandomForestClassifier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">gb_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">rf_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">use_balanced_rf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">gb_params</span> <span class="o">=</span> <span class="n">gb_params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rf_params</span> <span class="o">=</span> <span class="n">rf_params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_balanced_rf</span> <span class="o">=</span> <span class="n">use_balanced_rf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">gb_defaults</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+            <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gb_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gb_defaults</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gb_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gb_</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">gb_defaults</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_balanced_rf</span> <span class="ow">and</span> <span class="n">HAS_IMB</span><span class="p">:</span>
+            <span class="n">rf_cls</span> <span class="o">=</span> <span class="n">BalancedRandomForestClassifier</span>
+            <span class="n">rf_defaults</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+                <span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rf_cls</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span>
+            <span class="n">rf_defaults</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+                <span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced_subsample&quot;</span><span class="p">,</span>
+                <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rf_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rf_defaults</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rf_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rf_</span> <span class="o">=</span> <span class="n">rf_cls</span><span class="p">(</span><span class="o">**</span><span class="n">rf_defaults</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">check_X_y</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># Inicializamos modelos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_models</span><span class="p">()</span>
+
+        <span class="c1"># Pesos de clase para cost-sensitive (como d_i agregados por clase)</span>
+        <span class="n">class_weights</span> <span class="o">=</span> <span class="n">compute_class_weight</span><span class="p">(</span>
+            <span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+            <span class="n">classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y</span>
+        <span class="p">)</span>
+        <span class="n">w_dict</span> <span class="o">=</span> <span class="p">{</span><span class="bp">cls</span><span class="p">:</span> <span class="n">w</span> <span class="k">for</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">class_weights</span><span class="p">)}</span>
+        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">w_dict</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">y</span><span class="p">])</span>
+
+        <span class="c1"># Entrenamos GB con sample_weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gb_</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
+
+        <span class="c1"># Entrenamos RF (BalancedRF ya maneja el desbalance internamente)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rf_</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;gb_&quot;</span><span class="p">,</span> <span class="s2">&quot;rf_&quot;</span><span class="p">,</span> <span class="s2">&quot;classes_&quot;</span><span class="p">])</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="n">proba_gb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gb_</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">proba_rf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rf_</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="c1"># promedio simple (podrías cambiar a promedio ponderado)</span>
+        <span class="n">proba_hybrid</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">proba_gb</span> <span class="o">+</span> <span class="n">proba_rf</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">proba_hybrid</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">proba</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="c1"># clase con mayor probabilidad</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">proba</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">hybrid_model</span> <span class="o">=</span> <span class="n">HybridCostSensitiveEnsemble</span><span class="p">(</span>
+    <span class="n">gb_params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+        <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+        <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;subsample&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">rf_params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+        <span class="s2">&quot;min_samples_split&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s2">&quot;min_samples_leaf&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">use_balanced_rf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="n">pipeline_hybrid</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;prep&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">hybrid_model</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> 
+<span class="n">pipeline_hybrid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline_hybrid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MATRIZ DE CONFUSIÓN - Modelo híbrido&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tiempo de entrenamiento (s):&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">REPORTE&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pipeline_hybrid</span><span class="p">,</span> <span class="s1">&#39;hybrid_model.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MATRIZ DE CONFUSIÓN - Modelo híbrido
+Tiempo de entrenamiento (s): 143.34870886802673
+[[46237 17424]
+ [ 2434  7709]]
+
+REPORTE
+              precision    recall  f1-score   support
+
+           0     0.9500    0.7263    0.8232     63661
+           1     0.3067    0.7600    0.4371     10143
+
+    accuracy                         0.7309     73804
+   macro avg     0.6284    0.7432    0.6301     73804
+weighted avg     0.8616    0.7309    0.7702     73804
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;hybrid_model.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>El Modelo Híbrido combina las predicciones del Gradient Boosting cost-sensitive y del Balanced Random Forest para obtener un desempeño más equilibrado frente al desbalance severo del dataset. En el conjunto completo de prueba, el modelo logra una accuracy de 0.7309 y, sobre todo, un recall de 0.7600 para la clase 1, detectando 7.709 de los 10.143 casos reales de diabetes. Esto mejora la sensibilidad respecto a cada modelo por separado, mientras mantiene un rendimiento estable en la clase 0 (recall de 0.7263 y F1-score de 0.8232). La matriz de confusión refleja este equilibrio: menos falsos negativos que un modelo tradicional y un comportamiento más robusto frente al desbalance. En conjunto, el ensamble híbrido ofrece una mejor combinación de detección de casos positivos y estabilidad general que cualquiera de los dos modelos base por sí solo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Probabilidades de la clase positiva (ajusta el índice si tu clase positiva no es 1)</span>
+<span class="n">y_proba</span> <span class="o">=</span> <span class="n">pipeline_hybrid</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;ROC curve (AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Azar&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate (Recall)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - Modelo híbrido&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8498991c3ca7a2671563f08623367ac48f6c7cc2e7e599c191e5d67f31538ab9.png" src="_images/8498991c3ca7a2671563f08623367ac48f6c7cc2e7e599c191e5d67f31538ab9.png" />
+</div>
+</div>
+<p>La curva ROC del modelo híbrido muestra una mejora clara frente al azar, alcanzando un AUC de <strong>0.823</strong>, lo que indica una capacidad sólida para discriminar entre individuos con y sin diabetes. La curva se eleva de forma pronunciada en los primeros tramos, reflejando que el modelo logra altos niveles de <strong>recall</strong> incluso con incrementos moderados en la tasa de falsos positivos. Este comportamiento es característico de modelos que priorizan la detección de la clase minoritaria, coherente con el enfoque cost-sensitive y el uso combinado de dos algoritmos balanceados. En conjunto, la curva ROC confirma que el ensamble híbrido mantiene una buena capacidad discriminativa en un escenario fuertemente desbalanceado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thresholds_recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">recalls</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">thr</span> <span class="ow">in</span> <span class="n">thresholds_recall</span><span class="p">:</span>
+    <span class="n">y_pred_thr</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_proba</span> <span class="o">&gt;=</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_</span><span class="p">,</span> <span class="n">y_pred_thr</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">recalls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">thresholds_recall</span><span class="p">,</span> <span class="n">recalls</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Umbral de decisión&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Recall (clase 1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Recall de la clase positiva vs umbral&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0fb57f76cd2e20478fc66659cbf1e1ef0394b52578e1f794bc948569d85519ee.png" src="_images/0fb57f76cd2e20478fc66659cbf1e1ef0394b52578e1f794bc948569d85519ee.png" />
+</div>
+</div>
+<p>La gráfica de <strong>recall de la clase positiva en función del umbral</strong> muestra cómo varía la capacidad del modelo híbrido para identificar correctamente los casos de diabetes a medida que se endurece el criterio de decisión. Con umbrales bajos (entre 0.0 y 0.2), el modelo alcanza un recall cercano al 100 %, lo cual es esperable porque prácticamente cualquier probabilidad es clasificada como positiva. A medida que el umbral aumenta, el recall disminuye de forma progresiva y estable, reflejando la pérdida de sensibilidad a cambio de decisiones más conservadoras. La caída se vuelve más pronunciada a partir de 0.6, hasta casi llegar a cero cuando el umbral supera 0.9. Esta curva confirma que el modelo permite ajustar el balance entre sensibilidad y precisión, lo cual es especialmente útil en problemas médicos donde la detección temprana (alto recall) es prioritaria.</p>
+</section>
+<section id="referencias">
+<h2><strong>Referencias</strong><a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<p><strong>[1] Zhang, Y. (2019).</strong><br />
+<em>CMBoost: Cost-sensitive margin-based boosting algorithm.</em><br />
+IOP Conference Series: Materials Science and Engineering, 533(1), 012047.<br />
+<a class="reference external" href="https://doi.org/10.1088/1757-899X/533/1/012047">doi:10.1088/1757-899X/533/1/012047</a></p>
+<p><strong>[2] Pes, L., &amp; Lai, C. (2021).</strong><br />
+<em>Cost-sensitive learning strategies for high-dimensional imbalanced data.</em><br />
+PeerJ Computer Science, 7:e832.<br />
+<a class="reference external" href="https://peerj.com/articles/cs-832/">https://peerj.com/articles/cs-832/</a></p>
+<p><strong>[3] Kadkhodaei, M., Minaei-Bidgoli, B., &amp; develops others (2021).</strong><br />
+<em>Big data classification using heterogeneous ensemble of deep learning and machine learning models.</em><br />
+Expert Systems with Applications, 183, 115351.<br />
+<a class="reference external" href="https://doi.org/10.1016/j.eswa.2021.115351">https://doi.org/10.1016/j.eswa.2021.115351</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="7_validacion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>7. Validación</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="9_evaluacion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>8. Evaluación</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-del-problema-y-naturaleza-del-dataset"><strong>Contexto del problema y naturaleza del dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-central"><strong>Problema central</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-de-los-modelos-existentes"><strong>Limitaciones de los modelos existentes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-surge-la-necesidad-de-un-modelo-hibrido"><strong>Por qué surge la necesidad de un modelo híbrido</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ideas-teoricas-que-inspiran-el-modelo"><strong>Ideas teóricas que inspiran el modelo</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-cmboost-zhang-2019"><strong>Aporte tomado de CMBoost (Zhang, 2019)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-pes-lai-2021"><strong>Aporte tomado de Pes &amp; Lai (2021)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-tomado-de-kadkhodaei-et-al-2021"><strong>Aporte tomado de Kadkhodaei et al. (2021)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-esta-construido-el-modelo-hibrido"><strong>Cómo está construido el modelo híbrido</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-cost-sensitive"><strong>Gradient Boosting Cost-Sensitive</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balanced-random-forest"><strong>Balanced Random Forest</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-probabilistica-innovacion-propia-del-modelo"><strong>Fusión probabilística (innovación propia del modelo)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-resuelve-el-problema-del-dataset"><strong>Por qué este modelo resuelve el problema del dataset</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-este-modelo-es-original"><strong>Por qué este modelo es original</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion"><strong>Implementación</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cmboost-classifier"><strong>CMBoost Classifier</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toma-de-submuestra"><strong>Toma de Submuestra</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-por-separado-de-modelos-complementarios"><strong>Aplicacion por separado de Modelos complementarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-original-hybridcostsensitiveensemble"><strong>Modelo Original <code class="docutils literal notranslate"><span class="pre">HybridCostSensitiveEnsemble</span></code></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias"><strong>Referencias</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mariana Franco, Jeronimo Dominguez, Juan Andres Ramos
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
