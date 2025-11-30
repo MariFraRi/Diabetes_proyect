@@ -505,6 +505,142 @@ los primeros por su <strong>interpretabilidad y recall alto</strong>, y los segu
 </section>
 <section id="comparacion-con-el-modelo-original-test">
 <h2><strong>Comparación con el modelo original (test)</strong><a class="headerlink" href="#comparacion-con-el-modelo-original-test" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.contingency_tables</span><span class="w"> </span><span class="kn">import</span> <span class="n">mcnemar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">recall_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hcse_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">HybridCostSensitiveEnsemble</span>
+
+<span class="c1"># ============================</span>
+<span class="c1"># 1. Cargar datos</span>
+<span class="c1"># ============================</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;X_test.csv&#39;</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;y_test.csv&#39;</span><span class="p">)[</span><span class="s2">&quot;diabetes&quot;</span><span class="p">]</span>
+
+<span class="c1"># ============================</span>
+<span class="c1"># 2. Cargar modelos entrenados</span>
+<span class="c1"># ============================</span>
+<span class="n">modelo_A</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;model_hcse.pkl&quot;</span><span class="p">)</span>     <span class="c1"># Modelo original (HCSE)</span>
+<span class="n">modelo_B</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;modelo_svm.pkl&quot;</span><span class="p">)</span>     <span class="c1"># Modelo de comparación</span>
+
+<span class="n">nombre_A</span> <span class="o">=</span> <span class="s2">&quot;HCSE&quot;</span>
+<span class="n">nombre_B</span> <span class="o">=</span> <span class="s2">&quot;SVM&quot;</span>
+
+<span class="c1"># ============================</span>
+<span class="c1"># 3. Obtener predicciones</span>
+<span class="c1"># ============================</span>
+<span class="n">pred_A</span> <span class="o">=</span> <span class="n">modelo_A</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">pred_B</span> <span class="o">=</span> <span class="n">modelo_B</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">y_test</span>
+
+<span class="c1"># ============================</span>
+<span class="c1"># 4. Matriz de desacuerdos McNemar</span>
+<span class="c1"># ============================</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">pred_A</span> <span class="o">==</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pred_B</span> <span class="o">==</span> <span class="n">y_true</span><span class="p">))</span>  <span class="c1"># Ambos aciertan</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">pred_A</span> <span class="o">==</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pred_B</span> <span class="o">!=</span> <span class="n">y_true</span><span class="p">))</span>  <span class="c1"># A acierta, B falla</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">pred_A</span> <span class="o">!=</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pred_B</span> <span class="o">==</span> <span class="n">y_true</span><span class="p">))</span>  <span class="c1"># A falla, B acierta</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">pred_A</span> <span class="o">!=</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pred_B</span> <span class="o">!=</span> <span class="n">y_true</span><span class="p">))</span>  <span class="c1"># Ambos fallan</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz 2x2 (McNemar):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+
+<span class="c1"># ============================</span>
+<span class="c1"># 5. Test de McNemar</span>
+<span class="c1"># ============================</span>
+<span class="n">resultado</span> <span class="o">=</span> <span class="n">mcnemar</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== RESULTADOS McNemar ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chi2:&quot;</span><span class="p">,</span> <span class="n">resultado</span><span class="o">.</span><span class="n">statistic</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value:&quot;</span><span class="p">,</span> <span class="n">resultado</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>
+
+<span class="c1"># ============================</span>
+<span class="c1"># 6. Métricas de ambos modelos</span>
+<span class="c1"># ============================</span>
+<span class="n">acc_A</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_A</span><span class="p">)</span>
+<span class="n">acc_B</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_B</span><span class="p">)</span>
+
+<span class="n">rec_A</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_A</span><span class="p">)</span>
+<span class="n">rec_B</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_B</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Métricas de comparación:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_A</span><span class="si">}</span><span class="s2"> - Accuracy: </span><span class="si">{</span><span class="n">acc_A</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Recall: </span><span class="si">{</span><span class="n">rec_A</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_B</span><span class="si">}</span><span class="s2"> - Accuracy: </span><span class="si">{</span><span class="n">acc_B</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Recall: </span><span class="si">{</span><span class="n">rec_B</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ============================</span>
+<span class="c1"># 7. Interpretación general</span>
+<span class="c1"># ============================</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== CONCLUSIÓN GENERAL ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># 1. Diferencia estadística</span>
+<span class="k">if</span> <span class="n">resultado</span><span class="o">.</span><span class="n">pvalue</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hay diferencia significativa entre los modelos (p &lt; 0.05).&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No hay diferencia significativa entre los modelos (p ≥ 0.05).&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2. ¿Cuál es mejor? (basado en Recall y luego Accuracy)</span>
+<span class="k">if</span> <span class="n">rec_A</span> <span class="o">&gt;</span> <span class="n">rec_B</span><span class="p">:</span>
+    <span class="n">mejor</span> <span class="o">=</span> <span class="n">nombre_A</span>
+<span class="k">elif</span> <span class="n">rec_B</span> <span class="o">&gt;</span> <span class="n">rec_A</span><span class="p">:</span>
+    <span class="n">mejor</span> <span class="o">=</span> <span class="n">nombre_B</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">mejor</span> <span class="o">=</span> <span class="s2">&quot;empate en Recall&quot;</span>
+
+<span class="c1"># Comparación final</span>
+<span class="k">if</span> <span class="n">mejor</span> <span class="o">!=</span> <span class="s2">&quot;empate en Recall&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">El mejor modelo según Recall es: **</span><span class="si">{</span><span class="n">mejor</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ambos modelos tienen el mismo Recall.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Reforzar con accuracy si recall empata</span>
+<span class="k">if</span> <span class="n">mejor</span> <span class="o">==</span> <span class="s2">&quot;empate en Recall&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">acc_A</span> <span class="o">&gt;</span> <span class="n">acc_B</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;→ Pero por Accuracy, el mejor sería: **</span><span class="si">{</span><span class="n">nombre_A</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">acc_B</span> <span class="o">&gt;</span> <span class="n">acc_A</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;→ Pero por Accuracy, el mejor sería: **</span><span class="si">{</span><span class="n">nombre_B</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;→ También empatan en Accuracy.&quot;</span><span class="p">)</span>
+
+<span class="c1"># resumen final si hay un ganador claro</span>
+<span class="k">if</span> <span class="n">mejor</span> <span class="o">==</span> <span class="n">nombre_A</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">→ Conclusión: El modelo HCSE es superior en desempeño.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">mejor</span> <span class="o">==</span> <span class="n">nombre_B</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">→ Conclusión: El modelo SVM es superior en desempeño.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriz 2x2 (McNemar):
+[[48991  4955]
+ [ 4208 15650]]
+
+=== RESULTADOS McNemar ===
+Chi2: 60.735130415802686
+p-value: 6.529445933116824e-15
+
+Métricas de comparación:
+
+HCSE - Accuracy: 0.7309, Recall: 0.7600
+SVM - Accuracy: 0.7208, Recall: 0.7090
+
+=== CONCLUSIÓN GENERAL ===
+Hay diferencia significativa entre los modelos (p &lt; 0.05).
+
+El mejor modelo según Recall es: **HCSE**
+
+→ Conclusión: El modelo HCSE es superior en desempeño.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="conclusion-general-por-que-el-modelo-hcse-representa-una-mejora-real">
 <h2><strong>Conclusión General: Por qué el Modelo HCSE Representa una Mejora Real</strong><a class="headerlink" href="#conclusion-general-por-que-el-modelo-hcse-representa-una-mejora-real" title="Link to this heading">#</a></h2>
